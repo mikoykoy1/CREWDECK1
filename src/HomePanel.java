@@ -32,6 +32,7 @@ public class HomePanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new java.awt.BorderLayout());
 
         HOME.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -95,16 +96,7 @@ public class HomePanel extends javax.swing.JPanel {
 
         HOME.addTab("Home", jPanel1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(HOME)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(HOME, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
+        add(HOME, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 

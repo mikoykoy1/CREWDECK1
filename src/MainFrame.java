@@ -2,14 +2,17 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 
 public class MainFrame extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
+        
+        
         initComponents();
         setLocationRelativeTo(null);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,6 +46,12 @@ public class MainFrame extends javax.swing.JFrame {
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameActionPerformed(evt);
+            }
+        });
+
+        Password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PasswordKeyPressed(evt);
             }
         });
 
@@ -112,16 +121,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,6 +156,29 @@ public class MainFrame extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Incorrect credentials");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void PasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordKeyPressed
+        String correctpass = "12345678";
+        
+        String username = Username.getText();
+        char[] pass = Password.getPassword();
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) 
+        {
+            JOptionPane.showMessageDialog(null,"Welcome: " + username); 
+            
+            HomePanel panel = new HomePanel();
+            switchScreen(panel);
+            
+            getContentPane().removeAll();
+            getContentPane().add(panel);
+            getContentPane().revalidate();
+            getContentPane().repaint();
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_PasswordKeyPressed
     
     public void switchScreen(HomePanel newPanel){
         
