@@ -141,13 +141,29 @@ public class MainFrame extends javax.swing.JFrame {
         if ( ( String.valueOf(pass).equals(correctpass))) 
         {
             JOptionPane.showMessageDialog(null,"Welcome: " + username); 
+            
+            HomePanel panel = new HomePanel();
+            switchScreen(panel);
+            
+            getContentPane().removeAll();
+            getContentPane().add(panel);
+            getContentPane().revalidate();
+            getContentPane().repaint();
+            
         }
         
         else{
              JOptionPane.showMessageDialog(null, "Incorrect credentials");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
-
+    
+    public void switchScreen(HomePanel newPanel){
+        
+        getContentPane().removeAll();
+        getContentPane().add(newPanel);
+        getContentPane().revalidate();
+        getContentPane().repaint();
+    }
     /**
      * @param args the command line arguments
      */
