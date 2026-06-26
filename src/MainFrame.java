@@ -24,12 +24,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        Username = new javax.swing.JTextField();
-        Password = new javax.swing.JPasswordField();
+        loginPanel = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        Username = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        Password = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JToggleButton();
         sidePanel = new javax.swing.JPanel();
         employeeBtn = new javax.swing.JToggleButton();
@@ -38,32 +38,44 @@ public class MainFrame extends javax.swing.JFrame {
         addEvalBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        loginPanel.setBackground(new java.awt.Color(102, 102, 102));
+        loginPanel.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("CREWDECK");
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setText("CREWDECK");
+        loginPanel.add(titleLabel);
+        titleLabel.setBounds(80, 30, 121, 32);
 
+        jLabel2.setText("Username:");
+        loginPanel.add(jLabel2);
+        jLabel2.setBounds(40, 80, 56, 16);
+
+        Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Username.setText("Admin");
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameActionPerformed(evt);
             }
         });
+        loginPanel.add(Username);
+        Username.setBounds(44, 100, 180, 22);
 
+        jLabel3.setText("Password:");
+        loginPanel.add(jLabel3);
+        jLabel3.setBounds(40, 140, 53, 16);
+
+        Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 PasswordKeyPressed(evt);
             }
         });
-
-        jLabel2.setText("Username:");
-
-        jLabel3.setText("Password:");
+        loginPanel.add(Password);
+        Password.setBounds(44, 160, 180, 22);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -71,49 +83,11 @@ public class MainFrame extends javax.swing.JFrame {
                 loginButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Username)
-                        .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))
-                .addGap(79, 79, 79))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(loginButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(jLabel1)))
-                .addContainerGap(114, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(loginButton)
-                .addContainerGap(224, Short.MAX_VALUE))
-        );
+        loginPanel.add(loginButton);
+        loginButton.setBounds(100, 210, 60, 22);
 
         sidePanel.setBackground(new java.awt.Color(0, 102, 102));
+        sidePanel.setLayout(null);
 
         employeeBtn.setText("Employees");
         employeeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +95,8 @@ public class MainFrame extends javax.swing.JFrame {
                 employeeBtnActionPerformed(evt);
             }
         });
+        sidePanel.add(employeeBtn);
+        employeeBtn.setBounds(40, 130, 110, 22);
 
         reqBtn.setText("Requests");
         reqBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +104,8 @@ public class MainFrame extends javax.swing.JFrame {
                 reqBtnActionPerformed(evt);
             }
         });
+        sidePanel.add(reqBtn);
+        reqBtn.setBounds(40, 170, 110, 22);
 
         searchBtn.setText("Search");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +113,8 @@ public class MainFrame extends javax.swing.JFrame {
                 searchBtnActionPerformed(evt);
             }
         });
+        sidePanel.add(searchBtn);
+        searchBtn.setBounds(40, 90, 110, 22);
 
         addEvalBtn.setText("Add Evalutaion");
         addEvalBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -142,47 +122,24 @@ public class MainFrame extends javax.swing.JFrame {
                 addEvalBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
-        sidePanel.setLayout(sidePanelLayout);
-        sidePanelLayout.setHorizontalGroup(
-            sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addEvalBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(reqBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(employeeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-        sidePanelLayout.setVerticalGroup(
-            sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(employeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(reqBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(addEvalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        sidePanel.add(addEvalBtn);
+        addEvalBtn.setBounds(40, 210, 110, 22);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
+                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
@@ -307,14 +264,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField Username;
     private javax.swing.JToggleButton addEvalBtn;
     private javax.swing.JToggleButton employeeBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToggleButton loginButton;
+    private javax.swing.JPanel loginPanel;
     private javax.swing.JToggleButton reqBtn;
     private javax.swing.JToggleButton searchBtn;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

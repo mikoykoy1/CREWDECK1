@@ -96,7 +96,7 @@ public class HomePanel extends javax.swing.JPanel {
 
         HOME.addTab("Home", jPanel1);
 
-        add(HOME, java.awt.BorderLayout.CENTER);
+        add(HOME, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
