@@ -10,7 +10,9 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         initComponents();
+        setSize(850, 500);
         setLocationRelativeTo(null);
+        
     }
     
 
@@ -23,7 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        MainPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -31,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JToggleButton();
+        jPanel1 = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
         employeeBtn = new javax.swing.JToggleButton();
         reqBtn = new javax.swing.JToggleButton();
@@ -38,8 +41,10 @@ public class MainFrame extends javax.swing.JFrame {
         addEvalBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 102, 102));
+        MainPanel.setBackground(new java.awt.Color(255, 102, 102));
+        MainPanel.setLayout(new java.awt.BorderLayout());
 
         loginPanel.setBackground(new java.awt.Color(102, 102, 102));
         loginPanel.setLayout(null);
@@ -48,11 +53,11 @@ public class MainFrame extends javax.swing.JFrame {
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("CREWDECK");
         loginPanel.add(titleLabel);
-        titleLabel.setBounds(80, 30, 121, 32);
+        titleLabel.setBounds(380, 30, 121, 32);
 
         jLabel2.setText("Username:");
         loginPanel.add(jLabel2);
-        jLabel2.setBounds(40, 80, 56, 16);
+        jLabel2.setBounds(350, 100, 56, 16);
 
         Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Username.setText("Admin");
@@ -62,11 +67,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         loginPanel.add(Username);
-        Username.setBounds(44, 100, 180, 22);
+        Username.setBounds(350, 120, 180, 22);
 
         jLabel3.setText("Password:");
         loginPanel.add(jLabel3);
-        jLabel3.setBounds(40, 140, 53, 16);
+        jLabel3.setBounds(350, 160, 53, 16);
 
         Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Password.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -75,7 +80,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         loginPanel.add(Password);
-        Password.setBounds(44, 160, 180, 22);
+        Password.setBounds(350, 180, 180, 22);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -84,9 +89,19 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         loginPanel.add(loginButton);
-        loginButton.setBounds(100, 210, 60, 22);
+        loginButton.setBounds(410, 230, 60, 22);
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel1.setLayout(null);
+        loginPanel.add(jPanel1);
+        jPanel1.setBounds(0, -180, 280, 1520);
+
+        MainPanel.add(loginPanel, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
         sidePanel.setBackground(new java.awt.Color(0, 102, 102));
+        sidePanel.setPreferredSize(new java.awt.Dimension(200, 500));
         sidePanel.setLayout(null);
 
         employeeBtn.setText("Employees");
@@ -125,24 +140,7 @@ public class MainFrame extends javax.swing.JFrame {
         sidePanel.add(addEvalBtn);
         addEvalBtn.setBounds(40, 210, 110, 22);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(sidePanel, java.awt.BorderLayout.WEST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,7 +208,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void employeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeBtnActionPerformed
-        // TODO add your handling code here:
+        EmployeePanel panel2 = new EmployeePanel();
+      
+       
+            
+        MainPanel.removeAll();
+        MainPanel.add(panel2,java.awt.BorderLayout.CENTER);
+        MainPanel.revalidate();
+        MainPanel.repaint();
     }//GEN-LAST:event_employeeBtnActionPerformed
 
     private void addEvalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEvalBtnActionPerformed
@@ -260,13 +265,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JPasswordField Password;
     private javax.swing.JTextField Username;
     private javax.swing.JToggleButton addEvalBtn;
     private javax.swing.JToggleButton employeeBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JToggleButton reqBtn;
