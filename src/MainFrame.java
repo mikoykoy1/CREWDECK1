@@ -49,11 +49,11 @@ public class MainFrame extends javax.swing.JFrame {
         loginPanel.setBackground(new java.awt.Color(102, 102, 102));
         loginPanel.setLayout(null);
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 2, 48)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("CREWDECK");
         loginPanel.add(titleLabel);
-        titleLabel.setBounds(380, 30, 121, 32);
+        titleLabel.setBounds(320, 10, 320, 90);
 
         jLabel2.setText("Username:");
         loginPanel.add(jLabel2);
