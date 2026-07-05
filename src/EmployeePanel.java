@@ -233,8 +233,9 @@ public class EmployeePanel extends javax.swing.JPanel {
             javax.swing.JOptionPane.YES_NO_OPTION);
             
             if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            service.removeEmployee(selectedRow);
-            loadTable();
+                int employeeId = (int) employeeTable.getValueAt(selectedRow,0);
+                service.removeEmployee(employeeId);
+                loadTable();
             }
             
         }
@@ -297,7 +298,10 @@ public class EmployeePanel extends javax.swing.JPanel {
         String email = emailTxt.getText();
         double salary = Double.parseDouble(salaryTxt.getText());
         
-        EmployeeModel emp = new EmployeeModel(1, name, position, department, contactNum, email, salary);
+        int selectedRow = employeeTable.getSelectedRow();
+        int employeeId = (int) employeeTable.getValueAt(selectedRow,0);
+        
+        EmployeeModel emp = new EmployeeModel(employeeId, name, position, department, contactNum, email, salary);
         
         service.modifyEmployee(emp);
         loadTable();
