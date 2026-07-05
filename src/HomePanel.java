@@ -37,7 +37,7 @@ public class HomePanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         sidePanel.setBackground(new java.awt.Color(255, 204, 153));
-        sidePanel.setPreferredSize(new java.awt.Dimension(500, 1000000));
+        sidePanel.setPreferredSize(new java.awt.Dimension(400, 1000000));
 
         employeeBtn.setBackground(new java.awt.Color(255, 204, 102));
         employeeBtn.setText("Employee Records");
@@ -102,7 +102,7 @@ public class HomePanel extends javax.swing.JPanel {
         extraPanel.setLayout(extraPanelLayout);
         extraPanelLayout.setHorizontalGroup(
             extraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 769, Short.MAX_VALUE)
+            .addGap(0, 869, Short.MAX_VALUE)
         );
         extraPanelLayout.setVerticalGroup(
             extraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
