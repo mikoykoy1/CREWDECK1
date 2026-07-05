@@ -1,20 +1,22 @@
 
 import javax.swing.table.DefaultTableModel;
+import Service.EmployeeService;
+import Model.EmployeeModel;
 
 
 public class EmployeePanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form EmployeePanel
-     */
+    private static final EmployeeService service = new EmployeeService();
     DefaultTableModel model;
     
     public EmployeePanel() {
-        initComponents();
+        initComponents();   
+    }
+    
+    private void loadTable(){  
         
-        String[] columns = {"Employee ID", "Full Name", "Position", "Department"};
-        model = new DefaultTableModel(columns, 0);
-        employeeTable.setModel(model);
+        EmployeeService service = new EmployeeService();
+        employeeTable.setModel(service.getTableModel());
     }
 
  
@@ -40,6 +42,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         salaryTxt = new javax.swing.JTextField();
         EmployeeBodyPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
 
@@ -47,7 +50,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         EmployeeTopPanel.setBackground(new java.awt.Color(255, 255, 204));
-        EmployeeTopPanel.setPreferredSize(new java.awt.Dimension(636, 92));
+        EmployeeTopPanel.setPreferredSize(new java.awt.Dimension(869, 120));
 
         idTxt.setEditable(false);
         idTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -91,62 +94,66 @@ public class EmployeePanel extends javax.swing.JPanel {
             .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteBtn))
+                    .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(positiontTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(positiontTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(addBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteBtn)))
-                .addContainerGap(149, Short.MAX_VALUE))
+                        .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         EmployeeTopPanelLayout.setVerticalGroup(
             EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeTopPanelLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(deleteBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
+                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
                     .addComponent(positiontTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
+                    .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
@@ -155,7 +162,9 @@ public class EmployeePanel extends javax.swing.JPanel {
         add(EmployeeTopPanel, java.awt.BorderLayout.PAGE_START);
 
         EmployeeBodyPanel.setBackground(new java.awt.Color(255, 255, 204));
+        EmployeeBodyPanel.setPreferredSize(new java.awt.Dimension(869, 465));
         EmployeeBodyPanel.setLayout(new java.awt.BorderLayout());
+        EmployeeBodyPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,7 +203,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int selectedRow = employeeTable.getSelectedRow();
-          
+        
         if (selectedRow >= 0) {
             int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
             "Are you sure you want to delete this employee?", 
@@ -202,18 +211,20 @@ public class EmployeePanel extends javax.swing.JPanel {
             javax.swing.JOptionPane.YES_NO_OPTION);
             
             if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-            model.removeRow(selectedRow);
+            service.removeEmployee(selectedRow);
+            loadTable();
             }
             
         }
+        
         else {
             javax.swing.JOptionPane.showMessageDialog(this, 
             "Please click on an employee row in the table first to select them.", 
             "No Row Selected", 
             javax.swing.JOptionPane.WARNING_MESSAGE);
-    }
+        }
         
-        
+       
         
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -222,15 +233,22 @@ public class EmployeePanel extends javax.swing.JPanel {
         String name = nameTxt.getText().trim();
         String position = positiontTxt.getText().trim();
         String department = departmentTxt.getText().trim();
+        int contactNum = Integer.parseInt(contactNumTxt.getText());
+        String email = emailTxt.getText();
+        double salary = Double.parseDouble(salaryTxt.getText());
+
+        
         
         if (name.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please fill in Employee Name.");
             return;
         }
         
-        Object[] rowData = {1, name, position, department};
+       
+        EmployeeModel emp = new EmployeeModel(1, name, position, department, contactNum, email, salary);
         
-        model.addRow(rowData);
+        service.registerEmployee(emp);
+        loadTable();
         
         idTxt.setText("");
         nameTxt.setText("");
@@ -260,6 +278,7 @@ public class EmployeePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField positiontTxt;
