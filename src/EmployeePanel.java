@@ -41,6 +41,8 @@ public class EmployeePanel extends javax.swing.JPanel {
         emailTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         salaryTxt = new javax.swing.JTextField();
+        updateBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
         EmployeeBodyPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -87,6 +89,20 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         jLabel7.setText("[ Salary ]");
 
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EmployeeTopPanelLayout = new javax.swing.GroupLayout(EmployeeTopPanel);
         EmployeeTopPanel.setLayout(EmployeeTopPanelLayout);
         EmployeeTopPanelLayout.setHorizontalGroup(
@@ -97,7 +113,11 @@ public class EmployeePanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(addBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(deleteBtn))
+                        .addComponent(deleteBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(updateBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearBtn))
                     .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +157,9 @@ public class EmployeePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
-                    .addComponent(deleteBtn))
+                    .addComponent(deleteBtn)
+                    .addComponent(updateBtn)
+                    .addComponent(clearBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -222,10 +244,7 @@ public class EmployeePanel extends javax.swing.JPanel {
             "Please click on an employee row in the table first to select them.", 
             "No Row Selected", 
             javax.swing.JOptionPane.WARNING_MESSAGE);
-        }
-        
-       
-        
+        }       
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
@@ -250,21 +269,56 @@ public class EmployeePanel extends javax.swing.JPanel {
         service.registerEmployee(emp);
         loadTable();
         
+       
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void employeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTableMouseClicked
+        int index = employeeTable.getSelectedRow();
+        String selectedId = employeeTable.getValueAt(index, 0).toString();
+        
+
+      
+        EmployeeModel emp = service.fetchOneRecord(Integer.parseInt(selectedId));
+        
+        idTxt.setText(String.valueOf(emp.getEmployeeId()));
+        nameTxt.setText(emp.getEmployeeName());
+        positiontTxt.setText(emp.getEmployeePosition());
+        departmentTxt.setText(emp.getEmployeeDepartment());
+        contactNumTxt.setText(String.valueOf(emp.getEmployeeContactNum()));
+        emailTxt.setText(emp.getEmployeeEmail());
+        salaryTxt.setText(String.valueOf(emp.getSalary()));
+    }//GEN-LAST:event_employeeTableMouseClicked
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        String name = nameTxt.getText().trim();
+        String position = positiontTxt.getText().trim();
+        String department = departmentTxt.getText().trim();
+        int contactNum = Integer.parseInt(contactNumTxt.getText());
+        String email = emailTxt.getText();
+        double salary = Double.parseDouble(salaryTxt.getText());
+        
+        EmployeeModel emp = new EmployeeModel(1, name, position, department, contactNum, email, salary);
+        
+        service.modifyEmployee(emp);
+        loadTable();
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         idTxt.setText("");
         nameTxt.setText("");
         positiontTxt.setText("");
         departmentTxt.setText("");
-    }//GEN-LAST:event_addBtnActionPerformed
-
-    private void employeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTableMouseClicked
-        
-    }//GEN-LAST:event_employeeTableMouseClicked
+        contactNumTxt.setText("");
+        emailTxt.setText("");
+        salaryTxt.setText("");
+    }//GEN-LAST:event_clearBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EmployeeBodyPanel;
     private javax.swing.JPanel EmployeeTopPanel;
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JTextField contactNumTxt;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField departmentTxt;
@@ -283,5 +337,6 @@ public class EmployeePanel extends javax.swing.JPanel {
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField positiontTxt;
     private javax.swing.JTextField salaryTxt;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
