@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-
 /**
  *
  * @author BE214
@@ -13,6 +12,7 @@ public class HomePanel extends javax.swing.JPanel {
      * Creates new form HomePanel
      */
     public HomePanel() {
+        
         initComponents();
 
     }
@@ -28,10 +28,10 @@ public class HomePanel extends javax.swing.JPanel {
 
         sidePanel = new javax.swing.JPanel();
         employeeBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        homeBtn = new javax.swing.JButton();
+        requestBtn = new javax.swing.JButton();
+        evaluationBtn = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         extraPanel = new javax.swing.JPanel();
 
@@ -50,28 +50,43 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 102));
-        jButton2.setText("Home");
-        jButton2.setMaximumSize(new java.awt.Dimension(172, 22));
-        jButton2.setMinimumSize(new java.awt.Dimension(172, 22));
-        jButton2.setPreferredSize(new java.awt.Dimension(90, 22));
-
-        jButton3.setBackground(new java.awt.Color(255, 204, 102));
-        jButton3.setText("Request");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        homeBtn.setBackground(new java.awt.Color(255, 204, 102));
+        homeBtn.setText("Home");
+        homeBtn.setMaximumSize(new java.awt.Dimension(172, 22));
+        homeBtn.setMinimumSize(new java.awt.Dimension(172, 22));
+        homeBtn.setPreferredSize(new java.awt.Dimension(90, 22));
+        homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                homeBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 204, 102));
-        jButton4.setText("Evaluation");
+        requestBtn.setBackground(new java.awt.Color(255, 204, 102));
+        requestBtn.setText("Request");
+        requestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestBtnActionPerformed(evt);
+            }
+        });
 
-        jButton5.setBackground(new java.awt.Color(255, 204, 102));
-        jButton5.setText("Search");
-        jButton5.setMaximumSize(new java.awt.Dimension(172, 22));
-        jButton5.setMinimumSize(new java.awt.Dimension(172, 22));
-        jButton5.setPreferredSize(new java.awt.Dimension(90, 22));
+        evaluationBtn.setBackground(new java.awt.Color(255, 204, 102));
+        evaluationBtn.setText("Evaluation");
+        evaluationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evaluationBtnActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setBackground(new java.awt.Color(255, 204, 102));
+        searchBtn.setText("Search");
+        searchBtn.setMaximumSize(new java.awt.Dimension(172, 22));
+        searchBtn.setMinimumSize(new java.awt.Dimension(172, 22));
+        searchBtn.setPreferredSize(new java.awt.Dimension(90, 22));
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
@@ -81,26 +96,26 @@ public class HomePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(evaluationBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+                            .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
                     .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(employeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -109,18 +124,7 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         extraPanel.setBackground(new java.awt.Color(255, 255, 204));
-
-        javax.swing.GroupLayout extraPanelLayout = new javax.swing.GroupLayout(extraPanel);
-        extraPanel.setLayout(extraPanelLayout);
-        extraPanelLayout.setHorizontalGroup(
-            extraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-        extraPanelLayout.setVerticalGroup(
-            extraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 626, Short.MAX_VALUE)
-        );
-
+        extraPanel.setLayout(new java.awt.BorderLayout());
         mainPanel.add(extraPanel, java.awt.BorderLayout.CENTER);
 
         add(mainPanel, java.awt.BorderLayout.CENTER);
@@ -130,32 +134,58 @@ public class HomePanel extends javax.swing.JPanel {
         EmployeePanel panel2 = new EmployeePanel();
 
         mainPanel.removeAll();
-        mainPanel.add(panel2,java.awt.BorderLayout.CENTER);
+        mainPanel.add(panel2);
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_employeeBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        RequestPanel panel = new RequestPanel();
+
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }//GEN-LAST:event_requestBtnActionPerformed
+
+    private void evaluationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtnActionPerformed
+        EvaluationPanel panel = new EvaluationPanel();
+
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }//GEN-LAST:event_evaluationBtnActionPerformed
+
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
+        HomePanel2 panel = new HomePanel2();
+
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }//GEN-LAST:event_homeBtnActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        SearchPanel panel = new SearchPanel();
+
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }//GEN-LAST:event_searchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton employeeBtn;
+    private javax.swing.JButton evaluationBtn;
     private javax.swing.JPanel extraPanel;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton homeBtn;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton requestBtn;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables
 
-    private void setLocationRelativeTo(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setExtendedState(int MAXIMIZED_BOTH) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

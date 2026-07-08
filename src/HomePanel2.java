@@ -5,14 +5,14 @@
 
 /**
  *
- * @author CpELaboratory 216
+ * @author Acer Ryzen 5
  */
-public class EvaluationPanel extends javax.swing.JPanel {
+public class HomePanel2 extends javax.swing.JPanel {
 
     /**
-     * Creates new form EvaluationPanel
+     * Creates new form HomePanel2
      */
-    public EvaluationPanel() {
+    public HomePanel2() {
         initComponents();
     }
 
@@ -25,7 +25,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(102, 255, 102));
+        setBackground(new java.awt.Color(255, 255, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

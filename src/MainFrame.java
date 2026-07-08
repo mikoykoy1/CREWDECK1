@@ -10,9 +10,9 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         initComponents();
-        setSize(10000, 10000);
+        setSize(1920, 1080);
         setLocationRelativeTo(null);
-        
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
     
 
@@ -35,12 +35,15 @@ public class MainFrame extends javax.swing.JFrame {
         loginButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         MainPanel.setBackground(new java.awt.Color(153, 153, 255));
+        MainPanel.setLayout(new java.awt.GridBagLayout());
 
         loginPanel.setBackground(new java.awt.Color(102, 102, 255));
-        loginPanel.setPreferredSize(new java.awt.Dimension(500, 1000000));
+        loginPanel.setMaximumSize(new java.awt.Dimension(500, 500));
+        loginPanel.setMinimumSize(new java.awt.Dimension(200, 200));
+        loginPanel.setName(""); // NOI18N
+        loginPanel.setPreferredSize(new java.awt.Dimension(500, 500));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 2, 48)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,7 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(loginButton)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,23 +111,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginButton)
-                .addContainerGap())
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
-        MainPanel.setLayout(MainPanelLayout);
-        MainPanelLayout.setHorizontalGroup(
-            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainPanelLayout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 932, Short.MAX_VALUE))
-        );
-        MainPanelLayout.setVerticalGroup(
-            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainPanelLayout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
-        );
+        MainPanel.add(loginPanel, new java.awt.GridBagConstraints());
 
         getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
@@ -151,7 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
             switchScreen(panel);
             
             getContentPane().removeAll();
-            getContentPane().add(panel);
+            getContentPane().add(panel); // Snaps panel to edges
             getContentPane().revalidate();
             getContentPane().repaint();
             
