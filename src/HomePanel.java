@@ -1,3 +1,6 @@
+
+import java.awt.Color;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -38,10 +41,10 @@ public class HomePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
-        sidePanel.setBackground(new java.awt.Color(0, 102, 255));
+        sidePanel.setBackground(new java.awt.Color(102, 102, 102));
         sidePanel.setPreferredSize(new java.awt.Dimension(300, 400));
 
-        employeeBtn.setBackground(new java.awt.Color(255, 204, 102));
+        employeeBtn.setBackground(new java.awt.Color(153, 153, 153));
         employeeBtn.setText("Employee Records");
         employeeBtn.setPreferredSize(new java.awt.Dimension(65, 22));
         employeeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -50,18 +53,28 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        homeBtn.setBackground(new java.awt.Color(255, 204, 102));
+        homeBtn.setBackground(new java.awt.Color(153, 153, 153));
         homeBtn.setText("Home");
         homeBtn.setMaximumSize(new java.awt.Dimension(172, 22));
         homeBtn.setMinimumSize(new java.awt.Dimension(172, 22));
         homeBtn.setPreferredSize(new java.awt.Dimension(90, 22));
+        homeBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                homeBtnMouseDragged(evt);
+            }
+        });
+        homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeBtnMouseClicked(evt);
+            }
+        });
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeBtnActionPerformed(evt);
             }
         });
 
-        requestBtn.setBackground(new java.awt.Color(255, 204, 102));
+        requestBtn.setBackground(new java.awt.Color(153, 153, 153));
         requestBtn.setText("Request");
         requestBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,15 +82,16 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        evaluationBtn.setBackground(new java.awt.Color(255, 204, 102));
+        evaluationBtn.setBackground(new java.awt.Color(153, 153, 153));
         evaluationBtn.setText("Evaluation");
+        evaluationBtn.setPreferredSize(new java.awt.Dimension(72, 22));
         evaluationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 evaluationBtnActionPerformed(evt);
             }
         });
 
-        searchBtn.setBackground(new java.awt.Color(255, 204, 102));
+        searchBtn.setBackground(new java.awt.Color(153, 153, 153));
         searchBtn.setText("Search");
         searchBtn.setMaximumSize(new java.awt.Dimension(172, 22));
         searchBtn.setMinimumSize(new java.awt.Dimension(172, 22));
@@ -96,7 +110,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(evaluationBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
@@ -115,17 +129,17 @@ public class HomePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         add(sidePanel, java.awt.BorderLayout.WEST);
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        extraPanel.setBackground(new java.awt.Color(255, 255, 204));
+        extraPanel.setBackground(new java.awt.Color(102, 102, 102));
         extraPanel.setLayout(new java.awt.BorderLayout());
-        mainPanel.add(extraPanel, java.awt.BorderLayout.CENTER);
+        mainPanel.add(extraPanel, java.awt.BorderLayout.LINE_START);
 
         add(mainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -174,6 +188,14 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
+        
+    }//GEN-LAST:event_homeBtnMouseClicked
+
+    private void homeBtnMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseDragged
+        homeBtn.setBackground(Color.yellow);
+    }//GEN-LAST:event_homeBtnMouseDragged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
