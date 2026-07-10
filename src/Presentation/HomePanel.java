@@ -1,3 +1,5 @@
+package Presentation;
+
 
 import java.awt.Color;
 
@@ -75,6 +77,11 @@ public class HomePanel extends javax.swing.JPanel {
         employeeBtn.setText("Employee Records");
         employeeBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         employeeBtn.setPreferredSize(new java.awt.Dimension(65, 22));
+        employeeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeBtnMouseClicked(evt);
+            }
+        });
         employeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeBtnActionPerformed(evt);
@@ -105,6 +112,11 @@ public class HomePanel extends javax.swing.JPanel {
         requestBtn.setForeground(new java.awt.Color(255, 255, 255));
         requestBtn.setText("Request");
         requestBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        requestBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestBtnMouseClicked(evt);
+            }
+        });
         requestBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestBtnActionPerformed(evt);
@@ -117,6 +129,11 @@ public class HomePanel extends javax.swing.JPanel {
         evaluationBtn.setText("Evaluation");
         evaluationBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         evaluationBtn.setPreferredSize(new java.awt.Dimension(72, 22));
+        evaluationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                evaluationBtnMouseClicked(evt);
+            }
+        });
         evaluationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 evaluationBtnActionPerformed(evt);
@@ -131,6 +148,11 @@ public class HomePanel extends javax.swing.JPanel {
         searchBtn.setMaximumSize(new java.awt.Dimension(172, 22));
         searchBtn.setMinimumSize(new java.awt.Dimension(172, 22));
         searchBtn.setPreferredSize(new java.awt.Dimension(90, 22));
+        searchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchBtnMouseClicked(evt);
+            }
+        });
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtnActionPerformed(evt);
@@ -168,9 +190,8 @@ public class HomePanel extends javax.swing.JPanel {
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,7 +255,7 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
-        homeBtn.setBackground(Color.GRAY);
+        homeBtn.setBackground(Color.DARK_GRAY);
    
         evaluationBtn.setBackground(Color.BLACK);
         searchBtn.setBackground(Color.BLACK);
@@ -245,8 +266,49 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_homeBtnMouseClicked
 
     private void evaluationBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtn1ActionPerformed
-        // TODO add your handling code here:
+        EvaluationPanel panel = new EvaluationPanel();
+
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }//GEN-LAST:event_evaluationBtn1ActionPerformed
+
+    private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
+        searchBtn.setBackground(Color.DARK_GRAY);
+   
+        evaluationBtn.setBackground(Color.BLACK);
+        homeBtn.setBackground(Color.BLACK);
+        employeeBtn.setBackground(Color.BLACK); 
+        requestBtn.setBackground(Color.BLACK);
+    }//GEN-LAST:event_searchBtnMouseClicked
+
+    private void employeeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeBtnMouseClicked
+        employeeBtn.setBackground(Color.DARK_GRAY);
+   
+        evaluationBtn.setBackground(Color.BLACK);
+        searchBtn.setBackground(Color.BLACK);
+        homeBtn.setBackground(Color.BLACK); 
+        requestBtn.setBackground(Color.BLACK);
+    }//GEN-LAST:event_employeeBtnMouseClicked
+
+    private void requestBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestBtnMouseClicked
+        requestBtn.setBackground(Color.DARK_GRAY);
+   
+        evaluationBtn.setBackground(Color.BLACK);
+        searchBtn.setBackground(Color.BLACK);
+        employeeBtn.setBackground(Color.BLACK); 
+        homeBtn.setBackground(Color.BLACK);
+    }//GEN-LAST:event_requestBtnMouseClicked
+
+    private void evaluationBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evaluationBtnMouseClicked
+        evaluationBtn.setBackground(Color.DARK_GRAY);
+   
+        homeBtn.setBackground(Color.BLACK);
+        searchBtn.setBackground(Color.BLACK);
+        employeeBtn.setBackground(Color.BLACK); 
+        requestBtn.setBackground(Color.BLACK);
+    }//GEN-LAST:event_evaluationBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

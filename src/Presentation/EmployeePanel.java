@@ -1,3 +1,5 @@
+package Presentation;
+
 
 import javax.swing.table.DefaultTableModel;
 import Service.EmployeeService;
@@ -51,7 +53,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
-        EmployeeTopPanel.setBackground(new java.awt.Color(255, 255, 204));
+        EmployeeTopPanel.setBackground(new java.awt.Color(51, 51, 51));
         EmployeeTopPanel.setPreferredSize(new java.awt.Dimension(869, 120));
 
         idTxt.setEditable(false);
@@ -61,12 +63,16 @@ public class EmployeePanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("[ ID: ]");
 
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("[ Name: ]");
 
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("[ Position: ]");
 
+        addBtn.setBackground(new java.awt.Color(0, 204, 0));
         addBtn.setText("Add");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +80,7 @@ public class EmployeePanel extends javax.swing.JPanel {
             }
         });
 
+        deleteBtn.setBackground(new java.awt.Color(255, 0, 0));
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,12 +88,16 @@ public class EmployeePanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("[ Department: ]");
 
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("[ Contact Number ]");
 
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("[ Email ]");
 
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("[ Salary ]");
 
         updateBtn.setText("Update");
@@ -184,11 +195,11 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         add(EmployeeTopPanel, java.awt.BorderLayout.PAGE_START);
 
-        EmployeeBodyPanel.setBackground(new java.awt.Color(255, 255, 204));
+        EmployeeBodyPanel.setBackground(new java.awt.Color(102, 102, 102));
         EmployeeBodyPanel.setPreferredSize(new java.awt.Dimension(869, 465));
         EmployeeBodyPanel.setLayout(new java.awt.BorderLayout());
-        EmployeeBodyPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        employeeTable.setForeground(new java.awt.Color(204, 204, 204));
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -215,7 +226,9 @@ public class EmployeePanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(employeeTable);
 
-        EmployeeBodyPanel.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        jScrollPane1.setViewportView(jScrollPane2);
+
+        EmployeeBodyPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         add(EmployeeBodyPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

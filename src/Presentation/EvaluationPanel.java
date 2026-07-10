@@ -1,3 +1,5 @@
+package Presentation;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -5,14 +7,14 @@
 
 /**
  *
- * @author Acer Ryzen 5
+ * @author CpELaboratory 216
  */
-public class HomePanel2 extends javax.swing.JPanel {
+public class EvaluationPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form HomePanel2
+     * Creates new form EvaluationPanel
      */
-    public HomePanel2() {
+    public EvaluationPanel() {
         initComponents();
     }
 
@@ -25,7 +27,7 @@ public class HomePanel2 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 255, 204));
+        setBackground(new java.awt.Color(102, 255, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

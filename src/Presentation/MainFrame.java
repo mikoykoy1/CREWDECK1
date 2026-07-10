@@ -1,3 +1,5 @@
+package Presentation;
+
 import javax.swing.JOptionPane;
 import java.awt.Color;
 
@@ -37,7 +39,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         MainPanel.setBackground(new java.awt.Color(49, 51, 56));
         MainPanel.setForeground(new java.awt.Color(255, 255, 255));
