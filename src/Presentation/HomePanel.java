@@ -71,7 +71,7 @@ public class HomePanel extends javax.swing.JPanel {
             .addGap(0, 94, Short.MAX_VALUE)
         );
 
-        employeeBtn.setBackground(new java.awt.Color(49, 51, 56));
+        employeeBtn.setBackground(new java.awt.Color(0, 0, 0));
         employeeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         employeeBtn.setForeground(new java.awt.Color(255, 255, 255));
         employeeBtn.setText("Employee Records");
@@ -88,7 +88,7 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        homeBtn.setBackground(new java.awt.Color(49, 51, 56));
+        homeBtn.setBackground(new java.awt.Color(0, 0, 0));
         homeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         homeBtn.setForeground(new java.awt.Color(255, 255, 255));
         homeBtn.setText("Home");
@@ -107,7 +107,7 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        requestBtn.setBackground(new java.awt.Color(49, 51, 56));
+        requestBtn.setBackground(new java.awt.Color(0, 0, 0));
         requestBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         requestBtn.setForeground(new java.awt.Color(255, 255, 255));
         requestBtn.setText("Request");
@@ -123,7 +123,7 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        evaluationBtn.setBackground(new java.awt.Color(49, 51, 56));
+        evaluationBtn.setBackground(new java.awt.Color(0, 0, 0));
         evaluationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         evaluationBtn.setForeground(new java.awt.Color(255, 255, 255));
         evaluationBtn.setText("Evaluation");
@@ -140,7 +140,7 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        searchBtn.setBackground(new java.awt.Color(49, 51, 56));
+        searchBtn.setBackground(new java.awt.Color(0, 0, 0));
         searchBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         searchBtn.setForeground(new java.awt.Color(255, 255, 255));
         searchBtn.setText("Search");
