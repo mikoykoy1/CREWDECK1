@@ -40,7 +40,7 @@ public class HomePanel extends javax.swing.JPanel {
         requestBtn = new javax.swing.JButton();
         evaluationBtn = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
-        evaluationBtn1 = new javax.swing.JButton();
+        logOutBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
@@ -159,15 +159,15 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        evaluationBtn1.setBackground(new java.awt.Color(49, 51, 56));
-        evaluationBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        evaluationBtn1.setForeground(new java.awt.Color(255, 255, 255));
-        evaluationBtn1.setText("Logout");
-        evaluationBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
-        evaluationBtn1.setPreferredSize(new java.awt.Dimension(72, 22));
-        evaluationBtn1.addActionListener(new java.awt.event.ActionListener() {
+        logOutBtn.setBackground(new java.awt.Color(0, 0, 0));
+        logOutBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        logOutBtn.setForeground(new java.awt.Color(255, 255, 255));
+        logOutBtn.setText("Logout");
+        logOutBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        logOutBtn.setPreferredSize(new java.awt.Dimension(72, 22));
+        logOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                evaluationBtn1ActionPerformed(evt);
+                logOutBtnActionPerformed(evt);
             }
         });
 
@@ -184,7 +184,7 @@ public class HomePanel extends javax.swing.JPanel {
                     .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(evaluationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(evaluationBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         sidePanelLayout.setVerticalGroup(
@@ -202,7 +202,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(evaluationBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(227, Short.MAX_VALUE))
         );
 
@@ -265,14 +265,14 @@ public class HomePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_homeBtnMouseClicked
 
-    private void evaluationBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtn1ActionPerformed
-        EvaluationPanel panel = new EvaluationPanel();
+    private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
+        MainFrame panel = new MainFrame();
 
         mainPanel.removeAll();
         mainPanel.add(panel);
         mainPanel.revalidate();
         mainPanel.repaint();
-    }//GEN-LAST:event_evaluationBtn1ActionPerformed
+    }//GEN-LAST:event_logOutBtnActionPerformed
 
     private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
         searchBtn.setBackground(Color.DARK_GRAY);
@@ -309,15 +309,15 @@ public class HomePanel extends javax.swing.JPanel {
         employeeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_evaluationBtnMouseClicked
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton employeeBtn;
     private javax.swing.JButton evaluationBtn;
-    private javax.swing.JButton evaluationBtn1;
     private javax.swing.JPanel extraPanel;
     private javax.swing.JButton homeBtn;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton requestBtn;
     private javax.swing.JButton searchBtn;

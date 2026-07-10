@@ -4,6 +4,7 @@ package Presentation;
 import javax.swing.table.DefaultTableModel;
 import Service.EmployeeService;
 import Model.EmployeeModel;
+import javax.swing.JOptionPane;
 
 
 public class EmployeePanel extends javax.swing.JPanel {
@@ -59,6 +60,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         idTxt.setEditable(false);
         idTxt.setBackground(new java.awt.Color(102, 102, 102));
+        idTxt.setForeground(new java.awt.Color(204, 204, 204));
         idTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idTxtActionPerformed(evt);
@@ -75,8 +77,10 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel4.setText("[ Position: ]");
 
         nameTxt.setBackground(new java.awt.Color(102, 102, 102));
+        nameTxt.setForeground(new java.awt.Color(204, 204, 204));
 
         positiontTxt.setBackground(new java.awt.Color(102, 102, 102));
+        positiontTxt.setForeground(new java.awt.Color(204, 204, 204));
 
         addBtn.setBackground(new java.awt.Color(0, 204, 0));
         addBtn.setText("Add");
@@ -98,21 +102,25 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel2.setText("[ Department: ]");
 
         departmentTxt.setBackground(new java.awt.Color(102, 102, 102));
+        departmentTxt.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("[ Contact Number ]");
 
         contactNumTxt.setBackground(new java.awt.Color(102, 102, 102));
+        contactNumTxt.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("[ Email ]");
 
         emailTxt.setBackground(new java.awt.Color(102, 102, 102));
+        emailTxt.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("[ Salary ]");
 
         salaryTxt.setBackground(new java.awt.Color(102, 102, 102));
+        salaryTxt.setForeground(new java.awt.Color(204, 204, 204));
 
         updateBtn.setText("Update");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -259,50 +267,104 @@ public class EmployeePanel extends javax.swing.JPanel {
         int selectedRow = employeeTable.getSelectedRow();
         
         if (selectedRow >= 0) {
-            int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
-            "Are you sure you want to delete this employee?", 
+            int confirm = JOptionPane.showConfirmDialog(this, 
+            "Are you sure you want to delete this employee? This will permanently wipe out their security credentials and profile record.", 
             "Confirm Deletion", 
-            javax.swing.JOptionPane.YES_NO_OPTION);
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
             
-            if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-                int employeeId = (int) employeeTable.getValueAt(selectedRow,0);
-                service.removeEmployee(employeeId);
-                loadTable();
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    Object cellValue = employeeTable.getValueAt(selectedRow, 0);
+                    int employeeId = Integer.parseInt(cellValue.toString());
+                    service.removeEmployee(employeeId);
+                    loadTable();
+                    JOptionPane.showMessageDialog(this, 
+                    "Employee records deleted successfully.");
+                    
+                } catch (NumberFormatException | NullPointerException ex) {
+                    JOptionPane.showMessageDialog(this, 
+                    "Error parsing Employee ID from selected row: " + ex.getMessage(), 
+                    "Data Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                }
             }
-            
-        }
-        
+        } 
         else {
-            javax.swing.JOptionPane.showMessageDialog(this, 
+            JOptionPane.showMessageDialog(this, 
             "Please click on an employee row in the table first to select them.", 
             "No Row Selected", 
-            javax.swing.JOptionPane.WARNING_MESSAGE);
+            JOptionPane.WARNING_MESSAGE);
         }       
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        
+       /* // 1. Extract and clean values from your form components
         String name = nameTxt.getText().trim();
-        String position = positiontTxt.getText().trim();
         String department = departmentTxt.getText().trim();
-        int contactNum = Integer.parseInt(contactNumTxt.getText());
-        String email = emailTxt.getText();
-        double salary = Double.parseDouble(salaryTxt.getText());
+        String email = emailTxt.getText().trim();
+        //String selectedRole = roleCmb.getSelectedItem().toString();
 
-        
-        
-        if (name.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in Employee Name.");
+        double salary = 0.0;
+        try {
+            salary = Double.parseDouble(salaryTxt.getText().trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid decimal number for Salary.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-       
-        EmployeeModel emp = new EmployeeModel(1, name, position, department, contactNum, email, salary);
-        
-        service.registerEmployee(emp);
-        loadTable();
-        
-       
+
+        // 2. Validate inputs before running database operations
+        if (name.isEmpty() || department.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Name, Department, and Email fields cannot be blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 3. Wrap in a try-catch to satisfy compilation and catch SQL errors safely
+        try {
+           
+            // Step A: Register security credentials and capture the generated password/ID
+            UserService uServ =  new UserService();    
+            //User savedUser = uServ.registerUserAccount(email, selectedRole);
+
+            // Step B: Form the matching HR Profile mapping
+            Employee emp = new Employee();
+            //emp.setUser(savedUser); // Links the database auto-incremented user ID!
+            emp.setName(name);
+            emp.setDepartment(department);
+            emp.setSalary(salary);
+            emp.setStatus("Active");
+            emp.setDateHired(java.time.LocalDate.now());
+
+            // Step C: Save details to the employee table using your EmployeeService
+            boolean isProfileSaved = service.registerEmployee(emp);
+
+            if (isProfileSaved) {
+                // Success! Display the temporary credentials to the administrator
+              //  JOptionPane.showMessageDialog(this, 
+               //     "Account Successfully Created!\n\n" +
+              //      "Give these credentials to the employee:\n" +
+                   // "Username/Email: " + savedUser.getEmail() + "\n" +
+                   // "Temporary Password: " + savedUser.getTemporaryPassword(),
+              //      "Registration Success", JOptionPane.INFORMATION_MESSAGE);
+
+                // Clear text fields
+                nameTxt.setText("");
+                departmentTxt.setText("");
+                emailTxt.setText("");
+                salaryTxt.setText("");
+
+                // Refresh visual display table
+                loadTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "User credentials created, but failed to initialize HR profile.", 
+                        "Data Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (java.sql.SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Database entry failed: " + ex.getMessage(), 
+                    "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+   */
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void employeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTableMouseClicked
@@ -323,20 +385,84 @@ public class EmployeePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_employeeTableMouseClicked
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        String name = nameTxt.getText().trim();
-        String position = positiontTxt.getText().trim();
-        String department = departmentTxt.getText().trim();
-        int contactNum = Integer.parseInt(contactNumTxt.getText());
-        String email = emailTxt.getText();
-        double salary = Double.parseDouble(salaryTxt.getText());
-        
+        // 1. Ensure a row is actually selected before attempting updates
         int selectedRow = employeeTable.getSelectedRow();
-        int employeeId = (int) employeeTable.getValueAt(selectedRow,0);
-        
-        EmployeeModel emp = new EmployeeModel(employeeId, name, position, department, contactNum, email, salary);
-        
-        service.modifyEmployee(emp);
-        loadTable();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, 
+                "Please select an employee from the table first to update their details.", 
+                "Selection Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Extract the critical Primary Key ID from column index 0
+        int employeeId;
+        try {
+            Object cellValue = employeeTable.getValueAt(selectedRow, 0);
+            employeeId = Integer.parseInt(cellValue.toString());
+        } catch (NumberFormatException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Failed to parse a valid Employee ID from the selected row.", 
+                    "Data Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Gather updated entries from your form text fields
+        String name = nameTxt.getText().trim();
+        String department = departmentTxt.getText().trim();
+
+        // Safety check for salary (since it is now mapped as a double variable)
+        double salary = 0.0;
+        try {
+            salary = Double.parseDouble(salaryTxt.getText().trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid decimal number for Salary.", 
+                    "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 4. Basic input text validation checks
+        if (name.isEmpty() || department.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Name and Department fields cannot be left empty.", 
+                    "Validation Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (salary <= 0) {
+            JOptionPane.showMessageDialog(this, "Salary must be a positive value greater than 0.", 
+                    "Validation Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 5. Fetch the existing record first to retain unchanged values (like dateHired, remarks, etc.)
+        Employee existingEmp = service.fetchRecord(employeeId);
+        if (existingEmp == null) {
+            JOptionPane.showMessageDialog(this, "The selected employee record could not be found in the database.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 6. Apply updates directly onto the model object properties
+        existingEmp.setName(name);
+        existingEmp.setDepartment(department);
+        existingEmp.setSalary(salary); // Updated field property matching double format
+
+        // Optional: If you have components on your form for these, read them! Otherwise, retain their values:
+        // existingEmp.setContactNum(contactTxt.getText().trim());
+        // existingEmp.setAddress(addressTxt.getText().trim());
+        // existingEmp.setStatus(statusCmb.getSelectedItem().toString());
+
+        // 7. Dispatch the updated data entity down into your business service layer
+        boolean isSuccess = service.modifyEmployee(existingEmp);
+
+        if (isSuccess) {
+            JOptionPane.showMessageDialog(this, "Employee details updated successfully!", 
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            // 8. Refresh the UI JTable view component to reflect database updates
+            loadTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Update transaction failed. Check input values.", 
+                    "Execution Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed

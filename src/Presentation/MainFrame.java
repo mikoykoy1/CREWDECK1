@@ -120,11 +120,6 @@ public class MainFrame extends javax.swing.JFrame {
                 PasswordActionPerformed(evt);
             }
         });
-        Password.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PasswordKeyPressed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -192,7 +187,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         if ( ( String.valueOf(pass).equals(correctpass))) 
         {
-            JOptionPane.showMessageDialog(null,"Welcome: " + username); 
+            JOptionPane.showMessageDialog(null,"Welcome:" + username); 
             
             HomePanel panel = new HomePanel();
             switchScreen(panel);
@@ -208,29 +203,6 @@ public class MainFrame extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Incorrect credentials");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void PasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordKeyPressed
-        String correctpass = "12345678";
-        
-        String username = Username.getText();
-        char[] pass = Password.getPassword();
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) 
-        {
-            JOptionPane.showMessageDialog(null,"Welcome: " + username); 
-            
-            HomePanel panel = new HomePanel();
-            switchScreen(panel);
-            
-            getContentPane().removeAll();
-            getContentPane().add(panel);
-            getContentPane().revalidate();
-            getContentPane().repaint();
-            
-        }
-        
-        
-        
-    }//GEN-LAST:event_PasswordKeyPressed
 
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
         // TODO add your handling code here:
