@@ -29,23 +29,51 @@ public class HomePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainPanel = new javax.swing.JPanel();
+        extraPanel = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         employeeBtn = new javax.swing.JButton();
         homeBtn = new javax.swing.JButton();
         requestBtn = new javax.swing.JButton();
         evaluationBtn = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
-        mainPanel = new javax.swing.JPanel();
-        extraPanel = new javax.swing.JPanel();
+        evaluationBtn1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
-        sidePanel.setBackground(new java.awt.Color(102, 102, 102));
+        mainPanel.setLayout(new java.awt.BorderLayout());
+
+        extraPanel.setBackground(new java.awt.Color(102, 102, 102));
+        extraPanel.setLayout(new java.awt.BorderLayout());
+        mainPanel.add(extraPanel, java.awt.BorderLayout.LINE_START);
+
+        add(mainPanel, java.awt.BorderLayout.CENTER);
+
+        sidePanel.setBackground(new java.awt.Color(49, 51, 56));
+        sidePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        sidePanel.setToolTipText("");
         sidePanel.setPreferredSize(new java.awt.Dimension(300, 400));
 
-        employeeBtn.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(49, 51, 56));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 94, Short.MAX_VALUE)
+        );
+
+        employeeBtn.setBackground(new java.awt.Color(49, 51, 56));
+        employeeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        employeeBtn.setForeground(new java.awt.Color(255, 255, 255));
         employeeBtn.setText("Employee Records");
+        employeeBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         employeeBtn.setPreferredSize(new java.awt.Dimension(65, 22));
         employeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,16 +81,14 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        homeBtn.setBackground(new java.awt.Color(153, 153, 153));
+        homeBtn.setBackground(new java.awt.Color(49, 51, 56));
+        homeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        homeBtn.setForeground(new java.awt.Color(255, 255, 255));
         homeBtn.setText("Home");
+        homeBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         homeBtn.setMaximumSize(new java.awt.Dimension(172, 22));
         homeBtn.setMinimumSize(new java.awt.Dimension(172, 22));
         homeBtn.setPreferredSize(new java.awt.Dimension(90, 22));
-        homeBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                homeBtnMouseDragged(evt);
-            }
-        });
         homeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 homeBtnMouseClicked(evt);
@@ -74,16 +100,22 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        requestBtn.setBackground(new java.awt.Color(153, 153, 153));
+        requestBtn.setBackground(new java.awt.Color(49, 51, 56));
+        requestBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        requestBtn.setForeground(new java.awt.Color(255, 255, 255));
         requestBtn.setText("Request");
+        requestBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         requestBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestBtnActionPerformed(evt);
             }
         });
 
-        evaluationBtn.setBackground(new java.awt.Color(153, 153, 153));
+        evaluationBtn.setBackground(new java.awt.Color(49, 51, 56));
+        evaluationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        evaluationBtn.setForeground(new java.awt.Color(255, 255, 255));
         evaluationBtn.setText("Evaluation");
+        evaluationBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         evaluationBtn.setPreferredSize(new java.awt.Dimension(72, 22));
         evaluationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,8 +123,11 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        searchBtn.setBackground(new java.awt.Color(153, 153, 153));
+        searchBtn.setBackground(new java.awt.Color(49, 51, 56));
+        searchBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        searchBtn.setForeground(new java.awt.Color(255, 255, 255));
         searchBtn.setText("Search");
+        searchBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
         searchBtn.setMaximumSize(new java.awt.Dimension(172, 22));
         searchBtn.setMinimumSize(new java.awt.Dimension(172, 22));
         searchBtn.setPreferredSize(new java.awt.Dimension(90, 22));
@@ -102,46 +137,55 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
+        evaluationBtn1.setBackground(new java.awt.Color(49, 51, 56));
+        evaluationBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        evaluationBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        evaluationBtn1.setText("Logout");
+        evaluationBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        evaluationBtn1.setPreferredSize(new java.awt.Dimension(72, 22));
+        evaluationBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evaluationBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
-                    .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(evaluationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(evaluationBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(employeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(employeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(evaluationBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         add(sidePanel, java.awt.BorderLayout.WEST);
-
-        mainPanel.setLayout(new java.awt.BorderLayout());
-
-        extraPanel.setBackground(new java.awt.Color(102, 102, 102));
-        extraPanel.setLayout(new java.awt.BorderLayout());
-        mainPanel.add(extraPanel, java.awt.BorderLayout.LINE_START);
-
-        add(mainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void employeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeBtnActionPerformed
@@ -190,19 +234,28 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
-        
+        homeBtn.setBackground(Color.GRAY);
+   
+        evaluationBtn.setBackground(Color.BLACK);
+        searchBtn.setBackground(Color.BLACK);
+        employeeBtn.setBackground(Color.BLACK); 
+        requestBtn.setBackground(Color.BLACK);
+
+
     }//GEN-LAST:event_homeBtnMouseClicked
 
-    private void homeBtnMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseDragged
-        homeBtn.setBackground(Color.yellow);
-    }//GEN-LAST:event_homeBtnMouseDragged
+    private void evaluationBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_evaluationBtn1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton employeeBtn;
     private javax.swing.JButton evaluationBtn;
+    private javax.swing.JButton evaluationBtn1;
     private javax.swing.JPanel extraPanel;
     private javax.swing.JButton homeBtn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton requestBtn;
     private javax.swing.JButton searchBtn;
