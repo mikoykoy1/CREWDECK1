@@ -39,7 +39,6 @@ public class HomePanel extends javax.swing.JPanel {
         homeBtn = new javax.swing.JButton();
         requestBtn = new javax.swing.JButton();
         evaluationBtn = new javax.swing.JButton();
-        searchBtn = new javax.swing.JButton();
         logOutBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -140,25 +139,6 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        searchBtn.setBackground(new java.awt.Color(0, 0, 0));
-        searchBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        searchBtn.setForeground(new java.awt.Color(255, 255, 255));
-        searchBtn.setText("Search");
-        searchBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
-        searchBtn.setMaximumSize(new java.awt.Dimension(172, 22));
-        searchBtn.setMinimumSize(new java.awt.Dimension(172, 22));
-        searchBtn.setPreferredSize(new java.awt.Dimension(90, 22));
-        searchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchBtnMouseClicked(evt);
-            }
-        });
-        searchBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBtnActionPerformed(evt);
-            }
-        });
-
         logOutBtn.setBackground(new java.awt.Color(0, 0, 0));
         logOutBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         logOutBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,8 +160,7 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(evaluationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -193,17 +172,15 @@ public class HomePanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(employeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         add(sidePanel, java.awt.BorderLayout.WEST);
@@ -245,20 +222,11 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.repaint();
     }//GEN-LAST:event_homeBtnActionPerformed
 
-    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        SearchPanel panel = new SearchPanel();
-
-        mainPanel.removeAll();
-        mainPanel.add(panel);
-        mainPanel.revalidate();
-        mainPanel.repaint();
-    }//GEN-LAST:event_searchBtnActionPerformed
-
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
         homeBtn.setBackground(Color.DARK_GRAY);
    
         evaluationBtn.setBackground(Color.BLACK);
-        searchBtn.setBackground(Color.BLACK);
+        
         employeeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
 
@@ -274,20 +242,11 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.repaint();
     }//GEN-LAST:event_logOutBtnActionPerformed
 
-    private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
-        searchBtn.setBackground(Color.DARK_GRAY);
-   
-        evaluationBtn.setBackground(Color.BLACK);
-        homeBtn.setBackground(Color.BLACK);
-        employeeBtn.setBackground(Color.BLACK); 
-        requestBtn.setBackground(Color.BLACK);
-    }//GEN-LAST:event_searchBtnMouseClicked
-
     private void employeeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeBtnMouseClicked
         employeeBtn.setBackground(Color.DARK_GRAY);
    
         evaluationBtn.setBackground(Color.BLACK);
-        searchBtn.setBackground(Color.BLACK);
+        
         homeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_employeeBtnMouseClicked
@@ -296,7 +255,7 @@ public class HomePanel extends javax.swing.JPanel {
         requestBtn.setBackground(Color.DARK_GRAY);
    
         evaluationBtn.setBackground(Color.BLACK);
-        searchBtn.setBackground(Color.BLACK);
+      
         employeeBtn.setBackground(Color.BLACK); 
         homeBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_requestBtnMouseClicked
@@ -305,7 +264,7 @@ public class HomePanel extends javax.swing.JPanel {
         evaluationBtn.setBackground(Color.DARK_GRAY);
    
         homeBtn.setBackground(Color.BLACK);
-        searchBtn.setBackground(Color.BLACK);
+        
         employeeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_evaluationBtnMouseClicked
@@ -320,7 +279,6 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JButton logOutBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton requestBtn;
-    private javax.swing.JButton searchBtn;
     private javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables
 
