@@ -78,7 +78,7 @@ public class EmployeeService {
     // Refactored to display your new database columns in your JTable
     public DefaultTableModel getTableModel() {
         try {
-            String columns[] = {"User ID", "Name", "Department", "Salary Grade", "Status"};
+            String columns[] = {"User ID", "Name", "Department", "Salary", "Status"};
             List<Employee> records = fetchAllRecords();
             Object[][] data = new Object[records.size()][5];
 

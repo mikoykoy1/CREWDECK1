@@ -68,7 +68,7 @@ public class EmployeeDAO {
                     rs.getString("address"),
                     rs.getString("department"),
                     rs.getDate("dateHired") != null ? rs.getDate("dateHired").toLocalDate() : null,
-                    rs.getInt("salaryGrade"),
+                    rs.getDouble("salary"),
                     rs.getString("status"),
                     rs.getInt("evaluationScore"),
                     rs.getString("evaluationRemarks"),
@@ -106,7 +106,7 @@ public class EmployeeDAO {
                         rs.getString("address"),
                         rs.getString("department"),
                         rs.getDate("dateHired") != null ? rs.getDate("dateHired").toLocalDate() : null,
-                        rs.getInt("salaryGrade"),
+                        rs.getDouble("salary"),
                         rs.getString("status"),
                         rs.getInt("evaluationScore"),
                         rs.getString("evaluationRemarks"),
@@ -122,7 +122,7 @@ public class EmployeeDAO {
     public void update(Employee updatedemp) throws SQLException {
         String sql = "UPDATE `employee` SET "
                 + "name = ?, contactNum = ?, address = ?, department = ?, "
-                + "dateHired = ?, salaryGrade = ?, status = ?, "
+                + "dateHired = ?, salary = ?, status = ?, "
                 + "evaluationScore = ?, evaluationRemarks = ?, workHours = ? "
                 + "WHERE user_id = ?";
                 
