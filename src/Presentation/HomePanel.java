@@ -19,7 +19,11 @@ public class HomePanel extends javax.swing.JPanel {
     public HomePanel() {
         
         initComponents();
-
+        mainPanel.removeAll();
+        mainPanel.setLayout(new java.awt.BorderLayout());
+        mainPanel.add(new HomePanel2(), java.awt.BorderLayout.CENTER);
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 
     /**
