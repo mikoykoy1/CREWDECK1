@@ -10,7 +10,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         
-        
+        setTitle("CrewDeck");
         initComponents();
         setSize(1920, 1080);
         setLocationRelativeTo(null);
@@ -190,10 +190,10 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Welcome:" + username); 
             
             HomePanel panel = new HomePanel();
-            switchScreen(panel);
             
-            getContentPane().removeAll();
-            getContentPane().add(panel); // Snaps panel to edges
+            
+            getContentPane().removeAll(); //removes the MainFrame
+            getContentPane().add(panel); //adds the HomePanel
             getContentPane().revalidate();
             getContentPane().repaint();
             
@@ -208,13 +208,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordActionPerformed
     
-    public void switchScreen(HomePanel newPanel){
-        
-        getContentPane().removeAll();
-        getContentPane().add(newPanel);
-        getContentPane().revalidate();
-        getContentPane().repaint();
-    }
+    
     /**
      * @param args the command line arguments
      */

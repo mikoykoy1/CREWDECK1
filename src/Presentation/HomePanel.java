@@ -2,7 +2,9 @@ package Presentation;
 
 
 import java.awt.Color;
-
+import javax.swing.JOptionPane;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -48,6 +50,7 @@ public class HomePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.BorderLayout());
 
+        mainPanel.setBackground(new java.awt.Color(204, 204, 204));
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         extraPanel.setBackground(new java.awt.Color(102, 102, 102));
@@ -239,18 +242,40 @@ public class HomePanel extends javax.swing.JPanel {
 
     private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
         MainFrame panel = new MainFrame();
+        
+        
+        logOutBtn.setBackground(Color.DARK_GRAY);
+        
+        evaluationBtn.setBackground(Color.BLACK);       
+        employeeBtn.setBackground(Color.BLACK); 
+        requestBtn.setBackground(Color.BLACK);
+        homeBtn.setBackground(Color.BLACK); 
+        
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            
+            // Used for closing the HomePanel
+            Window hpanel = SwingUtilities.getWindowAncestor(this);           
+        
+            if (hpanel != null) {
+            
+                hpanel.dispose(); // Close the current window completely            
+                panel.setVisible(true); // Open a fresh MainFrame (showing the login screen)
+              
+            }
+         
+    }
+        
+        
 
-        mainPanel.removeAll();
-        mainPanel.add(panel);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        
     }//GEN-LAST:event_logOutBtnActionPerformed
 
     private void employeeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeBtnMouseClicked
         employeeBtn.setBackground(Color.DARK_GRAY);
    
-        evaluationBtn.setBackground(Color.BLACK);
-        
+        evaluationBtn.setBackground(Color.BLACK);        
         homeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_employeeBtnMouseClicked
@@ -258,8 +283,7 @@ public class HomePanel extends javax.swing.JPanel {
     private void requestBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestBtnMouseClicked
         requestBtn.setBackground(Color.DARK_GRAY);
    
-        evaluationBtn.setBackground(Color.BLACK);
-      
+        evaluationBtn.setBackground(Color.BLACK);    
         employeeBtn.setBackground(Color.BLACK); 
         homeBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_requestBtnMouseClicked
@@ -267,8 +291,7 @@ public class HomePanel extends javax.swing.JPanel {
     private void evaluationBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evaluationBtnMouseClicked
         evaluationBtn.setBackground(Color.DARK_GRAY);
    
-        homeBtn.setBackground(Color.BLACK);
-        
+        homeBtn.setBackground(Color.BLACK);        
         employeeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
     }//GEN-LAST:event_evaluationBtnMouseClicked
