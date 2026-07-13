@@ -1,5 +1,7 @@
 package Presentation;
 
+import javax.swing.SwingUtilities;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -28,13 +30,13 @@ public class RequestPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(56, 58, 64));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -44,12 +46,6 @@ public class RequestPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Request");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 15, -1, -1));
-
-        jToggleButton1.setBackground(new java.awt.Color(0, 204, 51));
-        jToggleButton1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("New Request");
-        add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 62, 130, 40));
 
         jToggleButton2.setBackground(new java.awt.Color(56, 58, 64));
         jToggleButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -68,7 +64,7 @@ public class RequestPanel extends javax.swing.JPanel {
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 98, 40));
+        add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 98, 40));
 
         jToggleButton4.setText("jToggleButton1");
         add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 98, 37));
@@ -108,6 +104,17 @@ public class RequestPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jScrollPane1);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 120, 1298, 161));
+
+        jButton1.setBackground(new java.awt.Color(0, 204, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("New Request");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -118,13 +125,22 @@ public class RequestPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            NewRequestDialog dialog = new NewRequestDialog(
+            (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+            true);
+
+            dialog.setLocationRelativeTo(this);
+            dialog.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
