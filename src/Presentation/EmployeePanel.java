@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 
 public class EmployeePanel extends javax.swing.JPanel {
-
+    
     private static final EmployeeService service = new EmployeeService();
     DefaultTableModel model;
     
@@ -60,7 +60,6 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         nameTxt = new javax.swing.JTextField();
-        addBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         departmentTxt = new javax.swing.JTextField();
@@ -107,16 +106,9 @@ public class EmployeePanel extends javax.swing.JPanel {
         nameTxt.setBackground(new java.awt.Color(102, 102, 102));
         nameTxt.setForeground(new java.awt.Color(204, 204, 204));
 
-        addBtn.setBackground(new java.awt.Color(0, 204, 0));
-        addBtn.setText("Add");
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
-            }
-        });
-
-        deleteBtn.setBackground(new java.awt.Color(255, 0, 0));
-        deleteBtn.setText("Delete");
+        deleteBtn.setBackground(new java.awt.Color(102, 102, 102));
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setText("Remove Employee");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -172,7 +164,9 @@ public class EmployeePanel extends javax.swing.JPanel {
             }
         });
 
-        dialogBtn.setText("DIALOG");
+        dialogBtn.setBackground(new java.awt.Color(102, 102, 255));
+        dialogBtn.setForeground(new java.awt.Color(255, 255, 255));
+        dialogBtn.setText("Add Employee");
         dialogBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dialogBtnActionPerformed(evt);
@@ -184,83 +178,82 @@ public class EmployeePanel extends javax.swing.JPanel {
         EmployeeTopPanelLayout.setHorizontalGroup(
             EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(addBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clearBtn))
-                            .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(dialogBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateBtn))
+                    .addComponent(jLabel8)
                     .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(dialogBtn)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(167, 167, 167)
+                        .addComponent(clearBtn))
+                    .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         EmployeeTopPanelLayout.setVerticalGroup(
             EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeTopPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(dialogBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(dialogBtn)
+                    .addComponent(deleteBtn)
+                    .addComponent(updateBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)
-                        .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addBtn)
-                        .addComponent(deleteBtn)
-                        .addComponent(updateBtn)
-                        .addComponent(clearBtn)))
-                .addGap(18, 18, 18))
+                    .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
+                        .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeTopPanelLayout.createSequentialGroup()
+                        .addComponent(clearBtn)
+                        .addGap(29, 29, 29))))
         );
 
         add(EmployeeTopPanel, java.awt.BorderLayout.PAGE_START);
@@ -274,17 +267,17 @@ public class EmployeePanel extends javax.swing.JPanel {
         employeeTable.setForeground(new java.awt.Color(204, 204, 204));
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Employee Name", "Position", "Department", "Contact Number", "Email", "Salary"
+                "Employee ID", "Name", "Position", "Department", "Salary"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -344,75 +337,6 @@ public class EmployeePanel extends javax.swing.JPanel {
         }       
     }//GEN-LAST:event_deleteBtnActionPerformed
 
-    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-       // 1. Extract and clean values from your form components
-        String name = nameTxt.getText().trim();
-        String department = departmentTxt.getText().trim();
-        String email = emailTxt.getText().trim();
-        String selectedRole = roleCmb.getSelectedItem().toString();
-
-        double salary = 0.0;
-        try {
-            salary = Double.parseDouble(salaryTxt.getText().trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid decimal number for Salary.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // 2. Validate inputs before running database operations
-        if (name.isEmpty() || department.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Name, Department, and Email fields cannot be blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // 3. Wrap in a try-catch to satisfy compilation and catch SQL errors safely
-        try {
-           
-            // Step A: Register security credentials and capture the generated password/ID
-            UserService uServ =  new UserService();    
-            User savedUser = uServ.registerUserAccount(email, selectedRole);
-
-            // Step B: Form the matching HR Profile mapping
-            Employee emp = new Employee();
-            emp.setUser(savedUser); // Links the database auto-incremented user ID!
-            emp.setName(name);
-            emp.setDepartment(department);
-            emp.setSalary(salary);
-            emp.setStatus("Active");
-            emp.setDateHired(java.time.LocalDate.now());
-
-            // Step C: Save details to the employee table using your EmployeeService
-            boolean isProfileSaved = service.registerEmployee(emp);
-
-            if (isProfileSaved) {
-                // Success! Display the temporary credentials to the administrator
-              JOptionPane.showMessageDialog(this, 
-               "Account Successfully Created!\n\n" +
-               "Give these credentials to the employee:\n" +
-                    "Username/Email: " + savedUser.getEmail() + "\n" +
-                   "Temporary Password: " + savedUser.getTemporaryPassword(),
-                 "Registration Success", JOptionPane.INFORMATION_MESSAGE);
-
-                // Clear text fields
-                nameTxt.setText("");
-                departmentTxt.setText("");
-                emailTxt.setText("");
-                salaryTxt.setText("");
-
-                // Refresh visual display table
-                loadTable();
-            } else {
-                JOptionPane.showMessageDialog(this, "User credentials created, but failed to initialize HR profile.", 
-                        "Data Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } catch (java.sql.SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Database entry failed: " + ex.getMessage(), 
-                    "Database Error", JOptionPane.ERROR_MESSAGE);
-        }
-   
-    }//GEN-LAST:event_addBtnActionPerformed
-
     private void employeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTableMouseClicked
                 // 1. Extract the selected row index and validate against empty clicks
         int index = employeeTable.getSelectedRow();
@@ -454,90 +378,50 @@ public class EmployeePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_employeeTableMouseClicked
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        // 1. Ensure a row is actually selected before attempting updates
+        // 1. Get the currently selected row from the JTable
         int selectedRow = employeeTable.getSelectedRow();
+    
+    // 2. Ensure a row is actually selected
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, 
-                "Please select an employee from the table first to update their details.", 
-                "Selection Error", JOptionPane.WARNING_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(this, "Please select an employee from the table first.", "No Row Selected", 
+            JOptionPane.WARNING_MESSAGE);
+        return;
         }
-
-        // 2. Extract the critical Primary Key ID from column index 0
-        int employeeId;
+    
         try {
+        // 3. Extract and parse the employee ID from column index 0
             Object cellValue = employeeTable.getValueAt(selectedRow, 0);
-            employeeId = Integer.parseInt(cellValue.toString());
+            int employeeId = Integer.parseInt(cellValue.toString());
+        
+        // 4. Fetch the full record from your business layer
+            Employee existingEmp = service.fetchRecord(employeeId); 
+        
+            if (existingEmp != null) {
+            // 5. Safely get the containing Frame parent reference
+                java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
+            
+            // 6. Construct and display the Dialog modal with the record metadata
+                UpdateRecordDialog dialog = new UpdateRecordDialog((java.awt.Frame) parentWindow, true, existingEmp);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            
+            // 7. Refresh your data presentation table after the updates are committed/disposed
+                loadTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "The selected employee record could not be found.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        
         } catch (NumberFormatException | NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "Failed to parse a valid Employee ID from the selected row.", 
-                    "Data Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            JOptionPane.showMessageDialog(this, 
+            "Error parsing Employee ID from selected row: " + ex.getMessage(), "Data Error", 
+            JOptionPane.ERROR_MESSAGE);
         }
 
-        // 3. Gather updated entries from your form text fields
-        String name = nameTxt.getText().trim();
-        String department = departmentTxt.getText().trim();
-
-        // Safety check for salary (since it is now mapped as a double variable)
-        double salary = 0.0;
-        try {
-            salary = Double.parseDouble(salaryTxt.getText().trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid decimal number for Salary.", 
-                    "Input Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // 4. Basic input text validation checks
-        if (name.isEmpty() || department.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Name and Department fields cannot be left empty.", 
-                    "Validation Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        if (salary <= 0) {
-            JOptionPane.showMessageDialog(this, "Salary must be a positive value greater than 0.", 
-                    "Validation Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // 5. Fetch the existing record first to retain unchanged values (like dateHired, remarks, etc.)
-        Employee existingEmp = service.fetchRecord(employeeId);
-        if (existingEmp == null) {
-            JOptionPane.showMessageDialog(this, "The selected employee record could not be found in the database.", 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // 6. Apply updates directly onto the model object properties
-        existingEmp.setName(name);
-        existingEmp.setDepartment(department);
-        existingEmp.setSalary(salary); // Updated field property matching double format
-
-        // Optional: If you have components on your form for these, read them! Otherwise, retain their values:
-        // existingEmp.setContactNum(contactTxt.getText().trim());
-        // existingEmp.setAddress(addressTxt.getText().trim());
-        // existingEmp.setStatus(statusCmb.getSelectedItem().toString());
-
-        // 7. Dispatch the updated data entity down into your business service layer
-        boolean isSuccess = service.modifyEmployee(existingEmp);
-
-        if (isSuccess) {
-            JOptionPane.showMessageDialog(this, "Employee details updated successfully!", 
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
-
-            // 8. Refresh the UI JTable view component to reflect database updates
-            loadTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "Update transaction failed. Check input values.", 
-                    "Execution Error", JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         idTxt.setText("");
-        nameTxt.setText("");
-        
+        nameTxt.setText("");      
         departmentTxt.setText("");
         contactNumTxt.setText("");
         emailTxt.setText("");
@@ -546,10 +430,11 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void dialogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogBtnActionPerformed
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
-        EmployeeRecordDialog addDialog = new EmployeeRecordDialog((Frame) parentWindow, true);
+        AddRecordDialog addDialog = new AddRecordDialog((Frame) parentWindow, true);
         
         addDialog.setLocationRelativeTo(null);
         addDialog.setVisible(true);
+        loadTable();
     }//GEN-LAST:event_dialogBtnActionPerformed
 
     private void roleCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleCmbActionPerformed
@@ -560,7 +445,6 @@ public class EmployeePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EmployeeBodyPanel;
     private javax.swing.JPanel EmployeeTopPanel;
-    private javax.swing.JButton addBtn;
     private javax.swing.JButton clearBtn;
     private javax.swing.JTextField contactNumTxt;
     private javax.swing.JButton deleteBtn;

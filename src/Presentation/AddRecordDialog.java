@@ -17,14 +17,14 @@ import javax.swing.JOptionPane;
  *
  * @author CpELaboratory 216
  */
-public class EmployeeRecordDialog extends javax.swing.JDialog {
+public class AddRecordDialog extends javax.swing.JDialog {
     
     private static final EmployeeService service = new EmployeeService();
     /**
      * Creates new form EmployeeRecordDialog
      */
     
-    public EmployeeRecordDialog(java.awt.Frame parent, boolean modal) {
+    public AddRecordDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         populateRolesDropdown();
@@ -75,12 +75,15 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
         salaryTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         roleCmb = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        contactNumTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         dialogPanel.setBackground(new java.awt.Color(51, 51, 51));
 
-        addBtn.setBackground(new java.awt.Color(51, 255, 51));
+        addBtn.setBackground(new java.awt.Color(102, 102, 255));
+        addBtn.setForeground(new java.awt.Color(255, 255, 255));
         addBtn.setText("Add");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,8 +91,12 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
             }
         });
 
+        nameTxt.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("[ Name: ]");
+
+        departmentTxt.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("[ Department: ]");
@@ -97,13 +104,22 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("[ Email ]");
 
+        emailTxt.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("[ Salary ]");
+
+        salaryTxt.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("[ Role: ]");
 
         roleCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setText("[ Contact Number ]");
+
+        contactNumTxt.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout dialogPanelLayout = new javax.swing.GroupLayout(dialogPanel);
         dialogPanel.setLayout(dialogPanelLayout);
@@ -112,23 +128,26 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
             .addGroup(dialogPanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTxt)
-                    .addComponent(departmentTxt)
                     .addGroup(dialogPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
+                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(salaryTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                            .addComponent(emailTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(departmentTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addBtn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(contactNumTxt))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(addBtn))
-                        .addGap(0, 57, Short.MAX_VALUE))
-                    .addComponent(emailTxt)
-                    .addComponent(salaryTxt))
-                .addGap(18, 18, 18)
-                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                            .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(42, 42, 42))))
         );
         dialogPanelLayout.setVerticalGroup(
             dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +174,11 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         getContentPane().add(dialogPanel, java.awt.BorderLayout.CENTER);
@@ -231,6 +254,8 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Database entry failed: " + ex.getMessage(), 
                     "Database Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        this.dispose();
     }//GEN-LAST:event_addBtnActionPerformed
 
     /**
@@ -250,20 +275,21 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddRecordDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EmployeeRecordDialog dialog = new EmployeeRecordDialog(new javax.swing.JFrame(), true);
+                AddRecordDialog dialog = new AddRecordDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -277,6 +303,7 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField contactNumTxt;
     private javax.swing.JTextField departmentTxt;
     private javax.swing.JPanel dialogPanel;
     private javax.swing.JTextField emailTxt;
@@ -285,6 +312,7 @@ public class EmployeeRecordDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JComboBox<String> roleCmb;
     private javax.swing.JTextField salaryTxt;

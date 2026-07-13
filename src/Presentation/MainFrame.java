@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Connection;
 import DAO.DBConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class MainFrame extends javax.swing.JFrame {
    
@@ -211,8 +213,8 @@ public class MainFrame extends javax.swing.JFrame {
             String role = "SELECT `name` FROM `roles`";
             try (
                     Connection conn = DBConnection.GetConnection(); 
-                    java.sql.PreparedStatement stmt = conn.prepareStatement(role); 
-                    java.sql.ResultSet rs = stmt.executeQuery()) {
+                    PreparedStatement stmt = conn.prepareStatement(role); 
+                    ResultSet rs = stmt.executeQuery()) {
                 
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Could not get Role" + e.getMessage());
