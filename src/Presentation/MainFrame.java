@@ -1,7 +1,11 @@
 package Presentation;
 
+import Model.Role;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.sql.Connection;
+import DAO.DBConnection;
 
 public class MainFrame extends javax.swing.JFrame {
    
@@ -180,27 +184,51 @@ public class MainFrame extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
         String correctpass = "12345678";
-        
+        String correctuser = "   Admin";
+        String correctId1 = "1";
+        String correctId2 = "2";
+        String correctPass1 = "123";
+        String correctPass2 = "1234";
         String username = Username.getText();
         char[] pass = Password.getPassword();
-        
-        
-        if ( ( String.valueOf(pass).equals(correctpass))) 
-        {
-            JOptionPane.showMessageDialog(null,"Welcome:" + username); 
-            
+
+        if ((String.valueOf(username).equals(correctuser)) && (String.valueOf(pass).equals(correctpass))) {
+            JOptionPane.showMessageDialog(null, "Welcome:" + username);
+
             HomePanel panel = new HomePanel();
-            
-            
             getContentPane().removeAll(); //removes the MainFrame
             getContentPane().add(panel); //adds the HomePanel
             getContentPane().revalidate();
             getContentPane().repaint();
-            
+
         }
-        
-        else{
-             JOptionPane.showMessageDialog(null, "Incorrect credentials");
+
+        else if ((String.valueOf(username).equals(correctId1)) && (String.valueOf(pass).equals(correctPass1))) {
+            JOptionPane.showMessageDialog(null, "Welcome:" + username);
+            
+            Role newRole = new Role(Username.getText());
+            
+            String role = "SELECT `name` FROM `roles`";
+            try (
+                    Connection conn = DBConnection.GetConnection(); 
+                    java.sql.PreparedStatement stmt = conn.prepareStatement(role); 
+                    java.sql.ResultSet rs = stmt.executeQuery()) {
+                
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Could not get Role" + e.getMessage());
+                
+            }
+            
+            HomePanel panel = new HomePanel(newRole);
+
+            getContentPane().removeAll(); //removes the MainFrame
+            getContentPane().add(panel); //adds the HomePanel
+            getContentPane().revalidate();
+            getContentPane().repaint();
+
+        } 
+        else {
+            JOptionPane.showMessageDialog(null, "Incorrect credentials");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

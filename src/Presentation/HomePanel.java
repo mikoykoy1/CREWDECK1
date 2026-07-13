@@ -1,10 +1,12 @@
 package Presentation;
 
 
+import Model.Role;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.awt.Window;
 import javax.swing.SwingUtilities;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -18,6 +20,8 @@ public class HomePanel extends javax.swing.JPanel {
     /**
      * Creates new form HomePanel
      */
+    private Role role;
+    
     public HomePanel() {
         
         initComponents();
@@ -27,7 +31,18 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.revalidate();
         mainPanel.repaint();
     }
-
+    
+    public HomePanel(Role role){
+        this();
+        this.role = role;
+        
+        if ("Standard_Employee".equals(role.getRoleName())) {
+            employeeBtn.setEnabled(false);
+            evaluationBtn.setEnabled(false);
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
