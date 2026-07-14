@@ -50,7 +50,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         EmployeeTopPanel.setBackground(new java.awt.Color(51, 51, 51));
-        EmployeeTopPanel.setPreferredSize(new java.awt.Dimension(869, 200));
+        EmployeeTopPanel.setPreferredSize(new java.awt.Dimension(869, 150));
 
         deleteBtn.setBackground(new java.awt.Color(102, 102, 102));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,12 +102,12 @@ public class EmployeePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeTopPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dialogBtn)
                     .addComponent(deleteBtn)
                     .addComponent(updateBtn))
-                .addGap(95, 95, 95))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         add(EmployeeTopPanel, java.awt.BorderLayout.PAGE_START);

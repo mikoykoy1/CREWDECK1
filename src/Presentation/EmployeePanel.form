@@ -27,7 +27,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[869, 200]"/>
+          <Dimension value="[869, 150]"/>
         </Property>
       </Properties>
       <Constraints>
@@ -60,13 +60,13 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="10" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="dialogBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="updateBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
