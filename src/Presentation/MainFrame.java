@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Connection;
 import DAO.DBConnection;
+import Presentation.HomePanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -31,6 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         MainPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
@@ -40,80 +42,98 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JToggleButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MainPanel.setBackground(new java.awt.Color(49, 51, 56));
+        MainPanel.setBackground(new java.awt.Color(245, 245, 245));
+        MainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         MainPanel.setForeground(new java.awt.Color(255, 255, 255));
-        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MainPanel.setLayout(new java.awt.GridBagLayout());
 
-        loginPanel.setBackground(new java.awt.Color(56, 58, 64));
-        loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        loginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(229, 231, 235), 1, true));
         loginPanel.setMaximumSize(new java.awt.Dimension(500, 500));
         loginPanel.setMinimumSize(new java.awt.Dimension(200, 200));
         loginPanel.setName(""); // NOI18N
         loginPanel.setPreferredSize(new java.awt.Dimension(350, 360));
-        loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        loginPanel.setLayout(null);
 
         titleLabel.setBackground(new java.awt.Color(255, 255, 255));
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 25)); // NOI18N
         titleLabel.setText("CREWDECK");
-        loginPanel.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 68, 200, 100));
+        loginPanel.add(titleLabel);
+        titleLabel.setBounds(90, 50, 150, 50);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Username:");
-        loginPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 238, -1, -1));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(107, 114, 128));
+        jLabel2.setText("Employee Record System");
+        loginPanel.add(jLabel2);
+        jLabel2.setBounds(50, 100, 177, 19);
 
-        Username.setBackground(new java.awt.Color(30, 31, 34));
-        Username.setForeground(new java.awt.Color(204, 204, 204));
         Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        Username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(78, 80, 88)));
+        Username.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         Username.setPreferredSize(new java.awt.Dimension(65, 18));
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameActionPerformed(evt);
             }
         });
-        loginPanel.add(Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 258, 310, 40));
+        loginPanel.add(Username);
+        Username.setBounds(50, 180, 300, 40);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Password:");
-        loginPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 328, -1, -1));
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(17, 24, 39));
+        jLabel3.setText("Password");
+        loginPanel.add(jLabel3);
+        jLabel3.setBounds(50, 250, 68, 19);
 
-        Password.setBackground(new java.awt.Color(30, 31, 34));
-        Password.setForeground(new java.awt.Color(255, 255, 255));
         Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        Password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(78, 80, 88)));
+        Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         Password.setPreferredSize(new java.awt.Dimension(61, 18));
         Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordActionPerformed(evt);
             }
         });
-        loginPanel.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 348, 310, 40));
+        loginPanel.add(Password);
+        Password.setBounds(50, 270, 300, 40);
 
-        loginButton.setBackground(new java.awt.Color(88, 101, 242));
+        loginButton.setBackground(new java.awt.Color(37, 99, 235));
         loginButton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Login");
+        loginButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         loginButton.setPreferredSize(new java.awt.Dimension(65, 25));
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
             }
         });
-        loginPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 428, 314, 45));
+        loginPanel.add(loginButton);
+        loginButton.setBounds(50, 350, 300, 45);
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Employee Management System");
-        loginPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 148, -1, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Screenshot 2026-07-14 154828.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        loginPanel.add(jLabel4);
+        jLabel4.setBounds(40, 50, 50, 50);
 
-        MainPanel.add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 485, 520));
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(17, 24, 39));
+        jLabel6.setText("ID");
+        loginPanel.add(jLabel6);
+        jLabel6.setBounds(50, 160, 14, 19);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 190;
+        gridBagConstraints.ipady = 280;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 290, 87, 292);
+        MainPanel.add(loginPanel, gridBagConstraints);
 
         getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
@@ -219,9 +239,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPasswordField Password;
     private javax.swing.JTextField Username;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JToggleButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel titleLabel;

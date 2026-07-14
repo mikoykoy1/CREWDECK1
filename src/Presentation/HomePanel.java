@@ -2,6 +2,11 @@ package Presentation;
 
 
 import Model.Role;
+import Presentation.EmployeePanel;
+import Presentation.EvaluationPanel;
+import Presentation.HomePanel2;
+import Presentation.MainFrame;
+import Presentation.RequestPanel;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.awt.Window;
@@ -56,14 +61,15 @@ public class HomePanel extends javax.swing.JPanel {
         extraPanel = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
         employeeBtn = new javax.swing.JButton();
         homeBtn = new javax.swing.JButton();
         requestBtn = new javax.swing.JButton();
         evaluationBtn = new javax.swing.JButton();
         logOutBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new java.awt.BorderLayout());
 
         mainPanel.setBackground(new java.awt.Color(204, 204, 204));
         mainPanel.setLayout(new java.awt.BorderLayout());
@@ -72,31 +78,42 @@ public class HomePanel extends javax.swing.JPanel {
         extraPanel.setLayout(new java.awt.BorderLayout());
         mainPanel.add(extraPanel, java.awt.BorderLayout.LINE_START);
 
-        add(mainPanel, java.awt.BorderLayout.CENTER);
-
-        sidePanel.setBackground(new java.awt.Color(49, 51, 56));
+        sidePanel.setBackground(new java.awt.Color(17, 24, 39));
         sidePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         sidePanel.setToolTipText("");
         sidePanel.setPreferredSize(new java.awt.Dimension(300, 400));
 
-        jPanel1.setBackground(new java.awt.Color(49, 51, 56));
+        jPanel1.setBackground(new java.awt.Color(17, 24, 39));
+
+        titleLabel.setBackground(new java.awt.Color(255, 255, 255));
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setText("CREWDECK");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        employeeBtn.setBackground(new java.awt.Color(0, 0, 0));
+        employeeBtn.setBackground(new java.awt.Color(17, 24, 39));
         employeeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         employeeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        employeeBtn.setText("Employee Records");
-        employeeBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        employeeBtn.setText("          Employee Records");
+        employeeBtn.setActionCommand("            Employee Records");
+        employeeBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
+        employeeBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         employeeBtn.setPreferredSize(new java.awt.Dimension(65, 22));
         employeeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,11 +126,13 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        homeBtn.setBackground(new java.awt.Color(0, 0, 0));
+        homeBtn.setBackground(new java.awt.Color(17, 24, 39));
         homeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         homeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        homeBtn.setText("Home");
-        homeBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        homeBtn.setText("          Home");
+        homeBtn.setActionCommand("      Home");
+        homeBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
+        homeBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         homeBtn.setMaximumSize(new java.awt.Dimension(172, 22));
         homeBtn.setMinimumSize(new java.awt.Dimension(172, 22));
         homeBtn.setPreferredSize(new java.awt.Dimension(90, 22));
@@ -128,11 +147,12 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        requestBtn.setBackground(new java.awt.Color(0, 0, 0));
+        requestBtn.setBackground(new java.awt.Color(17, 24, 39));
         requestBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         requestBtn.setForeground(new java.awt.Color(255, 255, 255));
-        requestBtn.setText("Request");
-        requestBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        requestBtn.setText("          Request");
+        requestBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
+        requestBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         requestBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 requestBtnMouseClicked(evt);
@@ -144,11 +164,12 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        evaluationBtn.setBackground(new java.awt.Color(0, 0, 0));
+        evaluationBtn.setBackground(new java.awt.Color(17, 24, 39));
         evaluationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         evaluationBtn.setForeground(new java.awt.Color(255, 255, 255));
-        evaluationBtn.setText("Evaluation");
-        evaluationBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        evaluationBtn.setText("          Evaluation");
+        evaluationBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
+        evaluationBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         evaluationBtn.setPreferredSize(new java.awt.Dimension(72, 22));
         evaluationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -161,11 +182,12 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        logOutBtn.setBackground(new java.awt.Color(0, 0, 0));
+        logOutBtn.setBackground(new java.awt.Color(17, 24, 39));
         logOutBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         logOutBtn.setForeground(new java.awt.Color(255, 255, 255));
-        logOutBtn.setText("Logout");
-        logOutBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 51, 56)));
+        logOutBtn.setText("          Logout");
+        logOutBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
+        logOutBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         logOutBtn.setPreferredSize(new java.awt.Dimension(72, 22));
         logOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,39 +195,67 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(17, 24, 39));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 55, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(evaluationBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(evaluationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(employeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        add(sidePanel, java.awt.BorderLayout.WEST);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void employeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeBtnActionPerformed
@@ -318,10 +368,12 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JPanel extraPanel;
     private javax.swing.JButton homeBtn;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton logOutBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton requestBtn;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
     
