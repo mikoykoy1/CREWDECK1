@@ -6,19 +6,15 @@ import java.util.List;
 import Model.Employee;
 import Model.User;
 
-
-
 public class EmployeeDAO {
 
     // CREATE
     public void add(Employee emp) throws SQLException {
-        // Pull the primary key ID assigned via the User account generation process
         int userId = emp.getUser().getId(); 
         
         String sql = "INSERT INTO `employee` "
-                + "(user_id, name, contactNum, address, department, dateHired, "
-                + "salary, status, evaluationScore, evaluationRemarks, workHours) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(user_id, name, contactNum, address, department, dateHired, salary, status) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (
             Connection connection = DBConnection.GetConnection();
@@ -29,12 +25,9 @@ public class EmployeeDAO {
             stmt.setString(3, emp.getContactNum());
             stmt.setString(4, emp.getAddress());
             stmt.setString(5, emp.getDepartment());
-            stmt.setObject(6, emp.getDateHired()); // LocalDates pass smoothly via setObject
+            stmt.setObject(6, emp.getDateHired()); // LocalDate
             stmt.setDouble(7, emp.getSalary());
             stmt.setString(8, emp.getStatus());
-            stmt.setInt(9, emp.getEvaluationScore());
-            stmt.setString(10, emp.getEvaluationRemarks());
-            stmt.setDouble(11, emp.getWorkHours());
             
             stmt.executeUpdate();
         }
@@ -43,8 +36,10 @@ public class EmployeeDAO {
     // READ (all records)
     public List<Employee> getAll() throws SQLException {
         List<Employee> lists = new ArrayList<>();
-        // We use a JOIN statement to build both the User object and Employee object concurrently
-        String sql = "SELECT e.*, u.email, u.isActive FROM `employee` e "
+        // Querying strictly existing columns from your database schema
+        String sql = "SELECT e.user_id, e.name, e.contactNum, e.address, e.department, e.dateHired, e.salary, e.status, "
+                   + "u.email, u.isActive "
+                   + "FROM `employee` e "
                    + "JOIN `users` u ON e.user_id = u.id";
                    
         try (
@@ -53,15 +48,14 @@ public class EmployeeDAO {
             ResultSet rs = stmt.executeQuery(sql);
         ) {
             while (rs.next()) {
-                // 1. Rebuild the core user credentials sub-object
                 User user = new User(
                     rs.getInt("user_id"),
                     rs.getString("email"),
-                    "PROTECTED", // Hide hash strings from generic memory pools
+                    "PROTECTED", 
                     rs.getBoolean("isActive")
                 );
 
-                // 2. Wrap it inside the complete full profile data sequence
+                // Rebuilding Employee without querying non-existent columns in 'employee' table
                 Employee emp = new Employee(
                     user,
                     rs.getString("name"),
@@ -71,9 +65,9 @@ public class EmployeeDAO {
                     rs.getDate("dateHired") != null ? rs.getDate("dateHired").toLocalDate() : null,
                     rs.getDouble("salary"),
                     rs.getString("status"),
-                    rs.getInt("evaluationScore"),
-                    rs.getString("evaluationRemarks"),
-                    rs.getDouble("workHours")
+                    0,     // evaluationScore default (stored in performance_evaluations table)
+                    "",    // evaluationRemarks default
+                    0.0    // workHours default
                 );
                 lists.add(emp);
             }
@@ -83,8 +77,11 @@ public class EmployeeDAO {
 
     // READ (one precise profile)
     public Employee getItem(int id) throws SQLException {
-        String sql = "SELECT e.*, u.email, u.isActive FROM `employee` e "
-                   + "JOIN `users` u ON e.user_id = u.id WHERE e.user_id = ?";
+        String sql = "SELECT e.user_id, e.name, e.contactNum, e.address, e.department, e.dateHired, e.salary, e.status, "
+                   + "u.email, u.isActive "
+                   + "FROM `employee` e "
+                   + "JOIN `users` u ON e.user_id = u.id "
+                   + "WHERE e.user_id = ?";
                    
         try (
             Connection connection = DBConnection.GetConnection();
@@ -109,9 +106,9 @@ public class EmployeeDAO {
                         rs.getDate("dateHired") != null ? rs.getDate("dateHired").toLocalDate() : null,
                         rs.getDouble("salary"),
                         rs.getString("status"),
-                        rs.getInt("evaluationScore"),
-                        rs.getString("evaluationRemarks"),
-                        rs.getDouble("workHours")
+                        0,   // evaluationScore default
+                        "",  // evaluationRemarks default
+                        0.0  // workHours default
                     );
                 }
             }
@@ -120,37 +117,80 @@ public class EmployeeDAO {
     }
 
     // UPDATE
-    public void update(Employee updatedemp) throws SQLException {
-        String sql = "UPDATE `employee` SET "
+    public void update(Employee updatedemp, String roleName) throws SQLException {
+        String updateEmployeeSql = "UPDATE `employee` SET "
                 + "name = ?, contactNum = ?, address = ?, department = ?, "
-                + "dateHired = ?, salary = ?, status = ?, "
-                + "evaluationScore = ?, evaluationRemarks = ?, workHours = ? "
+                + "dateHired = ?, salary = ?, status = ? "
                 + "WHERE user_id = ?";
+
+        String updateUserSql = "UPDATE `users` SET email = ? WHERE id = ?";
+        
+        // SQL to dynamically update the user's mapped role in your 'user_role' join table
+        String updateRoleSql = "UPDATE `user_role` SET role_id = (SELECT id FROM `roles` WHERE name = ?) WHERE user_id = ?";
                 
-        try (
-            Connection connection = DBConnection.GetConnection();
-            PreparedStatement stmt = connection.prepareStatement(sql);
-        ) {
-            stmt.setString(1, updatedemp.getName());
-            stmt.setString(2, updatedemp.getContactNum());
-            stmt.setString(3, updatedemp.getAddress());
-            stmt.setString(4, updatedemp.getDepartment());
-            stmt.setObject(5, updatedemp.getDateHired());
-            stmt.setDouble(6, updatedemp.getSalary());
-            stmt.setString(7, updatedemp.getStatus());
-            stmt.setInt(8, updatedemp.getEvaluationScore());
-            stmt.setString(9, updatedemp.getEvaluationRemarks());
-            stmt.setDouble(10, updatedemp.getWorkHours());
-            stmt.setInt(11, updatedemp.getUserId()); // Matches the target user_id index
-            
-            stmt.executeUpdate();
+        Connection connection = null;
+        try {
+            connection = DBConnection.GetConnection();
+            connection.setAutoCommit(false); // Enable manual transactions
+
+            // 1. Update User Account Details
+            if (updatedemp.getUser() != null) {
+                try (PreparedStatement stmtUser = connection.prepareStatement(updateUserSql)) {
+                    stmtUser.setString(1, updatedemp.getUser().getEmail());
+                    stmtUser.setInt(2, updatedemp.getUserId());
+                    stmtUser.executeUpdate();
+                }
+            }
+
+            // 2. Update Employee Profile details (using strictly matching DB columns)
+            try (PreparedStatement stmtEmp = connection.prepareStatement(updateEmployeeSql)) {
+                stmtEmp.setString(1, updatedemp.getName());
+                stmtEmp.setString(2, updatedemp.getContactNum());
+                stmtEmp.setString(3, updatedemp.getAddress());
+                stmtEmp.setString(4, updatedemp.getDepartment());
+                stmtEmp.setObject(5, updatedemp.getDateHired());
+                stmtEmp.setDouble(6, updatedemp.getSalary());
+                stmtEmp.setString(7, updatedemp.getStatus());
+                stmtEmp.setInt(8, updatedemp.getUserId());
+                
+                stmtEmp.executeUpdate();
+            }
+
+            // 3. Update User security role if a role option was chosen
+            if (roleName != null && !roleName.isEmpty()) {
+                try (PreparedStatement stmtRole = connection.prepareStatement(updateRoleSql)) {
+                    stmtRole.setString(1, roleName);
+                    stmtRole.setInt(2, updatedemp.getUserId());
+                    stmtRole.executeUpdate();
+                }
+            }
+
+            connection.commit(); // Save changes
+
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback(); // Rollback if any part fails
+                } catch (SQLException ex) {
+                    System.err.println("Rollback failed: " + ex.getMessage());
+                }
+            }
+            throw e;
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.err.println("Closing connection failed: " + ex.getMessage());
+                }
+            }
         }
     }
 
     // DELETE
     public void delete(int id) throws SQLException {
-        // Because of ON DELETE CASCADE on your foreign key configurations, 
-        // removing the primary record inside 'users' automatically purges the employee data safely!
+        // Because of ON DELETE CASCADE on your constraints, purging users purges user_role & employee tables instantly!
         String sql = "DELETE FROM `users` WHERE id = ?";
         
         try (
@@ -161,10 +201,4 @@ public class EmployeeDAO {
             stmt.executeUpdate();
         }
     }
-    
-    
-   
-    
-    
-    
 }

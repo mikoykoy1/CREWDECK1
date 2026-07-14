@@ -1,4 +1,3 @@
-
 package Service;
 
 import Model.Employee;
@@ -45,7 +44,7 @@ public class EmployeeService {
 
     }
     
-    public boolean modifyEmployee(Employee emp) {
+    public boolean modifyEmployee(Employee emp, String roleName) {
         try {
             boolean isNotFound = true;
             for (Employee e : fetchAllRecords()) {
@@ -60,7 +59,7 @@ public class EmployeeService {
                 return false;
             }
 
-            employeeDAO.update(emp);
+            employeeDAO.update(emp, roleName);
             return true;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

@@ -229,11 +229,12 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         String name = nameTxt.getText().trim();
         String department = departmentTxt.getText().trim();
         String contactNum = contactNumTxt.getText().trim();
-        
+        String email = emailTxt.getText().trim();
+        String selectedRole = (String) roleCmb.getSelectedItem();
 
         // 2. Validate standard structural fields
-        if (name.isEmpty() || department.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Name and Department cannot be blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        if (name.isEmpty() || department.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Name, Department, and Email cannot be blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -249,16 +250,23 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
             return;
         }
 
-        // 3. Mutate fields directly onto the passed reference tracking variable
+        // 3. Mutate fields directly onto the tracked reference model
         employeeToUpdate.setName(name);
         employeeToUpdate.setDepartment(department);
         employeeToUpdate.setContactNum(contactNum.isEmpty() ? null : contactNum);
-        
         employeeToUpdate.setSalary(salary);
         
+        // Mutate the inner User details
+        if (employeeToUpdate.getUser() != null) {
+            employeeToUpdate.getUser().setEmail(email);
+        } else {
+            // Safe fallback initialization if the nested user was null[cite: 1]
+            User u = new User(employeeToUpdate.getUserId(), email, "PROTECTED", true);
+            employeeToUpdate.setUser(u);
+        }
 
-        // 4. Submit updated data model container downward into Database Service
-        boolean isSuccess = service.modifyEmployee(employeeToUpdate);
+        // 4. Submit updated data downward to the database service with the selected role[cite: 1]
+        boolean isSuccess = service.modifyEmployee(employeeToUpdate, selectedRole);
 
         if (isSuccess) {
             JOptionPane.showMessageDialog(this, "Employee details successfully synchronized!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -266,7 +274,6 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Update routine database submission transaction rejected.", "Database Error", JOptionPane.ERROR_MESSAGE);
         }
-        
         this.dispose();
     }//GEN-LAST:event_updateBtnActionPerformed
 
