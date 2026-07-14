@@ -1,4 +1,5 @@
 package Model;
+
 import java.time.LocalDate;
 
 public class Employee {
@@ -12,39 +13,36 @@ public class Employee {
     private LocalDate dateHired;
     private double salary;
     private String status;
-    private int evaluationScore;
-    private String evaluationRemarks;
-    private double workHours;
 
     // Default Constructor
     public Employee() {}
 
     // Minimal Constructor (Required fields for a new hire)
     public Employee(User user, String name, String department) {
-        this.user = user;
-        this.userId = user.getId(); // Syncs the ID automatically
-        this.name = name;
-        this.department = department;
+        this.user = user; //
+        if (user != null) {
+            this.userId = user.getId(); // Syncs the ID automatically
+        }
+        this.name = name; //
+        this.department = department; //
         this.dateHired = LocalDate.now(); // Defaults to today
-        this.workHours = 0.0;
+        this.status = "Active";
     }
 
-    // Full Constructor (Used when loading existing record from DB)
+    // Full Constructor matching exactly the finalized database schema
     public Employee(User user, String name, String contactNum, String address, 
-                    String department, LocalDate dateHired, double salary, 
-                    String status, int evaluationScore, String evaluationRemarks, double workHours) {
-        this.user = user;
-        this.userId = user.getId();
-        this.name = name;
-        this.contactNum = contactNum;
-        this.address = address;
-        this.department = department;
-        this.dateHired = dateHired;
-        this.salary = salary;
-        this.status = status;
-        this.evaluationScore = evaluationScore;
-        this.evaluationRemarks = evaluationRemarks;
-        this.workHours = workHours;
+                    String department, LocalDate dateHired, double salary, String status) {
+        this.user = user; //
+        if (user != null) {
+            this.userId = user.getId(); //
+        }
+        this.name = name; //
+        this.contactNum = contactNum; //
+        this.address = address; //
+        this.department = department; //
+        this.dateHired = dateHired; //
+        this.salary = salary; //
+        this.status = status; //
     }
 
     // Getters and Setters
@@ -56,11 +54,10 @@ public class Employee {
         return user;
     }
 
-    // Setter updates both the reference object and the tracking ID field together
     public void setUser(User user) {
         this.user = user;
         if (user != null) {
-            this.userId = user.getId();
+            this.userId = user.getId(); //
         }
     }
 
@@ -118,29 +115,5 @@ public class Employee {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public int getEvaluationScore() {
-        return evaluationScore;
-    }
-
-    public void setEvaluationScore(int evaluationScore) {
-        this.evaluationScore = evaluationScore;
-    }
-
-    public String getEvaluationRemarks() {
-        return evaluationRemarks;
-    }
-
-    public void setEvaluationRemarks(String evaluationRemarks) {
-        this.evaluationRemarks = evaluationRemarks;
-    }
-
-    public double getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(double workHours) {
-        this.workHours = workHours;
     }
 }

@@ -1,7 +1,13 @@
 package Presentation;
 
 
+import Model.Employee;
+import Service.EmployeeService;
+import Service.EvaluationService;
+import Service.UserSession;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,23 +19,64 @@ import java.awt.Color;
  * @author CpELaboratory 216
  */
 public class EvaluationPanel extends javax.swing.JPanel {
-
+    private final EvaluationService evalService = new EvaluationService();
+    private final EmployeeService empService = new EmployeeService();
+    private List<Employee> employeeDropdownList = new ArrayList<>();
     /**
      * Creates new form EvaluationPanel
      */
     public EvaluationPanel() {
         initComponents();
-    updateRating(sliderEvaluation.getValue());
+    
+        // Set up your rating slider visual indicators
+        updateRating(sliderEvaluation.getValue());
+        lblScore.setText(String.valueOf(sliderEvaluation.getValue()));
 
-    sliderEvaluation.addChangeListener(e -> {
-    int score = sliderEvaluation.getValue();
-    lblScore.setText(String.valueOf(score));
-    updateRating(score);
-    
-    
-    });
+        sliderEvaluation.addChangeListener(e -> {
+            int score = sliderEvaluation.getValue();
+            lblScore.setText(String.valueOf(score));
+            updateRating(score);
+        });
+
+        // Automatically fill out the dropdown search target list on load
+        populateEmployeeComboBox();
+
+        // Set up an action listener so clicking a new employee refreshes their history log
+        jComboBox1.addActionListener(e -> loadEvaluationHistoryTable());
     }
     
+    private void populateEmployeeComboBox() {
+        jComboBox1.removeAllItems();
+        try {
+            // Fetch current active personnel
+            employeeDropdownList = empService.fetchAllRecords(); 
+
+            for (Employee emp : employeeDropdownList) {
+                // Display an easily searchable presentation option string
+                jComboBox1.addItem(emp.getName() + " (ID: " + emp.getUserId() + ")");
+            }
+
+            // Load the history log grid for whichever employee is highlighted first
+            if (!employeeDropdownList.isEmpty()) {
+                loadEvaluationHistoryTable();
+            }
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to load employee list: " + ex.getMessage());
+        }
+    }
+    
+    private void loadEvaluationHistoryTable() {
+        int selectedIndex = jComboBox1.getSelectedIndex();
+        if (selectedIndex < 0 || selectedIndex >= employeeDropdownList.size()) {
+            return;
+    }
+    
+    // 1. Identify which employee is selected in the UI dropdown list
+    Employee selectedEmp = employeeDropdownList.get(selectedIndex);
+    
+    // 2. Fetch the pre-packaged table model from the service and apply it immediately
+    jTable2.setModel(evalService.getEvaluationHistoryTableModel(selectedEmp.getUserId()));
+}
     // Method to determine rating label
 private void updateRating(int score) {
     String rating;
@@ -86,6 +133,7 @@ private void updateRating(int score) {
         jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(56, 58, 64));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane4.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -137,11 +185,21 @@ private void updateRating(int score) {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Save Evaluation");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(102, 102, 102));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,7 +255,7 @@ private void updateRating(int score) {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(186, 186, 186))
         );
 
         jTable2.setBackground(new java.awt.Color(102, 102, 102));
@@ -227,7 +285,6 @@ private void updateRating(int score) {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         jScrollPane5.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -238,36 +295,66 @@ private void updateRating(int score) {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jScrollPane4.setViewportView(jPanel4);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 840, 590));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 50));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int selectedIndex = jComboBox1.getSelectedIndex();
+        if (selectedIndex < 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select an employee first.");
+            return;
+        }
+
+        Employee targetEmp = employeeDropdownList.get(selectedIndex);
+        int score = sliderEvaluation.getValue();
+        String remarks = jTextArea1.getText().trim();
+        String periodText = jTextField1.getText().trim();
+
+        if (remarks.isEmpty() || periodText.isEmpty() || periodText.equals("MM/dd/yy")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill out all evaluation fields.");
+            return;
+        }
+
+        int currentAdminId = UserSession.getInstance().getLoggedInUser().getId();// Replace with your active session user ID if available
+
+        // Save record using service layer
+        boolean isSuccess = evalService.submitEvaluation(targetEmp.getUserId(), currentAdminId, periodText, score, remarks);
+
+        if (isSuccess) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Evaluation saved successfully!");
+            // Clear text controls and refresh history instantly using the new service layout!
+            jTextArea1.setText("");
+            jTextField1.setText("MM/dd/yy");
+            sliderEvaluation.setValue(80); 
+            loadEvaluationHistoryTable(); 
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error saving evaluation record.");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextArea1.setText("");
+        jTextField1.setText("MM/dd/yy");
+        sliderEvaluation.setValue(80);
+        lblScore.setText("80");
+        updateRating(80);   
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
