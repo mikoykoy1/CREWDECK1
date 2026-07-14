@@ -18,9 +18,8 @@ public class MainFrame extends javax.swing.JFrame {
         
         setTitle("CrewDeck");
         initComponents();
-        setSize(1920, 1080);
+        setSize(1091, 642);
         setLocationRelativeTo(null);
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
     }
     
 
