@@ -192,4 +192,21 @@ public class EmployeeDAO {
             stmt.executeUpdate(); //
         }
     }
+    
+    // Jcombo
+    public java.util.List<String> getRoleNames() throws SQLException {
+        java.util.List<String> roles = new java.util.ArrayList<>();
+        String sql = "SELECT `name` FROM `roles`";
+    
+        try (
+            Connection conn = DBConnection.GetConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()
+        ) {
+            while (rs.next()) {
+                roles.add(rs.getString("name"));
+            }
+        }
+        return roles;
+    }
 }
