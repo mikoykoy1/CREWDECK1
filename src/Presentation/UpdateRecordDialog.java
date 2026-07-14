@@ -57,21 +57,17 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     private void populateRolesDropdown() {
         roleCmb.removeAllItems(); // Clear default placeholders
     
-    // Explicitly query your database roles metadata
-        String sql = "SELECT `name` FROM `roles`";
-        try (
-            Connection conn = DBConnection.GetConnection();
-            java.sql.PreparedStatement stmt = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = stmt.executeQuery()
-        ) {
-            while (rs.next()) {
-            roleCmb.addItem(rs.getString("name"));
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this,"Could not load database roles into UI: " + e.getMessage());
-        // Fallback options in case database connection fails during startup
-            roleCmb.addItem("Standard_Employee");
-            roleCmb.addItem("HR_Admin");
+    try {
+        // Fetch the roles list directly from your DAO package
+        DAO.EmployeeDAO dao = new DAO.EmployeeDAO();
+        java.util.List<String> roles = dao.getRoleNames();
+        
+        for (String role : roles) {
+            roleCmb.addItem(role);
+        }
+    } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Could not load database roles into UI: " + e.getMessage());
+               
         }
     
     }
