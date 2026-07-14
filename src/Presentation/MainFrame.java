@@ -32,7 +32,6 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         MainPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
@@ -44,13 +43,15 @@ public class MainFrame extends javax.swing.JFrame {
         loginButton = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MainPanel.setBackground(new java.awt.Color(245, 245, 245));
         MainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         MainPanel.setForeground(new java.awt.Color(255, 255, 255));
-        MainPanel.setLayout(new java.awt.GridBagLayout());
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
         loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(229, 231, 235), 1, true));
@@ -126,26 +127,40 @@ public class MainFrame extends javax.swing.JFrame {
         loginPanel.add(jLabel6);
         jLabel6.setBounds(50, 160, 14, 19);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 190;
-        gridBagConstraints.ipady = 280;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(60, 290, 87, 292);
-        MainPanel.add(loginPanel, gridBagConstraints);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main picture.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        loginPanel.add(jLabel1);
+        jLabel1.setBounds(-10, 70, 1143, 642);
 
-        getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main picture.png"))); // NOI18N
+        jLabel7.setText("jLabel7");
+
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 972, 627));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UsernameActionPerformed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
+
         String correctpass = "12345678";
         String correctuser = "   Admin";
         String correctId1 = "1";
@@ -168,20 +183,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         else if ((String.valueOf(username).equals(correctId1)) && (String.valueOf(pass).equals(correctPass1))) {
             JOptionPane.showMessageDialog(null, "Welcome:" + username);
-            
+
             Role newRole = new Role(Username.getText());
-            
+
             String role = "SELECT `name` FROM `roles`";
             try (
-                    Connection conn = DBConnection.GetConnection(); 
-                    PreparedStatement stmt = conn.prepareStatement(role); 
-                    ResultSet rs = stmt.executeQuery()) {
-                
+                Connection conn = DBConnection.GetConnection();
+                PreparedStatement stmt = conn.prepareStatement(role);
+                ResultSet rs = stmt.executeQuery()) {
+
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Could not get Role" + e.getMessage());
-                
+
             }
-            
+
             HomePanel panel = new HomePanel(newRole);
 
             getContentPane().removeAll(); //removes the MainFrame
@@ -189,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
             getContentPane().revalidate();
             getContentPane().repaint();
 
-        } 
+        }
         else {
             JOptionPane.showMessageDialog(null, "Incorrect credentials");
         }
@@ -198,6 +213,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordActionPerformed
+
+    private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsernameActionPerformed
     
     
     /**
@@ -239,10 +258,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPasswordField Password;
     private javax.swing.JTextField Username;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JToggleButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel titleLabel;
