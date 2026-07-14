@@ -31,7 +31,6 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         MainPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
@@ -47,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         MainPanel.setBackground(new java.awt.Color(49, 51, 56));
         MainPanel.setForeground(new java.awt.Color(255, 255, 255));
-        MainPanel.setLayout(new java.awt.GridBagLayout());
+        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginPanel.setBackground(new java.awt.Color(56, 58, 64));
         loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -55,38 +54,22 @@ public class MainFrame extends javax.swing.JFrame {
         loginPanel.setMinimumSize(new java.awt.Dimension(200, 200));
         loginPanel.setName(""); // NOI18N
         loginPanel.setPreferredSize(new java.awt.Dimension(350, 360));
-        loginPanel.setLayout(new java.awt.GridBagLayout());
+        loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titleLabel.setBackground(new java.awt.Color(255, 255, 255));
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("CREWDECK");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 8;
-        gridBagConstraints.ipady = 52;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(70, 150, 0, 0);
-        loginPanel.add(titleLabel, gridBagConstraints);
+        loginPanel.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 68, 200, 100));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Username:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(70, 90, 0, 0);
-        loginPanel.add(jLabel2, gridBagConstraints);
+        loginPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 238, -1, -1));
 
         Username.setBackground(new java.awt.Color(30, 31, 34));
         Username.setForeground(new java.awt.Color(204, 204, 204));
         Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        Username.setText("   Admin");
         Username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(78, 80, 88)));
         Username.setPreferredSize(new java.awt.Dimension(65, 18));
         Username.addActionListener(new java.awt.event.ActionListener() {
@@ -94,26 +77,13 @@ public class MainFrame extends javax.swing.JFrame {
                 UsernameActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 246;
-        gridBagConstraints.ipady = 22;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 90, 0, 85);
-        loginPanel.add(Username, gridBagConstraints);
+        loginPanel.add(Username, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 258, 310, 40));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 90, 0, 0);
-        loginPanel.add(jLabel3, gridBagConstraints);
+        loginPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 328, -1, -1));
 
         Password.setBackground(new java.awt.Color(30, 31, 34));
         Password.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,15 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
                 PasswordActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 246;
-        gridBagConstraints.ipady = 22;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 90, 0, 85);
-        loginPanel.add(Password, gridBagConstraints);
+        loginPanel.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 348, 310, 40));
 
         loginButton.setBackground(new java.awt.Color(88, 101, 242));
         loginButton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -145,33 +107,13 @@ public class MainFrame extends javax.swing.JFrame {
                 loginButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 241;
-        gridBagConstraints.ipady = 15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 90, 50, 85);
-        loginPanel.add(loginButton, gridBagConstraints);
+        loginPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 428, 314, 45));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Employee Management System");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(150, 12, 0, 0);
-        loginPanel.add(jLabel1, gridBagConstraints);
+        loginPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 148, -1, -1));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 285;
-        gridBagConstraints.ipady = 320;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(16, 272, 91, 215);
-        MainPanel.add(loginPanel, gridBagConstraints);
+        MainPanel.add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 485, 520));
 
         getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
