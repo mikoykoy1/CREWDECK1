@@ -19,7 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         setTitle("CrewDeck");
         initComponents();
-        setSize(1091, 642);
+        setSize(1160, 642);
         setLocationRelativeTo(null);
     }
     
@@ -47,7 +47,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MainPanel.setBackground(new java.awt.Color(245, 245, 245));
         MainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -71,7 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(107, 114, 128));
         jLabel2.setText("Employee Record System");
         loginPanel.add(jLabel2);
-        jLabel2.setBounds(50, 100, 177, 19);
+        jLabel2.setBounds(50, 100, 183, 19);
 
         Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Username.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -89,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(17, 24, 39));
         jLabel3.setText("Password");
         loginPanel.add(jLabel3);
-        jLabel3.setBounds(50, 250, 68, 19);
+        jLabel3.setBounds(50, 250, 69, 19);
 
         Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -130,10 +129,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main picture.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         loginPanel.add(jLabel1);
-        jLabel1.setBounds(-10, 70, 1143, 642);
+        jLabel1.setBounds(-10, 70, 1143, 1091);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main picture.png"))); // NOI18N
-        jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -142,8 +140,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +152,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 972, 627));
+        getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
