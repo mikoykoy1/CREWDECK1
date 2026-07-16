@@ -309,7 +309,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (selectedEmployeeId == null) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
+            JOptionPane.showMessageDialog(this, 
             "Please select an employee from the table first.", 
             "No Selection", 
             javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -321,29 +321,29 @@ public class EmployeePanel extends javax.swing.JPanel {
 }
 
 // Helper method to open the Update Dialog
-private void openUpdateDialog(int employeeId) {
-    try {
-        // Fetch the employee's current database details
-        Employee emp = service.fetchRecord(employeeId); 
+    private void openUpdateDialog(int employeeId) {
+        try {
+            // Fetch the employee's current database details
+            Employee emp = service.fetchRecord(employeeId); 
         
-        if (emp != null) {
-            // Pass the employee data to your Update dialog
-            UpdateRecordDialog updateDialog = new UpdateRecordDialog(
-                (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 
-                true, 
-                emp
-            );
-            updateDialog.setLocationRelativeTo(this);
-            updateDialog.setVisible(true);
+            if (emp != null) {
+                // Pass the employee data to your Update dialog
+                UpdateRecordDialog updateDialog = new UpdateRecordDialog(
+                    (Frame) SwingUtilities.getWindowAncestor(this), 
+                    true, 
+                    emp
+                );
+                updateDialog.setLocationRelativeTo(this);
+                updateDialog.setVisible(true);
             
             // Refresh table after the dialog closes in case they made changes
-            loadTable(); 
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Employee record not found.");
+                loadTable(); 
+            } else {
+                JOptionPane.showMessageDialog(this, "Employee record not found.");
+            }
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error opening record: " + e.getMessage());
         }
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error opening record: " + e.getMessage());
-    }
 
     }//GEN-LAST:event_updateBtnActionPerformed
 
