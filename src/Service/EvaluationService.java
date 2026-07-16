@@ -2,7 +2,7 @@ package Service;
 
 
 import DAO.EvaluationDAO;
-import model.Evaluation;
+import Model.Evaluation;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class EvaluationService {
         if (remarks == null || remarks.trim().isEmpty() || period == null || period.trim().isEmpty()) {
             return false; 
         }
-        if (score < 1 || score > 5) { // Assuming a 1-5 rating standard
+        if (score < 0 || score > 100) {
             return false;
         }
 

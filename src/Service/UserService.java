@@ -11,7 +11,7 @@ public class UserService {
     // Handles authenticating credentials during application login
     public User login(String email, String passwordInput) {
         try {
-            User user = userDAO.findByEmail(email);
+            User user = userDAO.findByIdOrEmail(email);
             if (user != null && user.getIsActive()) {
                 // In production, evaluate using a secure hashing library like BCrypt here
                 if (user.getPasswordHash().equals(passwordInput)) {

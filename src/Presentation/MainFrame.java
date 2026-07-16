@@ -6,9 +6,13 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Connection;
 import DAO.DBConnection;
+import DAO.UserDAO;
+import Model.User;
 import Presentation.HomePanel;
+import Service.UserSession;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class MainFrame extends javax.swing.JFrame {
    
@@ -164,53 +168,65 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
 
-        String correctpass = "12345678";
-        String correctuser = "   Admin";
-        String correctId1 = "1";
-        String correctId2 = "2";
-        String correctPass1 = "123";
-        String correctPass2 = "1234";
-        String username = Username.getText();
-        char[] pass = Password.getPassword();
+        String inputUser = Username.getText().trim();
+        String inputPassword = new String(Password.getPassword());
 
-        if ((String.valueOf(username).equals(correctuser)) && (String.valueOf(pass).equals(correctpass))) {
-            JOptionPane.showMessageDialog(null, "Welcome:" + username);
-
-            HomePanel panel = new HomePanel();
-            getContentPane().removeAll(); //removes the MainFrame
-            getContentPane().add(panel); //adds the HomePanel
-            getContentPane().revalidate();
-            getContentPane().repaint();
-
+        // 1. Enforce simple input checks
+        if (inputUser.isEmpty() || inputPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fields cannot be left blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            return;
         }
 
-        else if ((String.valueOf(username).equals(correctId1)) && (String.valueOf(pass).equals(correctPass1))) {
-            JOptionPane.showMessageDialog(null, "Welcome:" + username);
+        try {
+            // 2. Delegate searching logic safely to the DAO layer
+            UserDAO userDAO = new DAO.UserDAO();
+            User user = userDAO.findByIdOrEmail(inputUser);
 
-            Role newRole = new Role(Username.getText());
-
-            String role = "SELECT `name` FROM `roles`";
-            try (
-                Connection conn = DBConnection.GetConnection();
-                PreparedStatement stmt = conn.prepareStatement(role);
-                ResultSet rs = stmt.executeQuery()) {
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Could not get Role" + e.getMessage());
-
+            // 3. Authenticate user identity details
+            if (user == null) {
+                JOptionPane.showMessageDialog(this, "Invalid credentials provided.", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-            HomePanel panel = new HomePanel(newRole);
+            if (!user.getIsActive()) {
+                JOptionPane.showMessageDialog(this, "This user profile is inactive.", "Access Suspended", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
-            getContentPane().removeAll(); //removes the MainFrame
-            getContentPane().add(panel); //adds the HomePanel
-            getContentPane().revalidate();
-            getContentPane().repaint();
+            // 4. Verify password sequence
+            // Adjust string matching to use custom encryption helpers if BCrypt is introduced later
+            boolean passwordMatches = inputPassword.equals(user.getPasswordHash());
 
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Incorrect credentials");
-        }
+            if (passwordMatches) {
+                // 5. Gather security groups / permissions from bridge junction table
+                List<String> assignedRoles = userDAO.getUserRoles(user.getId());
+                user.setRoles(assignedRoles);
+
+                // 6. Match exactly with your UserSession Singleton instance rules
+                String primaryRole = "Standard_Employee"; // Default fallback structure
+                if (!assignedRoles.isEmpty()) {
+                    primaryRole = assignedRoles.get(0); // Select the highest priority tier role assigned
+                }
+
+                // Bind explicitly into memory via the designated Service Singleton instance
+                UserSession.getInstance().login(user, primaryRole);
+
+                JOptionPane.showMessageDialog(this, "Login verified successfully!");
+
+                // 7. Initialize home routing based on security level parameters
+               HomePanel dashboardPanel = new HomePanel();
+               getContentPane().removeAll();          
+               getContentPane().add(dashboardPanel);   
+               getContentPane().revalidate();          
+               getContentPane().repaint();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid credentials provided.", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Database connectivity error: " + ex.getMessage(), "System Exception", JOptionPane.ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
