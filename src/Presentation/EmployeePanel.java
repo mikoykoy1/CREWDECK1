@@ -26,11 +26,21 @@ public class EmployeePanel extends javax.swing.JPanel {
         loadTable();
     }
     
-    public void loadTable(){  
+    //LOAD TABLE
+    public void loadTable() {
+        try {
         
-        EmployeeService service = new EmployeeService();
-        employeeTable.setModel(service.getTableModel());
-    }
+            EmployeeService empService = new EmployeeService();
+            DefaultTableModel model = empService.getTableModel();
+        
+            if (model != null) {
+                employeeTable.setModel(model); // Set the model to your JTable component
+            }
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error refreshing table: " + e.getMessage());
+        }
+}
     
     
 
