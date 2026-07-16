@@ -43,21 +43,23 @@ public class MainFrame extends javax.swing.JFrame {
         loginButton = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         MainPanel.setBackground(new java.awt.Color(245, 245, 245));
         MainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         MainPanel.setForeground(new java.awt.Color(255, 255, 255));
+        MainPanel.setLayout(new java.awt.BorderLayout());
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
         loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(229, 231, 235), 1, true));
         loginPanel.setMaximumSize(new java.awt.Dimension(500, 500));
         loginPanel.setMinimumSize(new java.awt.Dimension(200, 200));
         loginPanel.setName(""); // NOI18N
-        loginPanel.setPreferredSize(new java.awt.Dimension(350, 360));
+        loginPanel.setPreferredSize(new java.awt.Dimension(370, 360));
         loginPanel.setLayout(null);
 
         titleLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -70,7 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(107, 114, 128));
         jLabel2.setText("Employee Record System");
         loginPanel.add(jLabel2);
-        jLabel2.setBounds(50, 100, 183, 19);
+        jLabel2.setBounds(50, 100, 190, 19);
 
         Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Username.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -81,7 +83,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         loginPanel.add(Username);
-        Username.setBounds(50, 180, 300, 40);
+        Username.setBounds(50, 180, 290, 40);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -99,7 +101,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         loginPanel.add(Password);
-        Password.setBounds(50, 270, 300, 40);
+        Password.setBounds(50, 270, 290, 40);
 
         loginButton.setBackground(new java.awt.Color(37, 99, 235));
         loginButton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -113,7 +115,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         loginPanel.add(loginButton);
-        loginButton.setBounds(50, 350, 300, 45);
+        loginButton.setBounds(50, 350, 290, 45);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Screenshot 2026-07-14 154828.png"))); // NOI18N
         jLabel4.setText("jLabel4");
@@ -126,31 +128,34 @@ public class MainFrame extends javax.swing.JFrame {
         loginPanel.add(jLabel6);
         jLabel6.setBounds(50, 160, 14, 19);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main picture.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        loginPanel.add(jLabel1);
-        jLabel1.setBounds(-10, 70, 1143, 1091);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/742619597_26719342551075883_1456908827130861350_n.png"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        loginPanel.add(jLabel5);
+        jLabel5.setBounds(0, 180, 360, 440);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main picture.png"))); // NOI18N
+        MainPanel.add(loginPanel, java.awt.BorderLayout.WEST);
 
-        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
-        MainPanel.setLayout(MainPanelLayout);
-        MainPanelLayout.setHorizontalGroup(
-            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainPanelLayout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Main background.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        MainPanelLayout.setVerticalGroup(
-            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainPanelLayout.createSequentialGroup()
-                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+
+        MainPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
@@ -260,8 +265,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel titleLabel;
