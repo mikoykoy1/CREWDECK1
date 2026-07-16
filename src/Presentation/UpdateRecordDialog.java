@@ -98,6 +98,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         idTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        cancelBtn = new javax.swing.JButton();
 
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("[ Contact Number ]");
@@ -107,38 +108,65 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         updatePanel.setBackground(new java.awt.Color(51, 51, 51));
 
         updateBtn.setBackground(new java.awt.Color(102, 102, 255));
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         updateBtn.setForeground(new java.awt.Color(255, 255, 255));
         updateBtn.setText("Update");
         updateBtn.addActionListener(this::updateBtnActionPerformed);
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
         jLabel7.setText("[ Name: ]");
 
         nameTxt.setForeground(new java.awt.Color(0, 0, 0));
+        nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nameTxtKeyTyped(evt);
+            }
+        });
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("[ Department: ]");
 
         departmentTxt.setForeground(new java.awt.Color(0, 0, 0));
+        departmentTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                departmentTxtKeyTyped(evt);
+            }
+        });
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
         jLabel8.setText("[ Email ]");
 
         emailTxt.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("[ Salary ]");
 
         salaryTxt.setForeground(new java.awt.Color(0, 0, 0));
+        salaryTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                salaryTxtKeyTyped(evt);
+            }
+        });
 
-        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
         jLabel9.setText("[ Contact Number ]");
 
         contactNumTxt.setForeground(new java.awt.Color(0, 0, 0));
+        contactNumTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contactNumTxtKeyTyped(evt);
+            }
+        });
 
         roleCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setText("[ Role: ]");
 
         idTxt.setEditable(false);
@@ -146,8 +174,15 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         idTxt.setForeground(new java.awt.Color(204, 204, 204));
         idTxt.addActionListener(this::idTxtActionPerformed);
 
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("[ ID: ]");
+
+        cancelBtn.setBackground(new java.awt.Color(153, 153, 153));
+        cancelBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(this::cancelBtnActionPerformed);
 
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
@@ -164,28 +199,29 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                     .addComponent(departmentTxt)
                     .addComponent(jLabel2)
                     .addComponent(jLabel7)
-                    .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addComponent(updateBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
                     .addComponent(nameTxt)
-                    .addComponent(salaryTxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
+                    .addComponent(salaryTxt)
                     .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(100, 100, 100))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancelBtn)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn)
+                .addGap(33, 33, 33))
         );
         updatePanelLayout.setVerticalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updatePanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateBtn)
                     .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
@@ -212,7 +248,11 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateBtn)
+                    .addComponent(cancelBtn))
+                .addGap(70, 70, 70))
         );
 
         getContentPane().add(updatePanel, java.awt.BorderLayout.CENTER);
@@ -277,6 +317,56 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_idTxtActionPerformed
 
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void nameTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyTyped
+        char c = evt.getKeyChar();
+    
+    // Allow letters, spaces, hyphens, and apostrophes only
+        if (!Character.isLetter(c) && c != ' ' && c != '-' && c != '\'') {
+            evt.consume(); // Ignore the keystroke
+        }
+    }//GEN-LAST:event_nameTxtKeyTyped
+
+    private void departmentTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_departmentTxtKeyTyped
+        char c = evt.getKeyChar();
+    
+    // Allow letters, spaces, hyphens, and apostrophes only
+        if (!Character.isLetter(c) && c != ' ' && c != '-' && c != '\'') {
+        evt.consume(); // Ignore the keystroke
+        }
+    }//GEN-LAST:event_departmentTxtKeyTyped
+
+    private void salaryTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_salaryTxtKeyTyped
+        char c = evt.getKeyChar();
+    
+        // Allow only digits and a dot
+        if (!Character.isDigit(c) && c != '.') {
+            evt.consume(); // Reject letter keys
+        }
+    
+        // Prevent typing a second decimal point if one already exists
+        if (c == '.' && salaryTxt.getText().contains(".")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_salaryTxtKeyTyped
+
+    private void contactNumTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactNumTxtKeyTyped
+        char c = evt.getKeyChar();
+    
+        // Allow only digits and a '+' symbol at the start
+        if (!Character.isDigit(c) && c != '+') {
+            evt.consume(); // Reject letter keys
+        }
+    
+        // Block '+' if it's not the very first character
+        if (c == '+' && contactNumTxt.getText().length() > 0) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_contactNumTxtKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -319,6 +409,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField contactNumTxt;
     private javax.swing.JTextField departmentTxt;
     private javax.swing.JTextField emailTxt;
