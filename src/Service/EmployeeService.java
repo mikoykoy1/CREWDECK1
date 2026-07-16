@@ -76,19 +76,33 @@ public class EmployeeService {
     }
     
     // Refactored to display your new database columns in your JTable
-    public DefaultTableModel getTableModel() {
+   public DefaultTableModel getTableModel() {
         try {
-            String columns[] = {"User ID", "Name", "Department", "Salary", "Status"};
+            // Updated column headers array (8 columns total now)
+            String columns[] = {
+                "User ID", 
+                "Name", 
+                "Contact Number", 
+                "Address", 
+                "Department", 
+                "Date Hired", 
+                "Salary", 
+                "Status"
+            };
+            
             List<Employee> records = fetchAllRecords();
-            Object[][] data = new Object[records.size()][5];
+            Object[][] data = new Object[records.size()][8]; // Adjusted column dimension to 8
 
             for (int i = 0; i < records.size(); i++) {
                 Employee emp = records.get(i);
                 data[i][0] = emp.getUserId();
                 data[i][1] = emp.getName();
-                data[i][2] = emp.getDepartment();
-                data[i][3] = emp.getSalary();
-                data[i][4] = emp.getStatus();
+                data[i][2] = emp.getContactNum() != null ? emp.getContactNum() : "N/A";
+                data[i][3] = emp.getAddress() != null ? emp.getAddress() : "N/A";
+                data[i][4] = emp.getDepartment();
+                data[i][5] = emp.getDateHired() != null ? emp.getDateHired().toString() : "N/A";
+                data[i][6] = emp.getSalary();
+                data[i][7] = emp.getStatus();
             }
             return new DefaultTableModel(data, columns);
         } catch (SQLException e) {
