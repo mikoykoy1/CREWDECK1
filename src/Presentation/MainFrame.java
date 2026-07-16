@@ -45,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JToggleButton();
+        showPasswordBtn = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -121,6 +122,16 @@ public class MainFrame extends javax.swing.JFrame {
         loginPanel.add(loginButton);
         loginButton.setBounds(50, 350, 290, 45);
 
+        showPasswordBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        showPasswordBtn.setText("Show Password");
+        showPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPasswordBtnActionPerformed(evt);
+            }
+        });
+        loginPanel.add(showPasswordBtn);
+        showPasswordBtn.setBounds(210, 310, 130, 21);
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Screenshot 2026-07-14 154828.png"))); // NOI18N
         jLabel4.setText("jLabel4");
         loginPanel.add(jLabel4);
@@ -135,7 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/742619597_26719342551075883_1456908827130861350_n.png"))); // NOI18N
         jLabel5.setText("jLabel5");
         loginPanel.add(jLabel5);
-        jLabel5.setBounds(0, 180, 360, 440);
+        jLabel5.setBounds(0, 180, 360, 460);
 
         MainPanel.add(loginPanel, java.awt.BorderLayout.WEST);
 
@@ -236,6 +247,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UsernameActionPerformed
+
+    private void showPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordBtnActionPerformed
+        if (showPasswordBtn.isSelected()) {
+        Password.setEchoChar((char) 0); // Clear echo character to reveal text
+    } else {
+        Password.setEchoChar('•'); // Mask text (standard bullet character)
+    }
+    }//GEN-LAST:event_showPasswordBtnActionPerformed
     
     
     /**
@@ -286,6 +305,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton loginButton;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JRadioButton showPasswordBtn;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
