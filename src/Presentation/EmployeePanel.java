@@ -21,6 +21,7 @@ public class EmployeePanel extends javax.swing.JPanel {
     
     public EmployeePanel() {
         initComponents();
+        loadTable();
     }
     
     public void loadTable(){  

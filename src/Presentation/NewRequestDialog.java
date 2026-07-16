@@ -5,19 +5,70 @@
 package Presentation;
 
 import javax.swing.JOptionPane;
+import Model.Employee;
+import Service.RequestService;
+import DAO.EmployeeDAO; // Or Service.EmployeeService if preferred
+import java.awt.Component;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 
 /**
  *
  * @author CpELaboratory 216
  */
 public class NewRequestDialog extends javax.swing.JDialog {
-
+    private final RequestService requestService = new RequestService();
+    private final EmployeeDAO employeeDAO = new EmployeeDAO(); // Used to fetch employees
     /**
      * Creates new form NewRequestDialog
      */
     public NewRequestDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setupEmployeeComboBox();
+        setupRequestTypeComboBox();
+    }
+    
+    private void setupEmployeeComboBox() {
+        try {
+            // Updated: Call the exact method from your EmployeeDAO: "getAll()"
+            List<Employee> employees = employeeDAO.getAll(); 
+            
+            DefaultComboBoxModel<Employee> model = new DefaultComboBoxModel<>();
+            for (Employee emp : employees) {
+                model.addElement(emp);
+            }
+            employeeComboBox.setModel(model);
+
+            // CUSTOM RENDERER: Displays the name while keeping the actual Employee object bound
+            employeeComboBox.setRenderer(new DefaultListCellRenderer() {
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if (value instanceof Employee) {
+                        Employee emp = (Employee) value;
+                        setText(emp.getName()); // Displays name in the JComboBox
+                    }
+                    return this;
+                }
+            });
+        } catch (Exception e) {
+            System.err.println("Error loading employees: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Failed to load employees: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void setupRequestTypeComboBox() {
+        String[] types = {
+            "Leave Request",
+            "Equipment Request",
+            "Salary Inquiry",
+            "Overtime Work Approval",
+            "Other Support"
+        };
+        requestComboBox.setModel(new DefaultComboBoxModel<>(types));
     }
 
     /**
@@ -34,12 +85,12 @@ public class NewRequestDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        employeeComboBox = new javax.swing.JComboBox<>();
+        requestComboBox = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        descriptionField = new javax.swing.JTextArea();
+        saveBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -67,32 +118,30 @@ public class NewRequestDialog extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
         jLabel7.setText("Description: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        requestComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        descriptionField.setBackground(new java.awt.Color(102, 102, 102));
+        descriptionField.setColumns(20);
+        descriptionField.setRows(5);
+        jScrollPane3.setViewportView(descriptionField);
 
-        jTextArea1.setBackground(new java.awt.Color(102, 102, 102));
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
-
-        jButton2.setBackground(new java.awt.Color(102, 102, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saveBtn.setBackground(new java.awt.Color(102, 102, 102));
+        saveBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveBtn.setText("Save");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saveBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(102, 102, 102));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Cancel");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setBackground(new java.awt.Color(102, 102, 102));
+        cancelBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
@@ -108,15 +157,15 @@ public class NewRequestDialog extends javax.swing.JDialog {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel5)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, 0, 319, Short.MAX_VALUE)
+                                .addComponent(employeeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(requestComboBox, 0, 319, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel7))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(jLabel1)))
@@ -130,19 +179,19 @@ public class NewRequestDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(employeeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(requestComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(76, 76, 76))
         );
 
@@ -162,18 +211,45 @@ public class NewRequestDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
             dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           JOptionPane.showMessageDialog(
-            this,
-            "Request Saved Successfully!"
-    );
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+    // 1. Get Selected Objects
+        Employee selectedEmp = (Employee) employeeComboBox.getSelectedItem();
+        String selectedType = (String) requestComboBox.getSelectedItem();
+        String description = descriptionField.getText().trim();
 
+        // 2. Client-side Validation
+        if (selectedEmp == null) {
+            JOptionPane.showMessageDialog(this, "Please select an employee.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (description.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please write a description for the request.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // 3. Match user ID (using the User object inside Employee as structured in EmployeeDAO)
+            int userId = selectedEmp.getUser().getId(); 
+            
+            // 4. Submit to database via your RequestService
+            boolean success = requestService.createEmployeeRequest(userId, selectedType, description);
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Request Saved Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose(); // Close dialog on success
+            } else {
+                JOptionPane.showMessageDialog(this, "Could not save request. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.err.println("Error saving request: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error saving request: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
     dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_saveBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,7 +262,7 @@ public class NewRequestDialog extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("System".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -218,16 +294,16 @@ public class NewRequestDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JTextArea descriptionField;
+    private javax.swing.JComboBox<Employee> employeeComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox<String> requestComboBox;
+    private javax.swing.JButton saveBtn;
     // End of variables declaration//GEN-END:variables
 }

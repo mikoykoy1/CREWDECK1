@@ -90,7 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(17, 24, 39));
         jLabel3.setText("Password");
         loginPanel.add(jLabel3);
-        jLabel3.setBounds(50, 250, 69, 19);
+        jLabel3.setBounds(50, 250, 110, 19);
 
         Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));

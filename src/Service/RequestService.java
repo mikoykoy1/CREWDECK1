@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class RequestService {
     private final RequestDAO requestDAO = new RequestDAO();
@@ -52,5 +53,37 @@ public class RequestService {
             System.err.println("Error documenting admin request decision: " + ex.getMessage());
             return false;
         }
+    }
+    
+    
+    public DefaultTableModel getTableModel() {
+        // 1. Define the UI table columns
+        String[] columns = {"Request ID", "Employee", "Request Type", "Status", "Date Submitted", "Action"};
+        
+        // 2. Create the model and make it non-editable double-clicking
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; 
+            }
+        };
+
+        // 3. Fetch the list of pending requests
+        List<Request> requests = getPendingReviewQueue();
+
+        // 4. Populate the rows
+        for (Request req : requests) {
+            Object[] rowData = {
+                req.getId(),                // Maps to 'id' in employee_requests
+                req.getUserId(),      // Displays the User Id fetched via SQL join
+                req.getRequestType(),       // Maps to 'request_type'
+                req.getStatus(),            // Maps to 'status'
+                req.getSubmissionDate(),    // Maps to 'submission_date'
+                "Review"                    // Action placeholder for the last column
+            };
+            model.addRow(rowData);
+        }
+
+        return model;
     }
 }
