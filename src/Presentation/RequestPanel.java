@@ -1,6 +1,5 @@
 package Presentation;
 
-import Presentation.NewRequestDialog;
 import Service.RequestService;
 import javax.swing.SwingUtilities;
 

@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import Service.EmployeeService;
 import Model.Employee;
 import Model.User;
+import Presentation.AddRecordDialog;
+import Presentation.UpdateRecordDialog;
 import Service.UserService;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -37,88 +39,90 @@ public class EmployeePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         EmployeeTopPanel = new javax.swing.JPanel();
-        deleteBtn = new javax.swing.JButton();
-        updateBtn = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        addBtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
         EmployeeBodyPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        updateBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EmployeeTopPanel.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel1.setBackground(new java.awt.Color(156, 163, 175));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("CREWDECK");
+
+        jLabel2.setBackground(new java.awt.Color(156, 163, 175));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("/");
+
+        jLabel3.setBackground(new java.awt.Color(17, 24, 39));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Employee");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3)
+                .addContainerGap(700, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 40));
+
+        EmployeeTopPanel.setBackground(new java.awt.Color(255, 255, 255));
         EmployeeTopPanel.setPreferredSize(new java.awt.Dimension(869, 150));
-
-        deleteBtn.setBackground(new java.awt.Color(102, 102, 102));
-        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("Remove Employee");
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
-            }
-        });
-
-        updateBtn.setText("Update");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel8.setText("Employee Records");
-
-        addBtn.setBackground(new java.awt.Color(102, 102, 255));
-        addBtn.setForeground(new java.awt.Color(255, 255, 255));
-        addBtn.setText("Add Employee");
-        addBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout EmployeeTopPanelLayout = new javax.swing.GroupLayout(EmployeeTopPanel);
         EmployeeTopPanel.setLayout(EmployeeTopPanelLayout);
         EmployeeTopPanelLayout.setHorizontalGroup(
             EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EmployeeTopPanelLayout.createSequentialGroup()
-                        .addComponent(addBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(updateBtn))
-                    .addComponent(jLabel8))
-                .addContainerGap(483, Short.MAX_VALUE))
+            .addGap(0, 910, Short.MAX_VALUE)
         );
         EmployeeTopPanelLayout.setVerticalGroup(
             EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeTopPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addGroup(EmployeeTopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn)
-                    .addComponent(deleteBtn)
-                    .addComponent(updateBtn))
-                .addContainerGap(37, Short.MAX_VALUE))
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        add(EmployeeTopPanel, java.awt.BorderLayout.PAGE_START);
+        add(EmployeeTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 40));
 
-        EmployeeBodyPanel.setBackground(new java.awt.Color(102, 102, 102));
+        EmployeeBodyPanel.setBackground(new java.awt.Color(255, 255, 255));
         EmployeeBodyPanel.setPreferredSize(new java.awt.Dimension(869, 465));
-        EmployeeBodyPanel.setLayout(new java.awt.BorderLayout());
+        EmployeeBodyPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane2.setBackground(new java.awt.Color(102, 102, 102));
 
+        employeeTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         employeeTable.setForeground(new java.awt.Color(204, 204, 204));
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,11 +157,90 @@ public class EmployeePanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(employeeTable);
 
-        jScrollPane1.setViewportView(jScrollPane2);
+        EmployeeBodyPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 850, 310));
 
-        EmployeeBodyPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        add(EmployeeBodyPanel, java.awt.BorderLayout.CENTER);
+        jLabel6.setBackground(new java.awt.Color(17, 24, 39));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Employee");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(776, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
+        EmployeeBodyPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 850, -1));
+
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+        EmployeeBodyPanel.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
+
+        deleteBtn.setText("Remove Employee");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        EmployeeBodyPanel.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
+
+        addBtn.setBackground(new java.awt.Color(102, 102, 255));
+        addBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn.setText("Add Employee");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
+        EmployeeBodyPanel.add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jScrollPane3.setViewportView(EmployeeBodyPanel);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 890, 530));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+
+        jLabel10.setBackground(new java.awt.Color(56, 58, 64));
+        jLabel10.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("CREWDECK — Employee Management System  © 2026  —  v1.0");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(232, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addContainerGap())
+        );
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 900, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -280,9 +363,16 @@ private void openUpdateDialog(int employeeId) {
     private javax.swing.JButton addBtn;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTable employeeTable;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

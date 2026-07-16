@@ -5,6 +5,7 @@
 package Presentation;
 
 import DAO.DBConnection;
+import DAO.UserDAO;
 import Model.Employee;
 import Model.User;
 import Service.EmployeeService;
@@ -94,6 +95,11 @@ public class AddRecordDialog extends javax.swing.JDialog {
         });
 
         nameTxt.setForeground(new java.awt.Color(0, 0, 0));
+        nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameTxtKeyReleased(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("[ Name: ]");
@@ -259,6 +265,27 @@ public class AddRecordDialog extends javax.swing.JDialog {
         
         this.dispose();
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void nameTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyReleased
+        
+    String fullName = nameTxt.getText().trim();
+
+    if (!fullName.isEmpty()) {
+
+      UserDAO userDAO = new UserDAO();
+
+      // Generate the unique email dynamically as they type!
+
+      String uniqueEmail = userDAO.generateUniqueEmail(fullName);
+
+      emailTxt.setText(uniqueEmail); // Display it on-the-fly in a non-editable field
+
+    } else {
+
+      emailTxt.setText("");
+
+    }
+    }//GEN-LAST:event_nameTxtKeyReleased
 
     /**
      * @param args the command line arguments

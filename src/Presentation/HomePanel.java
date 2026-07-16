@@ -5,7 +5,10 @@ import Model.Role;
 import Presentation.EmployeePanel;
 import Presentation.EvaluationPanel;
 import Presentation.HomePanel2;
+import Presentation.HomePanel2;
 import Presentation.MainFrame;
+import Presentation.MainFrame;
+import Presentation.RequestPanel;
 import Presentation.RequestPanel;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -64,11 +67,11 @@ public class HomePanel extends javax.swing.JPanel {
         employeeBtn = new javax.swing.JButton();
         homeBtn = new javax.swing.JButton();
         requestBtn = new javax.swing.JButton();
-        evaluationBtn = new javax.swing.JButton();
         logOutBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
+        evaluationBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -100,7 +103,8 @@ public class HomePanel extends javax.swing.JPanel {
         employeeBtn.setBackground(new java.awt.Color(17, 24, 39));
         employeeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         employeeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        employeeBtn.setText("          Employee Records");
+        employeeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/users_icon.png"))); // NOI18N
+        employeeBtn.setText("Employee Records");
         employeeBtn.setActionCommand("            Employee Records");
         employeeBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
         employeeBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -119,7 +123,7 @@ public class HomePanel extends javax.swing.JPanel {
         homeBtn.setBackground(new java.awt.Color(17, 24, 39));
         homeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         homeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home_icon.png"))); // NOI18N
+        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home_icon (1).png"))); // NOI18N
         homeBtn.setText("Home");
         homeBtn.setActionCommand("      Home");
         homeBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
@@ -141,7 +145,8 @@ public class HomePanel extends javax.swing.JPanel {
         requestBtn.setBackground(new java.awt.Color(17, 24, 39));
         requestBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         requestBtn.setForeground(new java.awt.Color(255, 255, 255));
-        requestBtn.setText("          Request");
+        requestBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/document_icon.png"))); // NOI18N
+        requestBtn.setText("Request");
         requestBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
         requestBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         requestBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -155,31 +160,11 @@ public class HomePanel extends javax.swing.JPanel {
             }
         });
 
-        evaluationBtn.setBackground(new java.awt.Color(17, 24, 39));
-        evaluationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        evaluationBtn.setForeground(new java.awt.Color(255, 255, 255));
-        evaluationBtn.setText("Evaluation");
-        evaluationBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
-        evaluationBtn.setHideActionText(true);
-        evaluationBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        evaluationBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        evaluationBtn.setInheritsPopupMenu(true);
-        evaluationBtn.setPreferredSize(new java.awt.Dimension(72, 22));
-        evaluationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                evaluationBtnMouseClicked(evt);
-            }
-        });
-        evaluationBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                evaluationBtnActionPerformed(evt);
-            }
-        });
-
         logOutBtn.setBackground(new java.awt.Color(17, 24, 39));
         logOutBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         logOutBtn.setForeground(new java.awt.Color(255, 255, 255));
-        logOutBtn.setText("          Logout");
+        logOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logout_icon.png"))); // NOI18N
+        logOutBtn.setText("Logout");
         logOutBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
         logOutBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         logOutBtn.setPreferredSize(new java.awt.Dimension(72, 22));
@@ -209,18 +194,35 @@ public class HomePanel extends javax.swing.JPanel {
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("CREWDECK");
 
+        evaluationBtn.setBackground(new java.awt.Color(17, 24, 39));
+        evaluationBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        evaluationBtn.setForeground(new java.awt.Color(255, 255, 255));
+        evaluationBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/star_icon.png"))); // NOI18N
+        evaluationBtn.setText("Evalution");
+        evaluationBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
+        evaluationBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        evaluationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                evaluationBtnMouseClicked(evt);
+            }
+        });
+        evaluationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evaluationBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
+            .addGroup(sidePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(evaluationBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(employeeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(requestBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(sidePanelLayout.createSequentialGroup()
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(employeeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(requestBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidePanelLayout.createSequentialGroup()
                         .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(sidePanelLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -229,7 +231,8 @@ public class HomePanel extends javax.swing.JPanel {
                             .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(evaluationBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sidePanelLayout.setVerticalGroup(
@@ -250,9 +253,9 @@ public class HomePanel extends javax.swing.JPanel {
                 .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(evaluationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -289,15 +292,6 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_requestBtnActionPerformed
-
-    private void evaluationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtnActionPerformed
-        EvaluationPanel panel = new EvaluationPanel();
-
-        mainPanel.removeAll();
-        mainPanel.add(panel);
-        mainPanel.revalidate();
-        mainPanel.repaint();
-    }//GEN-LAST:event_evaluationBtnActionPerformed
 
     private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
         HomePanel2 panel = new HomePanel2();
@@ -360,8 +354,7 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_employeeBtnMouseClicked
 
     private void requestBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestBtnMouseClicked
-        requestBtn.setBackground(Color.DARK_GRAY);
-   
+        requestBtn.setBackground(Color.DARK_GRAY);  
         evaluationBtn.setBackground(Color.BLACK);    
         employeeBtn.setBackground(Color.BLACK); 
         homeBtn.setBackground(Color.BLACK);
@@ -373,7 +366,19 @@ public class HomePanel extends javax.swing.JPanel {
         homeBtn.setBackground(Color.BLACK);        
         employeeBtn.setBackground(Color.BLACK); 
         requestBtn.setBackground(Color.BLACK);
+        
+        
+    
     }//GEN-LAST:event_evaluationBtnMouseClicked
+
+    private void evaluationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtnActionPerformed
+        EvaluationPanel panel = new EvaluationPanel();
+
+        mainPanel.removeAll();
+        mainPanel.add(panel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }//GEN-LAST:event_evaluationBtnActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

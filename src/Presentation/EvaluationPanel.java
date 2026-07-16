@@ -219,7 +219,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
         employeeJcom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setBackground(new java.awt.Color(56, 58, 64));
-        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("EVALUAATION SCORE (0 - 100)");
 
@@ -231,7 +231,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
         lblRating.setText(".                       ");
 
         jLabel7.setBackground(new java.awt.Color(56, 58, 64));
-        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
         jLabel7.setText("REMARKS");
 
@@ -241,7 +241,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
         jScrollPane3.setViewportView(remarksTxt);
 
         jLabel8.setBackground(new java.awt.Color(56, 58, 64));
-        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 153, 153));
         jLabel8.setText("DATE");
 
