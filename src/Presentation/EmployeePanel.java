@@ -185,25 +185,28 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         EmployeeBodyPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 850, -1));
 
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         updateBtn.setText("Update");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
             }
         });
-        EmployeeBodyPanel.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
+        EmployeeBodyPanel.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
 
-        deleteBtn.setText("Remove Employee");
+        deleteBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteBtn.setText("Remove");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
-        EmployeeBodyPanel.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
+        EmployeeBodyPanel.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
-        addBtn.setBackground(new java.awt.Color(102, 102, 255));
+        addBtn.setBackground(new java.awt.Color(0, 153, 255));
+        addBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         addBtn.setForeground(new java.awt.Color(255, 255, 255));
-        addBtn.setText("Add Employee");
+        addBtn.setText("Add");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
