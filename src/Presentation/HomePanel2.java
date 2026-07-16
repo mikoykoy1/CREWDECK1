@@ -18,6 +18,30 @@ public class HomePanel2 extends javax.swing.JPanel {
         ImageIcon resizedIcon = new ImageIcon(resizedImg);
 
         jLabel1.setIcon(resizedIcon);
+        
+        // 1. Fetch metrics from DB and populate GUI Labels
+        loadDashboardMetrics();
+    
+        jLabel1.setIcon(resizedIcon);
+    }
+    
+    private void loadDashboardMetrics() {
+        // Instantiate the DAO layer objects
+        DAO.EmployeeDAO employeeDAO = new DAO.EmployeeDAO();
+        DAO.RequestDAO requestDAO = new DAO.RequestDAO();
+        DAO.EvaluationDAO evaluationDAO = new DAO.EvaluationDAO();
+
+        // Retrieve values from database
+        int totalEmployees = employeeDAO.getTotalEmployeeCount();
+        int totalDepartments = employeeDAO.getTotalDepartmentCount();
+        int pendingRequests = requestDAO.getPendingRequestsCount();
+        int pendingEvaluations = evaluationDAO.getPendingEvaluationsCount();
+
+        // Bind data values directly to the GUI components
+        TotalEmployeeLabel.setText(String.valueOf(totalEmployees));
+        requestLabel.setText(String.valueOf(pendingRequests));
+        pendingEvaluationLabel.setText(String.valueOf(pendingEvaluations));
+        departmentsLabel.setText(String.valueOf(totalDepartments));
     }
 
     /**
@@ -50,6 +74,10 @@ public class HomePanel2 extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        TotalEmployeeLabel = new javax.swing.JLabel();
+        requestLabel = new javax.swing.JLabel();
+        pendingEvaluationLabel = new javax.swing.JLabel();
+        departmentsLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
@@ -158,6 +186,18 @@ public class HomePanel2 extends javax.swing.JPanel {
 
         jLabel16.setText(":");
 
+        TotalEmployeeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TotalEmployeeLabel.setText("0");
+
+        requestLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        requestLabel.setText("0");
+
+        pendingEvaluationLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pendingEvaluationLabel.setText("0");
+
+        departmentsLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        departmentsLabel.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,19 +212,25 @@ public class HomePanel2 extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(107, 107, 107)
-                                .addComponent(jLabel15))
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(pendingEvaluationLabel))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(106, 106, 106)
-                                .addComponent(jLabel14))
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(requestLabel))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(105, 105, 105)
-                                .addComponent(jLabel13))))
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addComponent(TotalEmployeeLabel))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +243,9 @@ public class HomePanel2 extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107)
-                        .addComponent(jLabel16)))
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
+                        .addComponent(departmentsLabel)))
                 .addContainerGap(162, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,16 +259,19 @@ public class HomePanel2 extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel13))))
+                            .addComponent(jLabel13)
+                            .addComponent(TotalEmployeeLabel))))
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel14)
+                                .addComponent(requestLabel))
                             .addComponent(jLabel6))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,20 +279,22 @@ public class HomePanel2 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel15))))
+                            .addComponent(jLabel15)
+                            .addComponent(pendingEvaluationLabel))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel16))))
+                            .addComponent(jLabel16)
+                            .addComponent(departmentsLabel))))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -563,6 +616,8 @@ public class HomePanel2 extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TotalEmployeeLabel;
+    private javax.swing.JLabel departmentsLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -616,5 +671,7 @@ public class HomePanel2 extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel pendingEvaluationLabel;
+    private javax.swing.JLabel requestLabel;
     // End of variables declaration//GEN-END:variables
 }

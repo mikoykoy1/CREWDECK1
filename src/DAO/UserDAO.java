@@ -22,7 +22,7 @@ public class UserDAO {
         }
 
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql)
         ) {
             if (isNumeric) {
@@ -55,7 +55,7 @@ public class UserDAO {
                    + "WHERE ur.user_id = ?";
                    
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql)
         ) {
             stmt.setInt(1, userId);
@@ -73,7 +73,7 @@ public class UserDAO {
         String sql = "INSERT INTO `users` (`email`, `password_hash`, `isActive`) VALUES (?, ?, ?)";
         
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             // Statement.RETURN_GENERATED_KEYS allows retrieval of the auto-increment value assigned by MariaDB/MySQL
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
         ) {
@@ -100,7 +100,7 @@ public class UserDAO {
         String findRoleSql = "SELECT `id` FROM `roles` WHERE `name` = ?";
         String insertRelationSql = "INSERT INTO `user_role` (`user_id`, `role_id`) VALUES (?, ?)";
         
-        try (Connection connection = DBConnection.GetConnection()) {
+        try (Connection connection = DBConnection.getConnection()) {
             int roleId = -1;
             
             // Step 4a: Find the target role ID matching the string descriptor
@@ -157,7 +157,7 @@ public class UserDAO {
     public boolean doesEmailExist(String email) {
         String sql = "SELECT 1 FROM `users` WHERE `email` = ? LIMIT 1";
         try (
-            Connection conn = DBConnection.GetConnection();
+            Connection conn = DBConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
             stmt.setString(1, email);

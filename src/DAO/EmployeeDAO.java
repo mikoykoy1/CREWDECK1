@@ -6,6 +6,7 @@ import java.util.List;
 import Model.Employee;
 import Model.User;
 
+
 public class EmployeeDAO {
 
     // CREATE
@@ -17,7 +18,7 @@ public class EmployeeDAO {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; //
         
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql); //
         ) {
             stmt.setInt(1, userId); //
@@ -42,7 +43,7 @@ public class EmployeeDAO {
                    + "JOIN `users` u ON e.user_id = u.id"; //
                    
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             Statement stmt = connection.createStatement();    
             ResultSet rs = stmt.executeQuery(sql); //
         ) {
@@ -80,7 +81,7 @@ public class EmployeeDAO {
                    + "WHERE e.user_id = ?"; //
                    
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql); //
         ) {
             stmt.setInt(1, id); //
@@ -121,7 +122,7 @@ public class EmployeeDAO {
                 
         Connection connection = null; //
         try {
-            connection = DBConnection.GetConnection(); //
+            connection = DBConnection.getConnection(); //
             connection.setAutoCommit(false); // Enable manual transactions
 
             // 1. Update User Account Details
@@ -185,7 +186,7 @@ public class EmployeeDAO {
         String sql = "DELETE FROM `users` WHERE id = ?"; //
         
         try (
-            Connection connection = DBConnection.GetConnection();
+            Connection connection = DBConnection.getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql); //
         ) {
             stmt.setInt(1, id); //
@@ -199,7 +200,7 @@ public class EmployeeDAO {
         String sql = "SELECT `name` FROM `roles`";
     
         try (
-            Connection conn = DBConnection.GetConnection();
+            Connection conn = DBConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()
         ) {
@@ -209,4 +210,39 @@ public class EmployeeDAO {
         }
         return roles;
     }
+    
+    
+    // Method to get total employees
+    public int getTotalEmployeeCount() {
+        String query = "SELECT COUNT(*) AS total FROM employee";
+        
+        try (java.sql.Connection conn = DBConnection.getConnection();
+            java.sql.Statement stmt = conn.createStatement();
+            java.sql.ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                
+                return rs.getInt("total");
+            }
+            
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    // Method to get total unique departments
+    public int getTotalDepartmentCount() {
+        String query = "SELECT COUNT(DISTINCT department) AS total FROM employee";
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
 }

@@ -12,7 +12,7 @@ public class EvaluationDAO {
         String sql = "INSERT INTO performance_evaluations (user_id, evaluator_id, evaluation_date, period, score, feedback_remarks) VALUES (?, ?, ?, ?, ?, ?)";
         DBConnection dbcconnection = new DBConnection();
         
-        try (Connection conn = dbcconnection.GetConnection();
+        try (Connection conn = dbcconnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setInt(1, eval.getUserId());
@@ -31,7 +31,7 @@ public class EvaluationDAO {
         List<Evaluation> historyList = new ArrayList<>();
         String sql = "SELECT * FROM performance_evaluations WHERE user_id = ? ORDER BY evaluation_date DESC";
         
-        try (Connection conn = DBConnection.GetConnection();
+        try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setInt(1, employeeId);
@@ -52,4 +52,21 @@ public class EvaluationDAO {
         }
         return historyList;
     }
+    
+    
+    public int getPendingEvaluationsCount() {
+        String query = "SELECT COUNT(*) AS total FROM performance_evaluations ";
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    
 }
