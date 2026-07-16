@@ -29,7 +29,7 @@ public class AddRecordDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         populateRolesDropdown();
-        setTitle("Add Dialog");       
+        setTitle("Add Employee Record");       
     }
     
     private void populateRolesDropdown() {
@@ -82,6 +82,8 @@ public class AddRecordDialog extends javax.swing.JDialog {
         contactNumTxt = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        addressTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -170,38 +172,66 @@ public class AddRecordDialog extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Add Employee");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel8.setText("[ Address: ]");
+
+        addressTxt.setForeground(new java.awt.Color(0, 0, 0));
+        addressTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                addressTxtKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                addressTxtKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout dialogPanelLayout = new javax.swing.GroupLayout(dialogPanel);
         dialogPanel.setLayout(dialogPanelLayout);
         dialogPanelLayout.setHorizontalGroup(
             dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(dialogPanelLayout.createSequentialGroup()
-                            .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(nameTxt)
-                                    .addComponent(departmentTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emailTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(salaryTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(contactNumTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6))
-                                .addComponent(jLabel7))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(cancelBtn))
-                .addGap(18, 18, 18)
-                .addComponent(addBtn)
-                .addGap(16, 16, 16))
+            .addGroup(dialogPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
+                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(dialogPanelLayout.createSequentialGroup()
+                                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addGroup(dialogPanelLayout.createSequentialGroup()
+                                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(nameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                                                        .addComponent(departmentTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(emailTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(salaryTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(contactNumTxt, javax.swing.GroupLayout.Alignment.LEADING))
+                                                    .addComponent(jLabel2))
+                                                .addGap(39, 39, 39)
+                                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel5))))
+                                        .addGap(36, 36, 36))
+                                    .addComponent(cancelBtn)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dialogPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(124, 124, 124)
+                                        .addComponent(jLabel8)))
+                                .addGap(18, 18, 18)
+                                .addComponent(addBtn)
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
+                                .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45))))
+                    .addGroup(dialogPanelLayout.createSequentialGroup()
+                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         dialogPanelLayout.setVerticalGroup(
             dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,28 +241,32 @@ public class AddRecordDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contactNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
                     .addComponent(addBtn))
@@ -247,8 +281,10 @@ public class AddRecordDialog extends javax.swing.JDialog {
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // 1. Extract and clean values from your form components
         String name = nameTxt.getText().trim();
+        String address = addressTxt.getText().trim();
         String department = departmentTxt.getText().trim();
         String email = emailTxt.getText().trim();
+        String contactNum = contactNumTxt.getText().trim();
         String selectedRole = roleCmb.getSelectedItem().toString();
 
         double salary = 0.0;
@@ -259,29 +295,31 @@ public class AddRecordDialog extends javax.swing.JDialog {
             return;
         }
 
-        // 2. Validate inputs before running database operations
+        // Validate inputs before running database operations
         if (name.isEmpty() || department.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Name, Department, and Email fields cannot be blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 3. Wrap in a try-catch to satisfy compilation and catch SQL errors safely
+       
         try {
            
-            // Step A: Register security credentials and capture the generated password/ID
+            
             UserService uServ =  new UserService();    
             User savedUser = uServ.registerUserAccount(email, selectedRole);
 
-            // Step B: Form the matching HR Profile mapping
+            // Form the matching HR Profile mapping
             Employee emp = new Employee();
             emp.setUser(savedUser); // Links the database auto-incremented user ID!
             emp.setName(name);
+            emp.setAddress(address);
+            emp.setContactNum(contactNum);
             emp.setDepartment(department);
             emp.setSalary(salary);
             emp.setStatus("Active");
             emp.setDateHired(java.time.LocalDate.now());
 
-            // Step C: Save details to the employee table using your EmployeeService
+            // Save details to the employee table using your EmployeeService
             boolean isProfileSaved = service.registerEmployee(emp);
 
             if (isProfileSaved) {
@@ -295,14 +333,18 @@ public class AddRecordDialog extends javax.swing.JDialog {
 
                 // Clear text fields
                 nameTxt.setText("");
+                addressTxt.setText("");
                 departmentTxt.setText("");
                 emailTxt.setText("");
                 salaryTxt.setText("");
+                contactNumTxt.setText("");
 
                 // Refresh visual display table
                 EmployeePanel employee = new EmployeePanel();
-                
+                if(employee != null){
                 employee.loadTable();
+                }
+                
             } else {
                 JOptionPane.showMessageDialog(this, "User credentials created, but failed to initialize HR profile.", 
                         "Data Error", JOptionPane.ERROR_MESSAGE);
@@ -387,6 +429,14 @@ public class AddRecordDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_contactNumTxtKeyTyped
 
+    private void addressTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressTxtKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressTxtKeyReleased
+
+    private void addressTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressTxtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressTxtKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -432,6 +482,7 @@ public class AddRecordDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField addressTxt;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField contactNumTxt;
     private javax.swing.JTextField departmentTxt;
@@ -444,6 +495,7 @@ public class AddRecordDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JComboBox<String> roleCmb;
     private javax.swing.JTextField salaryTxt;

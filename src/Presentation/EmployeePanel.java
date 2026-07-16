@@ -344,7 +344,8 @@ public class EmployeePanel extends javax.swing.JPanel {
                 UpdateRecordDialog updateDialog = new UpdateRecordDialog(
                     (Frame) SwingUtilities.getWindowAncestor(this), 
                     true, 
-                    emp
+                    emp,
+                    this
                 );
                 updateDialog.setLocationRelativeTo(this);
                 updateDialog.setVisible(true);

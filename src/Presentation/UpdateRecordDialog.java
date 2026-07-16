@@ -20,45 +20,60 @@ import javax.swing.JOptionPane;
 public class UpdateRecordDialog extends javax.swing.JDialog {
     
     private Employee employeeToUpdate;
+    private EmployeePanel parentPanel;
     private static final EmployeeService service = new EmployeeService();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UpdateRecordDialog.class.getName());
 
     /**
      * Creates new form UpdateRecordDialog
      */
-    public UpdateRecordDialog(java.awt.Frame parent, boolean modal, Employee employee) {
+    public UpdateRecordDialog(java.awt.Frame parent, boolean modal, Employee employee, EmployeePanel parentPanel) {
        super(parent, modal);
+       this.parentPanel = parentPanel;
        // 1. Initialize NetBeans UI elements first
-    initComponents(); 
+        initComponents(); 
     
-    // 2. Setup dropdown list data
-    populateRolesDropdown();
-    setTitle("Update Dialog");
+        // 2. Setup dropdown list data
+        populateRolesDropdown();
+        setTitle("Update Dialog");
     
-    // 3. Bind the employee record and populate the form fields
-    this.employeeToUpdate = employee;
-    if (this.employeeToUpdate != null) {
+        // 3. Bind the employee record and populate the form fields
+        this.employeeToUpdate = employee;
+        if (this.employeeToUpdate != null) {
         populateFormFields();
-    }
+        }
     }
     
     
-        private void populateFormFields() {
+    private void populateFormFields() {
         // ID field stays read-only/uneditable 
         idTxt.setText(String.valueOf(employeeToUpdate.getUserId()));
         nameTxt.setText(employeeToUpdate.getName());
         departmentTxt.setText(employeeToUpdate.getDepartment());
         contactNumTxt.setText(employeeToUpdate.getContactNum() != null ? employeeToUpdate.getContactNum() : "");
-        
+        addressTxt.setText(employeeToUpdate.getAddress() != null ? employeeToUpdate.getAddress() : "");
         salaryTxt.setText(String.valueOf(employeeToUpdate.getSalary()));
         
+        // Populate and select email/role safely
+        if (employeeToUpdate.getUser() != null) {
+            emailTxt.setText(employeeToUpdate.getUser().getEmail());
+    
+        // FIX: Get the roles list and safely grab the first role
+            java.util.List<String> userRoles = employeeToUpdate.getUser().getRoles();
+            if (userRoles != null && !userRoles.isEmpty()) {
+            String firstRole = userRoles.get(0); // Gets the first role in the list
+            roleCmb.setSelectedItem(firstRole);
+        }
+        } else {
+            emailTxt.setText("");
+        }     
     }
     
     private void populateRolesDropdown() {
         roleCmb.removeAllItems(); // Clear default placeholders
     
         try {
-        // Fetch the roles list directly from your DAO package
+            // Fetch the roles list directly from your DAO package
             DAO.EmployeeDAO dao = new DAO.EmployeeDAO();
             java.util.List<String> roles = dao.getRoleNames();
         
@@ -66,10 +81,9 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                 roleCmb.addItem(role);
             }
         } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Could not load database roles into UI: " + e.getMessage());
-               
+            JOptionPane.showMessageDialog(this, "Could not load database roles into UI: " + e.getMessage());
+       
         }
-    
     }
 
     /**
@@ -100,6 +114,8 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        addressTxt = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("[ Contact Number ]");
@@ -189,6 +205,20 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Update Employee");
 
+        addressTxt.setForeground(new java.awt.Color(0, 0, 0));
+        addressTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                addressTxtKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                addressTxtKeyTyped(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel11.setText("[ Address: ]");
+
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
         updatePanelLayout.setHorizontalGroup(
@@ -196,32 +226,12 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
             .addGroup(updatePanelLayout.createSequentialGroup()
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(updatePanelLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(contactNumTxt)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel4)
-                                    .addComponent(emailTxt)
-                                    .addComponent(jLabel8)
-                                    .addComponent(departmentTxt)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel7)
-                                    .addComponent(nameTxt)
-                                    .addComponent(salaryTxt))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
-                                .addContainerGap(41, Short.MAX_VALUE)
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)))
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addGroup(updatePanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(41, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -229,6 +239,26 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(updateBtn)))
                 .addGap(33, 33, 33))
+            .addGroup(updatePanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(contactNumTxt)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel4)
+                    .addComponent(emailTxt)
+                    .addComponent(jLabel8)
+                    .addComponent(departmentTxt)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7)
+                    .addComponent(nameTxt)
+                    .addComponent(salaryTxt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel5)
+                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         updatePanelLayout.setVerticalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,17 +273,22 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                             .addComponent(jLabel1)
                             .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(updatePanelLayout.createSequentialGroup()
+                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -281,6 +316,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // 1. Clean data extracts
         String name = nameTxt.getText().trim();
+        String address = addressTxt.getText().trim();
         String department = departmentTxt.getText().trim();
         String contactNum = contactNumTxt.getText().trim();
         String email = emailTxt.getText().trim();
@@ -306,6 +342,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
 
         // 3. Mutate fields directly onto the tracked reference model
         employeeToUpdate.setName(name);
+        employeeToUpdate.setAddress(address.isEmpty() ? null : address);
         employeeToUpdate.setDepartment(department);
         employeeToUpdate.setContactNum(contactNum.isEmpty() ? null : contactNum);
         employeeToUpdate.setSalary(salary);
@@ -324,11 +361,16 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
 
         if (isSuccess) {
             JOptionPane.showMessageDialog(this, "Employee details successfully synchronized!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Refresh parent view display table if operational
+            if (parentPanel != null) {
+                parentPanel.loadTable();
+            }
             this.dispose(); // Close modal window
         } else {
             JOptionPane.showMessageDialog(this, "Update routine database submission transaction rejected.", "Database Error", JOptionPane.ERROR_MESSAGE);
         }
-        this.dispose();
+       
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
@@ -385,6 +427,14 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_contactNumTxtKeyTyped
 
+    private void addressTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressTxtKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressTxtKeyReleased
+
+    private void addressTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressTxtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressTxtKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -408,25 +458,29 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Employee dummyEmployee = new Model.Employee(); 
+    @Override
+    public void run() {
+        Employee dummyEmployee = new Model.Employee(); 
         dummyEmployee.setName("Test Employee");
         dummyEmployee.setDepartment("IT");
         dummyEmployee.setSalary(25000.0);
-                UpdateRecordDialog dialog = new UpdateRecordDialog(new javax.swing.JFrame(), true, dummyEmployee);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+        
+        // FIXED: Added "null" as the 4th argument (parentPanel) to match the constructor
+        UpdateRecordDialog dialog = new UpdateRecordDialog(new javax.swing.JFrame(), true, dummyEmployee, null);
+        
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                System.exit(0);
             }
         });
+        dialog.setVisible(true);
+    }
+});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addressTxt;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField contactNumTxt;
     private javax.swing.JTextField departmentTxt;
@@ -434,6 +488,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     private javax.swing.JTextField idTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
