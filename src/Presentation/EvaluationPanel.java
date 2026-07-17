@@ -32,10 +32,10 @@ public class EvaluationPanel extends javax.swing.JPanel {
     
     public EvaluationPanel() {
         initComponents();
-    
-        // Set up your rating slider visual indicators
         updateRating(sliderEvaluation.getValue());
         lblScore.setText(String.valueOf(sliderEvaluation.getValue()));
+        sliderEvaluation.setPaintLabels(false);
+        sliderEvaluation.setPaintTicks(false);
 
         sliderEvaluation.addChangeListener(e -> {
             int score = sliderEvaluation.getValue();
@@ -77,39 +77,78 @@ public class EvaluationPanel extends javax.swing.JPanel {
     }
     
     private void loadEvaluationHistoryTable() {
-        int selectedIndex = employeeJcom.getSelectedIndex();
-        if (selectedIndex < 0 || selectedIndex >= employeeDropdownList.size()) {
-            return;
+     int selectedIndex = employeeJcom.getSelectedIndex();
+
+    if (selectedIndex < 0 || selectedIndex >= employeeDropdownList.size()) {
+        return;
+    }
+
+    Employee selectedEmp = employeeDropdownList.get(selectedIndex);
+
+    jTable2.setModel(
+        evalService.getEvaluationHistoryTableModel(selectedEmp.getUserId())
+    );
+
+    jTable2.getColumnModel().getColumn(1).setCellRenderer(
+        new javax.swing.table.DefaultTableCellRenderer() {
+
+            @Override
+            public java.awt.Component getTableCellRendererComponent(
+                    javax.swing.JTable table,
+                    Object value,
+                    boolean isSelected,
+                    boolean hasFocus,
+                    int row,
+                    int column) {
+
+                super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+
+                String text = value.toString();
+
+                if (text.contains("Outstanding")) {
+                    setForeground(new Color(34,197,94));
+                } else if (text.contains("Very Satisfactory")) {
+                    setForeground(new Color(37,99,235));
+                } else if (text.contains("Satisfactory")) {
+                    setForeground(new Color(249,115,22));
+                } else if (text.contains("Needs Improvement")) {
+                    setForeground(new Color(239,68,68));
+                } else {
+                    setForeground(new Color(185,28,28));
+                }
+
+                setHorizontalAlignment(CENTER);
+
+                return this;
+            }
+        });
     }
     
-    // 1. Identify which employee is selected in the UI dropdown list
-    Employee selectedEmp = employeeDropdownList.get(selectedIndex);
-    
-    // 2. Fetch the pre-packaged table model from the service and apply it immediately
-    jTable2.setModel(evalService.getEvaluationHistoryTableModel(selectedEmp.getUserId()));
-}
+
     // Method to determine rating label
     private void updateRating(int score) {
         String rating;
         Color color;
 
-        if (score >= 90) {
-            rating = "Outstanding";
-            color = new Color(0, 200, 0); // green
-        } else if (score >= 80) {
-            rating = "Very Satisfactory";
-            color = new Color(0, 122, 255); // blue
-        } else if (score >= 70) {
-            rating = "Satisfactory";
-            color = new Color(0, 122, 255);
-        } else if (score >= 60) {
-            rating = "Needs Improvement";
-            color = new Color(255, 165, 0); // orange
-        } else {
-            rating = "Unsatisfactory";
-            color = new Color(255, 0, 0); // red
-        }
+            if (score >= 90) {
+                rating = "Outstanding";
+                color = new Color(34, 197, 94);      // Green
+            } else if (score >= 80) {
+                rating = "Very Satisfactory";
+                color = new Color(37, 99, 235);      // Blue
+            } else if (score >= 70) {
+                rating = "Satisfactory";
+                color = new Color(249, 115, 22);     // Orange
+            } else if (score >= 60) {
+                rating = "Needs Improvement";
+                color = new Color(239, 68, 68);      // Red
+            } else {
+                rating = "Unsatisfactory";
+                color = new Color(185, 28, 28);      // Dark Red
+            }
 
+        // Score
         lblRating.setText(rating);
         lblRating.setForeground(color);
     }
@@ -132,6 +171,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
         });
     }
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,6 +181,8 @@ public class EvaluationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel12 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -168,6 +210,33 @@ public class EvaluationPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(56, 58, 64));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+
+        jLabel37.setBackground(new java.awt.Color(56, 58, 64));
+        jLabel37.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel37.setText("CREWDECK — Employee Management System  © 2026  —  v1.0");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(234, Short.MAX_VALUE)
+                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel37)
+                .addContainerGap())
+        );
+
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 890, 50));
 
         jScrollPane4.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -368,7 +437,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
 
         jScrollPane4.setViewportView(jPanel4);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 890, 600));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 890, 580));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -462,12 +531,14 @@ public class EvaluationPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -30,7 +30,12 @@ public class HomePanel extends javax.swing.JPanel {
      */
     private Role role;
     
+    private final Color ACTIVE = new Color(37, 99, 235);   // Blue (#2563EB)
+    private final Color NORMAL = new Color(17, 24, 39);    // Sidebar color
+    
     public HomePanel() {
+        
+        
         
         initComponents();
         mainPanel.removeAll();
@@ -48,6 +53,23 @@ public class HomePanel extends javax.swing.JPanel {
             employeeBtn.setEnabled(false);
             evaluationBtn.setEnabled(false);
         }
+    }
+    
+        private void setActiveButton(javax.swing.JButton activeBtn) {
+
+        javax.swing.JButton[] buttons = {
+            homeBtn,
+            employeeBtn,
+            requestBtn,
+            evaluationBtn,
+            logOutBtn
+        };
+
+        for (javax.swing.JButton btn : buttons) {
+            btn.setBackground(NORMAL);
+        }
+
+        activeBtn.setBackground(ACTIVE);
     }
     
     
@@ -168,6 +190,11 @@ public class HomePanel extends javax.swing.JPanel {
         logOutBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(49, 51, 56), 0, true));
         logOutBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         logOutBtn.setPreferredSize(new java.awt.Dimension(72, 22));
+        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseClicked(evt);
+            }
+        });
         logOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logOutBtnActionPerformed(evt);
@@ -303,13 +330,7 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_homeBtnActionPerformed
 
     private void homeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBtnMouseClicked
-        homeBtn.setBackground(Color.DARK_GRAY);
-   
-        evaluationBtn.setBackground(Color.BLACK);
-        
-        employeeBtn.setBackground(Color.BLACK); 
-        requestBtn.setBackground(Color.BLACK);
-
+        setActiveButton(homeBtn);
 
     }//GEN-LAST:event_homeBtnMouseClicked
 
@@ -346,29 +367,15 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_logOutBtnActionPerformed
 
     private void employeeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeBtnMouseClicked
-        employeeBtn.setBackground(Color.DARK_GRAY);
-   
-        evaluationBtn.setBackground(Color.BLACK);        
-        homeBtn.setBackground(Color.BLACK); 
-        requestBtn.setBackground(Color.BLACK);
+       setActiveButton(employeeBtn);
     }//GEN-LAST:event_employeeBtnMouseClicked
 
     private void requestBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestBtnMouseClicked
-        requestBtn.setBackground(Color.DARK_GRAY);  
-        evaluationBtn.setBackground(Color.BLACK);    
-        employeeBtn.setBackground(Color.BLACK); 
-        homeBtn.setBackground(Color.BLACK);
+        setActiveButton(requestBtn);
     }//GEN-LAST:event_requestBtnMouseClicked
 
     private void evaluationBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evaluationBtnMouseClicked
-        evaluationBtn.setBackground(Color.DARK_GRAY);
-   
-        homeBtn.setBackground(Color.BLACK);        
-        employeeBtn.setBackground(Color.BLACK); 
-        requestBtn.setBackground(Color.BLACK);
-        
-        
-    
+        setActiveButton(evaluationBtn);
     }//GEN-LAST:event_evaluationBtnMouseClicked
 
     private void evaluationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluationBtnActionPerformed
@@ -379,6 +386,10 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_evaluationBtnActionPerformed
+
+    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
+        setActiveButton(logOutBtn);
+    }//GEN-LAST:event_logOutBtnMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

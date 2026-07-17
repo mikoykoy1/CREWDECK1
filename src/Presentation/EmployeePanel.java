@@ -11,6 +11,7 @@ import Model.User;
 import Presentation.AddRecordDialog;
 import Presentation.UpdateRecordDialog;
 import Service.UserService;
+import java.awt.Color;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -24,23 +25,92 @@ public class EmployeePanel extends javax.swing.JPanel {
     public EmployeePanel() {
         initComponents();
         loadTable();
+
+    // ---------- SEARCH PLACEHOLDER ----------
+    searchTxt.setText("Search employees...");
+    searchTxt.setForeground(Color.GRAY);
+
+    searchTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+
+        @Override
+        public void focusGained(java.awt.event.FocusEvent e) {
+
+            if (searchTxt.getText().equals("Search employees...")) {
+                searchTxt.setText("");
+                searchTxt.setForeground(Color.BLACK);
+            }
+
+        }
+
+        @Override
+        public void focusLost(java.awt.event.FocusEvent e) {
+
+            if (searchTxt.getText().isEmpty()) {
+                searchTxt.setText("Search employees...");
+                searchTxt.setForeground(Color.GRAY);
+            }
+
+        }
+
+    });
+
+    // ---------- LIVE SEARCH ----------
+    searchTxt.getDocument().addDocumentListener(
+        new javax.swing.event.DocumentListener() {
+
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });    
+
     }
     
-    //LOAD TABLE
-    public void loadTable() {
-        try {
-        
-            EmployeeService empService = new EmployeeService();
-            DefaultTableModel model = empService.getTableModel();
-        
-            if (model != null) {
-                employeeTable.setModel(model); // Set the model to your JTable component
-            }
-        
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error refreshing table: " + e.getMessage());
+            //LOAD TABLE
+            public void loadTable() {
+                try {
+
+                    EmployeeService empService = new EmployeeService();
+                    DefaultTableModel model = empService.getTableModel();
+
+                    if (model != null) {
+                        employeeTable.setModel(model); // Set the model to your JTable component
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error refreshing table: " + e.getMessage());
+                }
         }
-}
+            private void search() {
+
+            javax.swing.table.TableRowSorter<
+                    javax.swing.table.TableModel> sorter =
+                    new javax.swing.table.TableRowSorter<>(employeeTable.getModel());
+
+            employeeTable.setRowSorter(sorter);
+
+            String text = searchTxt.getText();
+
+            if (text.trim().length() == 0 ||
+                    text.equals("Search employees...")) {
+
+                sorter.setRowFilter(null);
+
+            } else {
+
+                sorter.setRowFilter(
+                        javax.swing.RowFilter.regexFilter("(?i)" + text));
+
+            }
+
+        }
     
     
 
@@ -63,6 +133,9 @@ public class EmployeePanel extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
+        searchTxt = new javax.swing.JTextField();
+        departmentFilter = new javax.swing.JComboBox<>();
+        departmentFilter1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
 
@@ -224,6 +297,15 @@ public class EmployeePanel extends javax.swing.JPanel {
         });
         EmployeeBodyPanel.add(addBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        searchTxt.setText("search");
+        EmployeeBodyPanel.add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 120, 30));
+
+        departmentFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Information Technology", "Finance", "Human Resources", "Operations", "Sales" }));
+        EmployeeBodyPanel.add(departmentFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 170, 30));
+
+        departmentFilter1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Information Technology", "Finance", "Human Resources", "Operations", "Sales" }));
+        EmployeeBodyPanel.add(departmentFilter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 170, 30));
+
         jScrollPane3.setViewportView(EmployeeBodyPanel);
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 890, 530));
@@ -376,6 +458,8 @@ public class EmployeePanel extends javax.swing.JPanel {
     private javax.swing.JPanel EmployeeTopPanel;
     private javax.swing.JButton addBtn;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JComboBox<String> departmentFilter;
+    private javax.swing.JComboBox<String> departmentFilter1;
     private javax.swing.JTable employeeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -387,6 +471,7 @@ public class EmployeePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField searchTxt;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -81,13 +81,14 @@ public class AddRecordDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         contactNumTxt = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         addressTxt = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        dialogPanel.setBackground(new java.awt.Color(51, 51, 51));
+        dialogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        dialogPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         addBtn.setBackground(new java.awt.Color(0, 102, 255));
         addBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -99,7 +100,6 @@ public class AddRecordDialog extends javax.swing.JDialog {
             }
         });
 
-        nameTxt.setForeground(new java.awt.Color(0, 0, 0));
         nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nameTxtKeyReleased(evt);
@@ -111,9 +111,8 @@ public class AddRecordDialog extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("[ Name: ]");
+        jLabel1.setText("Name: ");
 
-        departmentTxt.setForeground(new java.awt.Color(0, 0, 0));
         departmentTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 departmentTxtKeyTyped(evt);
@@ -122,19 +121,16 @@ public class AddRecordDialog extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("[ Department: ]");
+        jLabel2.setText("Department: ");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("[ Email ]");
-
-        emailTxt.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Email :");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("[ Salary ]");
+        jLabel4.setText("Salary:");
 
-        salaryTxt.setForeground(new java.awt.Color(0, 0, 0));
         salaryTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 salaryTxtKeyTyped(evt);
@@ -143,15 +139,14 @@ public class AddRecordDialog extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("[ Role: ]");
+        jLabel5.setText("Role: ");
 
         roleCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("[ Contact Number ]");
+        jLabel6.setText("Contact Number :");
 
-        contactNumTxt.setForeground(new java.awt.Color(0, 0, 0));
         contactNumTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 contactNumTxtKeyTyped(evt);
@@ -168,15 +163,10 @@ public class AddRecordDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Add Employee");
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel8.setText("[ Address: ]");
+        jLabel8.setText("Address: ");
 
-        addressTxt.setForeground(new java.awt.Color(0, 0, 0));
         addressTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 addressTxtKeyReleased(evt);
@@ -186,59 +176,52 @@ public class AddRecordDialog extends javax.swing.JDialog {
             }
         });
 
+        jLabel9.setBackground(new java.awt.Color(17, 24, 39));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel9.setText("Add Employee");
+
         javax.swing.GroupLayout dialogPanelLayout = new javax.swing.GroupLayout(dialogPanel);
         dialogPanel.setLayout(dialogPanelLayout);
         dialogPanelLayout.setHorizontalGroup(
             dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dialogPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
+                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dialogPanelLayout.createSequentialGroup()
+                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(nameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                                        .addComponent(departmentTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(emailTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(salaryTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(contactNumTxt, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addGap(147, 147, 147))
+                            .addComponent(cancelBtn)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(addBtn)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
                         .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
-                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(dialogPanelLayout.createSequentialGroup()
-                                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addGroup(dialogPanelLayout.createSequentialGroup()
-                                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(nameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                                                        .addComponent(departmentTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(emailTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(salaryTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(contactNumTxt, javax.swing.GroupLayout.Alignment.LEADING))
-                                                    .addComponent(jLabel2))
-                                                .addGap(39, 39, 39)
-                                                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel5))))
-                                        .addGap(36, 36, 36))
-                                    .addComponent(cancelBtn)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dialogPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(124, 124, 124)
-                                        .addComponent(jLabel8)))
-                                .addGap(18, 18, 18)
-                                .addComponent(addBtn)
-                                .addGap(16, 16, 16))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
-                                .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45))))
-                    .addGroup(dialogPanelLayout.createSequentialGroup()
-                        .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel8)
+                            .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))))
         );
         dialogPanelLayout.setVerticalGroup(
             dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel8))
@@ -494,8 +477,8 @@ public class AddRecordDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JComboBox<String> roleCmb;
     private javax.swing.JTextField salaryTxt;
