@@ -19,7 +19,7 @@ public class HomePanel2 extends javax.swing.JPanel {
 
         jLabel1.setIcon(resizedIcon);
         
-        // 1. Fetch metrics from DB and populate GUI Labels
+        //Fetch metrics from DB and populate GUI Labels
         loadDashboardMetrics();
     
         jLabel1.setIcon(resizedIcon);
@@ -98,7 +98,7 @@ public class HomePanel2 extends javax.swing.JPanel {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel4.setText("Welcome, Admin!");
+        jLabel4.setText("Welcome, Crew!");
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel5.setText("🙋‍");

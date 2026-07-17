@@ -7,7 +7,7 @@ public class UserSession {
     private User loggedInUser;
     private String role; // e.g., "HR_Admin", "Standard_Employee"
 
-    private UserSession() {}
+   
 
     public static UserSession getInstance() {
         if (instance == null) {

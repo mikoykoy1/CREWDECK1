@@ -12,8 +12,11 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class EvaluationService {
-    private final EvaluationDAO evalDAO = new EvaluationDAO();
-
+    private final EvaluationDAO evalDAO;
+    
+    public EvaluationService() {
+        this.evalDAO = new EvaluationDAO(); 
+    }
     // Validates inputs and handles submission execution logs
     public boolean submitEvaluation(int targetEmployeeId, int adminId, String period, int score, String remarks) {
         // Business Rules Validation Checkpoints
@@ -50,37 +53,95 @@ public class EvaluationService {
         }
     }
     
+/**
+     * Context A: Used for the dynamic Combo Box view.
+     * Shows filtered evaluation interactions between a selected target and the current user.
+     * @param selectedUserId
+     * @param currentUserId
+     * @return 
+     * @throws java.sql.SQLException
+     */
+    public DefaultTableModel getFilteredEvaluationsModel(int selectedUserId, int currentUserId) {
+        try{
+        List<Evaluation> evals = evalDAO.getEvaluationsFiltered(selectedUserId, currentUserId);
+        
+        String[] columns = {"ID", "Employee ID", "Evaluator ID", "Period", "Score", "Remarks", "Evaluation Date"};
+        Object[][] data = new Object[evals.size()][7];
+        
+        for (int i = 0; i < evals.size(); i++) {
+            Evaluation eval = evals.get(i);
+            data[i][0] = eval.getId(); //
+            data[i][1] = eval.getUserId() == currentUserId ? "You" : eval.getUserId(); //[cite: 5]
+            data[i][2] = eval.getEvaluatorId() == currentUserId ? "You" : eval.getEvaluatorId(); //[cite: 5]
+            data[i][3] = eval.getPeriod(); //
+            data[i][4] = eval.getScore() + " / 100"; //[cite: 5]
+            data[i][5] = eval.getFeedbackRemarks(); //[cite: 5]
+            data[i][6] = eval.getEvaluationDate().toString(); //[cite: 5]
+        }
+
+        return createUneditableModel(data, columns);
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error loading evaluation histor"+e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Context B: Used for the absolute History Log table.
+     * Fetches the total list timeline of every review written about an individual employee.
+     * @param employeeId
+     * @return 
+     * @throws java.sql.SQLException
+     */
+
     public DefaultTableModel getEvaluationHistoryTableModel(int employeeId) {
         try {
-            // Define your UI header columns
-            String[] columns = {"ID", "Score", "Remarks", "Evaluation Date"};
-            
-            // Retrieve raw list from database
+            Service.UserSession session = Service.UserSession.getInstance();
+            int currentUserId = session.getLoggedInUser().getId();
+            String currentRole = session.getRole();
+
+            // ONLY restrict the query if the user logged into the system is a standard base employee.
+            // If an Admin/Manager is viewing, do NOT overwrite the employeeId parameter!
+            if ("Employee".equalsIgnoreCase(currentRole) || "Standard_Employee".equalsIgnoreCase(currentRole)) {
+                employeeId = currentUserId;
+            }
+
             List<Evaluation> historyList = evalDAO.fetchHistoryByEmployee(employeeId);
-            Object[][] data = new Object[historyList.size()][4];
+
+            // Dynamically match your custom CellRenderer array index count
+            String[] columns = {"ID", "Evaluator ID", "Period", "Score / Rating", "Remarks", "Evaluation Date"};
+            Object[][] data = new Object[historyList.size()][6];
 
             for (int i = 0; i < historyList.size(); i++) {
                 Evaluation eval = historyList.get(i);
-                
-                data[i][0] = eval.getId();
-                data[i][1] = eval.getScore() + "/100 (" + getRatingString(eval.getScore()) + ")";
-                data[i][2] = eval.getFeedbackRemarks();
-                data[i][3] = eval.getEvaluationDate().toString(); 
+                data[i][0] = eval.getId(); 
+                data[i][1] = eval.getEvaluatorId() == currentUserId ? "You" : eval.getEvaluatorId(); 
+                data[i][2] = eval.getPeriod(); 
+                data[i][3] = eval.getScore() + " / 100"; 
+                data[i][4] = eval.getFeedbackRemarks(); 
+                data[i][5] = eval.getEvaluationDate().toString(); 
             }
 
-            // Return table model with cell editing disabled
-            return new DefaultTableModel(data, columns) {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false; 
-                }
-            };
-
+            return createUneditableModel(data, columns);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error loading evaluation history: " + e.getMessage());
             return null;
         }
     }
+
+    /**
+     * Private helper to keep code DRY (Don't Repeat Yourself) 
+     * by wrapping the non editable table structure rule in one place.
+     */
+    private DefaultTableModel createUneditableModel(Object[][] data, String[] columns) {
+        return new DefaultTableModel(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+    }
+    
 
     // Rating text logic remains safely encapsulated inside the service layer
     private String getRatingString(int score) {

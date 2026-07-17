@@ -63,7 +63,44 @@ public class RequestDAO {
             return stmt.executeUpdate() > 0;
         }
     }
-    
+    public List<Request> getRequestsFiltered(int targetUserId) throws SQLException {
+        List<Request> list = new ArrayList<>();
+        String sql;
+
+        // If targetUserId is 0 or negative, load everything (For Admin / Managers)
+        if (targetUserId <= 0) {
+            sql = "SELECT * FROM `employee_requests` ORDER BY `submission_date` DESC";
+        } else {
+            // Strict boundary matching for the concrete employee
+            sql = "SELECT * FROM `employee_requests` WHERE `user_id` = ? ORDER BY `submission_date` DESC";
+        }
+
+        try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            if (targetUserId > 0) {
+                stmt.setInt(1, targetUserId);
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Request req = new Request(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("request_type"), 
+                        rs.getString("details"),
+                        rs.getDate("submission_date").toLocalDate(), 
+                        rs.getString("status"),
+                        rs.getString("admin_remarks") 
+                    );
+                    list.add(req);
+                }
+            }
+        }
+        return list;
+    }
+
     // Counts pending request
     public int getPendingRequestsCount() {
         String query = "SELECT COUNT(*) AS total FROM employee_requests WHERE status = 'Pending'"; 

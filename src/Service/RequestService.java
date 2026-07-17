@@ -58,9 +58,9 @@ public class RequestService {
     
     public DefaultTableModel getTableModel() {
         // 1. Define the UI table columns
-        String[] columns = {"Request ID", "Employee", "Request Type", "Status", "Date Submitted", "Action"};
-        
-        // 2. Create the model and make it non-editable double-clicking
+        String[] columns = {"Request ID", "Employee ID", "Request Type", "Status", "Date Submitted", "Action"};
+
+        // 2. Create the non-editable model
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -68,18 +68,35 @@ public class RequestService {
             }
         };
 
-        // 3. Fetch the list of pending requests
-        List<Request> requests = getPendingReviewQueue();
+        // 3. Extract credentials via UserSession safely
+        UserSession session = UserSession.getInstance();
+        String currentRole = session.getRole();
+        int currentUserId = session.getLoggedInUser().getId();
 
-        // 4. Populate the rows
+        List<Request> requests;
+        try {
+            // 4. Evaluate access rules
+            if ("Admin".equalsIgnoreCase(currentRole) || "Manager".equalsIgnoreCase(currentRole)) {
+                // Privileged view: load the absolute history table logs
+                requests = requestDAO.getRequestsFiltered(0); 
+            } else {
+                // Employee view: lock rows tightly down to their session ID 
+                requests = requestDAO.getRequestsFiltered(currentUserId);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error binding table rows: " + ex.getMessage());
+            requests = new ArrayList<>();
+        }
+
+        // 5. Populate the UI elements safely
         for (Request req : requests) {
             Object[] rowData = {
-                req.getId(),                // Maps to 'id' in employee_requests
-                req.getUserId(),      // Displays the User Id fetched via SQL join
-                req.getRequestType(),       // Maps to 'request_type'
-                req.getStatus(),            // Maps to 'status'
-                req.getSubmissionDate(),    // Maps to 'submission_date'
-                "Review"                    // Action placeholder for the last column
+                req.getId(),                
+                req.getUserId(),      
+                req.getRequestType(),       
+                req.getStatus(),            
+                req.getSubmissionDate(),    
+                "Review"                    
             };
             model.addRow(rowData);
         }

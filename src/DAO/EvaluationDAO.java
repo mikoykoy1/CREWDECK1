@@ -53,6 +53,48 @@ public class EvaluationDAO {
         return historyList;
     }
     
+public List<Evaluation> getEvaluationsFiltered(int targetUserId, int currentUserId) throws SQLException {
+        List<Evaluation> list = new ArrayList<>();
+        String sql;
+        
+        // Case A: Selected themselves -> Show evaluations ABOUT them
+        if (targetUserId == currentUserId) {
+            sql = "SELECT * FROM `performance_evaluations` WHERE `user_id` = ?";
+        } 
+        // Case B: Selected someone else -> Show evaluations written BY the current user about that target
+        else {
+            sql = "SELECT * FROM `performance_evaluations` WHERE `evaluator_id` = ? AND `user_id` = ?";
+        }
+
+        try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            if (targetUserId == currentUserId) {
+                stmt.setInt(1, currentUserId);
+            } else {
+                stmt.setInt(1, currentUserId); // evaluator_id
+                stmt.setInt(2, targetUserId);  // user_id
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Evaluation eval = new Evaluation(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getInt("evaluator_id"),
+                        rs.getDate("evaluation_date").toLocalDate(), 
+                        rs.getString("period"),
+                        rs.getInt("score"),
+                        rs.getString("feedback_remarks") 
+                    );
+                    list.add(eval);
+                }
+            }
+        }
+        return list;
+    }
+    
     
     public int getPendingEvaluationsCount() {
         String query = "SELECT COUNT(*) AS total FROM performance_evaluations ";
@@ -67,6 +109,5 @@ public class EvaluationDAO {
         }
         return 0;
     }
-    
     
 }

@@ -7,7 +7,7 @@ public class Evaluation {
     private int userId;          // The Employee being evaluated
     private int evaluatorId;     // The Admin/Manager conducting the review
     private LocalDate evaluationDate;
-    private String period;       // e.g., "Q1 2026", "Annual 2026"
+    private String period;      
     private int score;          // Numerical rating (e.g., 1-5)
     private String feedbackRemarks;
 

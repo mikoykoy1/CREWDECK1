@@ -67,7 +67,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
                 employeeJcom.addItem(emp.getName() + " (ID: " + emp.getUserId() + ")");
             }
 
-            // Load the history log grid for whichever employee is highlighted first
+            // Load the history log grid for whichever employee is highlighted first.
             if (!employeeDropdownList.isEmpty()) {
                 loadEvaluationHistoryTable();
             }
@@ -77,52 +77,52 @@ public class EvaluationPanel extends javax.swing.JPanel {
     }
     
     private void loadEvaluationHistoryTable() {
-     int selectedIndex = employeeJcom.getSelectedIndex();
+        int selectedIndex = employeeJcom.getSelectedIndex();
 
-    if (selectedIndex < 0 || selectedIndex >= employeeDropdownList.size()) {
-        return;
-    }
+        if (selectedIndex < 0 || selectedIndex >= employeeDropdownList.size()) {
+            return;
+        }
 
-    Employee selectedEmp = employeeDropdownList.get(selectedIndex);
+        Employee selectedEmp = employeeDropdownList.get(selectedIndex);
+        int currentUserId = UserSession.getInstance().getLoggedInUser().getId();
 
-    jTable2.setModel(
-        evalService.getEvaluationHistoryTableModel(selectedEmp.getUserId())
-    );
+        // Use the peer-filtered data model so users see interactions relative to the selection context
+        jTable2.setModel(
+            evalService.getFilteredEvaluationsModel(selectedEmp.getUserId(), currentUserId)
+        );
 
-    jTable2.getColumnModel().getColumn(1).setCellRenderer(
-        new javax.swing.table.DefaultTableCellRenderer() {
+        // Colorize based on the Text Rating string column (Column Index 4 represents the score metric text)
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(
+            new javax.swing.table.DefaultTableCellRenderer() {
+                @Override
+                public java.awt.Component getTableCellRendererComponent(
+                        javax.swing.JTable table,
+                        Object value,
+                        boolean isSelected,
+                        boolean hasFocus,
+                        int row,
+                        int column) {
 
-            @Override
-            public java.awt.Component getTableCellRendererComponent(
-                    javax.swing.JTable table,
-                    Object value,
-                    boolean isSelected,
-                    boolean hasFocus,
-                    int row,
-                    int column) {
+                    super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-                super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
+                    if (value == null) return this;
+                    String text = value.toString();
 
-                String text = value.toString();
+                    // Custom paint operations matching score properties
+                    if (text.startsWith("9") || text.equals("100 / 100") || text.contains("Outstanding")) {
+                        setForeground(new Color(34, 197, 94)); // Green
+                    } else if (text.startsWith("8")) {
+                        setForeground(new Color(37, 99, 235)); // Blue
+                    } else if (text.startsWith("7")) {
+                        setForeground(new Color(249, 115, 22)); // Orange
+                    } else {
+                        setForeground(new Color(239, 68, 68)); // Red
+                    }
 
-                if (text.contains("Outstanding")) {
-                    setForeground(new Color(34,197,94));
-                } else if (text.contains("Very Satisfactory")) {
-                    setForeground(new Color(37,99,235));
-                } else if (text.contains("Satisfactory")) {
-                    setForeground(new Color(249,115,22));
-                } else if (text.contains("Needs Improvement")) {
-                    setForeground(new Color(239,68,68));
-                } else {
-                    setForeground(new Color(185,28,28));
+                    setHorizontalAlignment(CENTER);
+                    return this;
                 }
-
-                setHorizontalAlignment(CENTER);
-
-                return this;
-            }
-        });
+            });
     }
     
 

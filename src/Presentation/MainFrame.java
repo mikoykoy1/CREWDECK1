@@ -1,6 +1,5 @@
 package Presentation;
 
-import Model.Role;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.sql.SQLException;

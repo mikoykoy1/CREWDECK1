@@ -1,7 +1,6 @@
 package Presentation;
 
 
-import Model.Role;
 import Presentation.EmployeePanel;
 import Presentation.EvaluationPanel;
 import Presentation.HomePanel2;
@@ -10,6 +9,7 @@ import Presentation.MainFrame;
 import Presentation.MainFrame;
 import Presentation.RequestPanel;
 import Presentation.RequestPanel;
+import Service.UserSession;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.awt.Window;
@@ -28,7 +28,7 @@ public class HomePanel extends javax.swing.JPanel {
     /**
      * Creates new form HomePanel
      */
-    private Role role;
+    
     
     private final Color ACTIVE = new Color(37, 99, 235);   // Blue (#2563EB)
     private final Color NORMAL = new Color(17, 24, 39);    // Sidebar color
@@ -43,17 +43,11 @@ public class HomePanel extends javax.swing.JPanel {
         mainPanel.add(new HomePanel2(), java.awt.BorderLayout.CENTER);
         mainPanel.revalidate();
         mainPanel.repaint();
+        applyRoleRestrictions();//Role based access
+        
     }
     
-    public HomePanel(Role role){
-        this();
-        this.role = role;
-        
-        if ("Standard_Employee".equals(role.getRoleName())) {
-            employeeBtn.setEnabled(false);
-            evaluationBtn.setEnabled(false);
-        }
-    }
+   
     
         private void setActiveButton(javax.swing.JButton activeBtn) {
 
@@ -72,7 +66,17 @@ public class HomePanel extends javax.swing.JPanel {
         activeBtn.setBackground(ACTIVE);
     }
     
-    
+    private void applyRoleRestrictions() {
+        // Retrieve session data[cite: 8]
+        Service.UserSession session = Service.UserSession.getInstance();
+        String currentRole = session.getRole(); // Pulls the role string directly[cite: 8]
+        
+        // Disable "Employee Records" for employees. 
+        // We leave evaluationBtn enabled since we updated the evaluation screen's internal panels!
+        if  ("Employee".equalsIgnoreCase(currentRole)) {
+            employeeBtn.setEnabled(false);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
