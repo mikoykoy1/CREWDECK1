@@ -110,4 +110,21 @@ public List<Evaluation> getEvaluationsFiltered(int targetUserId, int currentUser
         return 0;
     }
     
+    // Counts how many times a precise employee has been evaluated
+    public int getPersonalEvaluationCount(int userId) {
+        String query = "SELECT COUNT(*) AS total FROM performance_evaluations WHERE user_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        } catch (SQLException e) {
+        
+                e.printStackTrace();
+            }
+        return 0;
+    }
 }

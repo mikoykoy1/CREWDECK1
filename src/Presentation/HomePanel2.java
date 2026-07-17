@@ -1,5 +1,6 @@
 package Presentation;
 
+import Service.UserSession;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -26,22 +27,70 @@ public class HomePanel2 extends javax.swing.JPanel {
     }
     
     private void loadDashboardMetrics() {
-        // Instantiate the DAO layer objects
-        DAO.EmployeeDAO employeeDAO = new DAO.EmployeeDAO();
-        DAO.RequestDAO requestDAO = new DAO.RequestDAO();
-        DAO.EvaluationDAO evaluationDAO = new DAO.EvaluationDAO();
+    // 1. Instantiate the DAO layer objects
+    DAO.EmployeeDAO employeeDAO = new DAO.EmployeeDAO();
+    DAO.RequestDAO requestDAO = new DAO.RequestDAO();
+    DAO.EvaluationDAO evaluationDAO = new DAO.EvaluationDAO();
 
-        // Retrieve values from database
-        int totalEmployees = employeeDAO.getTotalEmployeeCount();
+    // 2. Fetch active credentials from the Global User Session
+    Service.UserSession session = Service.UserSession.getInstance();
+    String currentRole = session.getRole();
+    int loggedInUserId = session.getLoggedInUser().getId();
+
+    // 3. Global Metric: Get total employees (visible to ALL users)
+    int totalEmployees = employeeDAO.getTotalEmployeeCount();
+    TotalEmployeeLabel.setText(String.valueOf(totalEmployees));
+
+    // 4. Conditional evaluation based on the user's operational role permissions
+    if ("Admin".equalsIgnoreCase(currentRole) || "Manager".equalsIgnoreCase(currentRole)) {
+        // --- PRIVILEGED ADMINISTRATIVE VIEW ---
         int totalDepartments = employeeDAO.getTotalDepartmentCount();
         int pendingRequests = requestDAO.getPendingRequestsCount();
         int pendingEvaluations = evaluationDAO.getPendingEvaluationsCount();
 
-        // Bind data values directly to the GUI components
-        TotalEmployeeLabel.setText(String.valueOf(totalEmployees));
+        // Bind standard company-wide database aggregates
         requestLabel.setText(String.valueOf(pendingRequests));
         pendingEvaluationLabel.setText(String.valueOf(pendingEvaluations));
         departmentsLabel.setText(String.valueOf(totalDepartments));
+        
+        // Ensure description titles reflect system-wide monitoring context
+        jLabel6.setText("Pending Requests");
+        jLabel8.setText("Evaluations Pending");
+        jLabel11.setText("Departments");
+    } else {
+        // --- STANDARDIZED EMPLOYEE VIEW ---
+        try {
+            // Retrieve the logged-in user's personalized corporate profile
+            Model.Employee selfProfile = employeeDAO.getItem(loggedInUserId);
+            
+            // Query personal workflow frequency counts
+            int personalRequests = requestDAO.getPersonalRequestsCount(loggedInUserId);
+            int personalEvaluations = evaluationDAO.getPersonalEvaluationCount(loggedInUserId);
+            
+            // Bind personal performance tracking numbers
+            requestLabel.setText(String.valueOf(personalRequests));
+            pendingEvaluationLabel.setText(String.valueOf(personalEvaluations));
+            
+            // Bind individual profile metadata strings safely
+            if (selfProfile != null && selfProfile.getDepartment() != null) {
+                departmentsLabel.setText(selfProfile.getDepartment());
+            } else {
+                departmentsLabel.setText("Unassigned");
+            }
+            
+            // Customize display typography descriptors for personal clarity
+            jLabel6.setText("My Total Requests");
+            jLabel8.setText("Times Evaluated");
+            jLabel11.setText("My Department");
+            
+        } catch (java.sql.SQLException e) {
+            System.err.println("Error rendering individual worker metrics dashboard: " + e.getMessage());
+            // Fallbacks in case database connection fails temporarily
+            requestLabel.setText("0");
+            pendingEvaluationLabel.setText("0");
+            departmentsLabel.setText("Error");
+        }
+    }
     }
 
     /**

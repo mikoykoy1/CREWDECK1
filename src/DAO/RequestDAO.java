@@ -116,4 +116,21 @@ public class RequestDAO {
         return 0;
     }
     
+    // Counts total requests submitted by a specific employee
+    public int getPersonalRequestsCount(int userId) {
+        String query = "SELECT COUNT(*) AS total FROM employee_requests WHERE user_id = ?"; 
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    return 0;
+    }
+    
 }

@@ -4,14 +4,16 @@
  */
 package Presentation;
 
+import Model.EmployeeStatus;
 import DAO.DBConnection;
 import Model.Employee;
 import Model.User;
+
 import Service.EmployeeService;
 import Service.UserService;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -23,6 +25,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     private EmployeePanel parentPanel;
     private static final EmployeeService service = new EmployeeService();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UpdateRecordDialog.class.getName());
+    
 
     /**
      * Creates new form UpdateRecordDialog
@@ -36,6 +39,8 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         // 2. Setup dropdown list data
         populateRolesDropdown();
         setTitle("Update Dialog");
+        
+        statusCmb.setModel(new DefaultComboBoxModel(EmployeeStatus.values()));
     
         // 3. Bind the employee record and populate the form fields
         this.employeeToUpdate = employee;
@@ -43,6 +48,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         populateFormFields();
         }
     }
+    
     
     
     private void populateFormFields() {
@@ -53,6 +59,17 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         contactNumTxt.setText(employeeToUpdate.getContactNum() != null ? employeeToUpdate.getContactNum() : "");
         addressTxt.setText(employeeToUpdate.getAddress() != null ? employeeToUpdate.getAddress() : "");
         salaryTxt.setText(String.valueOf(employeeToUpdate.getSalary()));
+        
+        // Bind Employee Status safely
+        if (employeeToUpdate.getStatus() != null) {
+            try {
+                // Converts "ACTIVE" or "ON_LEAVE" string from DB to Enum constant
+                Model.EmployeeStatus currentStatus = Model.EmployeeStatus.valueOf(employeeToUpdate.getStatus().toUpperCase());
+                statusCmb.setSelectedItem(currentStatus);
+            } catch (IllegalArgumentException e) {
+                statusCmb.setSelectedItem(Model.EmployeeStatus.ACTIVE); // Default fallback
+            }
+        }
         
         // Populate and select email/role safely
         if (employeeToUpdate.getUser() != null) {
@@ -116,6 +133,8 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         addressTxt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        statusCmb = new javax.swing.JComboBox<>();
 
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("[ Contact Number ]");
@@ -181,6 +200,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         });
 
         roleCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        roleCmb.addActionListener(this::roleCmbActionPerformed);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
@@ -219,14 +239,21 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         jLabel11.setForeground(new java.awt.Color(153, 153, 153));
         jLabel11.setText("[ Address: ]");
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel12.setText("Status");
+
+        statusCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        statusCmb.addActionListener(this::statusCmbActionPerformed);
+
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
         updatePanelLayout.setHorizontalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addContainerGap(41, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
@@ -234,7 +261,6 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                         .addComponent(idTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancelBtn)
                         .addGap(18, 18, 18)
                         .addComponent(updateBtn)))
@@ -252,12 +278,14 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addComponent(nameTxt)
                     .addComponent(salaryTxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel5)
-                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(statusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
         updatePanelLayout.setVerticalGroup(
@@ -284,15 +312,19 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -321,7 +353,9 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         String contactNum = contactNumTxt.getText().trim();
         String email = emailTxt.getText().trim();
         String selectedRole = (String) roleCmb.getSelectedItem();
-
+        EmployeeStatus selectedStatus = (EmployeeStatus) statusCmb.getSelectedItem();
+        
+        
         // 2. Validate standard structural fields
         if (name.isEmpty() || department.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Name, Department, and Email cannot be blank.", "Validation Error", JOptionPane.WARNING_MESSAGE);
@@ -347,6 +381,9 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         employeeToUpdate.setContactNum(contactNum.isEmpty() ? null : contactNum);
         employeeToUpdate.setSalary(salary);
         
+        if (selectedStatus != null) {
+            employeeToUpdate.setStatus(selectedStatus.name()); 
+        }
         // Mutate the inner User details
         if (employeeToUpdate.getUser() != null) {
             employeeToUpdate.getUser().setEmail(email);
@@ -372,7 +409,9 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         }
        
     }//GEN-LAST:event_updateBtnActionPerformed
-
+    
+    // Define your ComboBox with the Enum type
+    
     private void idTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTxtActionPerformed
 
     }//GEN-LAST:event_idTxtActionPerformed
@@ -435,6 +474,14 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_addressTxtKeyTyped
 
+    private void roleCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleCmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roleCmbActionPerformed
+
+    private void statusCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusCmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusCmbActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -489,6 +536,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -499,6 +547,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
     private javax.swing.JTextField nameTxt;
     private javax.swing.JComboBox<String> roleCmb;
     private javax.swing.JTextField salaryTxt;
+    private javax.swing.JComboBox<String> statusCmb;
     private javax.swing.JButton updateBtn;
     private javax.swing.JPanel updatePanel;
     // End of variables declaration//GEN-END:variables

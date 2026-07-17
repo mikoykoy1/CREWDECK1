@@ -35,31 +35,58 @@ public class NewRequestDialog extends javax.swing.JDialog {
     
     private void setupEmployeeComboBox() {
         try {
-            // Updated: Call the exact method from your EmployeeDAO: "getAll()"
-            List<Employee> employees = employeeDAO.getAll(); 
-            
-            DefaultComboBoxModel<Employee> model = new DefaultComboBoxModel<>();
-            for (Employee emp : employees) {
+        // 1. Retrieve current user session metadata
+        Service.UserSession session = Service.UserSession.getInstance();
+        String currentRole = session.getRole();
+        int loggedInUserId = session.getLoggedInUser().getId();
+
+        // 2. Fetch the absolute list of employees
+        List<Employee> allEmployees = employeeDAO.getAll(); 
+        DefaultComboBoxModel<Employee> model = new DefaultComboBoxModel<>();
+
+        // 3. Filter employees based on roles
+        if ("Admin".equalsIgnoreCase(currentRole) || "Manager".equalsIgnoreCase(currentRole)) {
+            // Admins & Managers can request for anyone -> Populate all records
+            for (Employee emp : allEmployees) {
                 model.addElement(emp);
             }
-            employeeComboBox.setModel(model);
-
-            // CUSTOM RENDERER: Displays the name while keeping the actual Employee object bound
-            employeeComboBox.setRenderer(new DefaultListCellRenderer() {
-                @Override
-                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if (value instanceof Employee) {
-                        Employee emp = (Employee) value;
-                        setText(emp.getName()); // Displays name in the JComboBox
-                    }
-                    return this;
+        } else {
+            // Standard Employee -> Only add their own profile record to the ComboBox
+            Employee self = null;
+            for (Employee emp : allEmployees) {
+                if (emp.getUser() != null && emp.getUser().getId() == loggedInUserId) {
+                    self = emp;
+                    break;
                 }
-            });
-        } catch (Exception e) {
-            System.err.println("Error loading employees: " + e.getMessage());
-            JOptionPane.showMessageDialog(this, "Failed to load employees: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (self != null) {
+                model.addElement(self);
+            } else {
+                // Safe Fallback: Handle situations where the profile isn't mapped yet
+                System.err.println("Warning: Logged-in user has no associated Employee profile record.");
+            }
         }
+
+        employeeComboBox.setModel(model);
+
+        // CUSTOM RENDERER: Displays the name while keeping the actual Employee object bound
+        employeeComboBox.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Employee) {
+                    Employee emp = (Employee) value;
+                    setText(emp.getName()); // Displays name in the JComboBox
+                }
+                return this;
+            }
+        });
+
+    } catch (Exception e) {
+        System.err.println("Error loading employees: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Failed to load employees: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }
     
     private void setupRequestTypeComboBox() {
