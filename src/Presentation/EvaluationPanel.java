@@ -2,6 +2,8 @@ package Presentation;
 
 
 import Model.Employee;
+import Model.EmployeeStatus;
+import Model.Period;
 import Service.EmployeeService;
 import Service.EvaluationService;
 import Service.UserSession;
@@ -11,6 +13,7 @@ import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
@@ -36,7 +39,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
         lblScore.setText(String.valueOf(sliderEvaluation.getValue()));
         sliderEvaluation.setPaintLabels(false);
         sliderEvaluation.setPaintTicks(false);
-
+        periodCmb.setModel(new DefaultComboBoxModel(Period.values()));  
         sliderEvaluation.addChangeListener(e -> {
             int score = sliderEvaluation.getValue();
             lblScore.setText(String.valueOf(score));
@@ -51,7 +54,8 @@ public class EvaluationPanel extends javax.swing.JPanel {
         
             addFocusBorder(employeeJcom);
             addFocusBorder(remarksTxt); // Replace with your actual text area name
-            addFocusBorder(dateTxt);
+            addFocusBorder(periodCmb);
+          
     }
     
     
@@ -200,9 +204,9 @@ public class EvaluationPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         remarksTxt = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
-        dateTxt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
+        periodCmb = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -312,28 +316,28 @@ public class EvaluationPanel extends javax.swing.JPanel {
         jLabel8.setBackground(new java.awt.Color(56, 58, 64));
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel8.setText("DATE");
+        jLabel8.setText("EVALUATION PERIOD");
 
-        dateTxt.setText("MM/dd/yy");
-
-        jButton1.setBackground(new java.awt.Color(37, 99, 235));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Save Evaluation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveBtn.setBackground(new java.awt.Color(37, 99, 235));
+        saveBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        saveBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveBtn.setText("Save Evaluation");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(107, 114, 128));
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        clearBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clearBtn.setForeground(new java.awt.Color(107, 114, 128));
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                clearBtnActionPerformed(evt);
             }
         });
+
+        periodCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -343,10 +347,6 @@ public class EvaluationPanel extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(lblRating, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,9 +357,13 @@ public class EvaluationPanel extends javax.swing.JPanel {
                             .addComponent(sliderEvaluation, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblScore, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(dateTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(periodCmb, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -384,14 +388,14 @@ public class EvaluationPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel8)
-                .addGap(3, 3, 3)
-                .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(periodCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -480,7 +484,7 @@ public class EvaluationPanel extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         int selectedIndex = employeeJcom.getSelectedIndex();
         if (selectedIndex < 0) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select an employee first.");
@@ -490,9 +494,9 @@ public class EvaluationPanel extends javax.swing.JPanel {
         Employee targetEmp = employeeDropdownList.get(selectedIndex);
         int score = sliderEvaluation.getValue();
         String remarks = remarksTxt.getText().trim();
-        String periodText = dateTxt.getText().trim();
+        Period selectedPeriod = (Period) periodCmb.getSelectedItem();
 
-        if (remarks.isEmpty() || periodText.isEmpty() || periodText.equals("MM/dd/yy")) {
+        if (remarks.isEmpty() || selectedPeriod==null) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please fill out all evaluation fields.");
             return;
         }
@@ -500,34 +504,32 @@ public class EvaluationPanel extends javax.swing.JPanel {
         int currentAdminId = UserSession.getInstance().getLoggedInUser().getId();// Replace with your active session user ID if available
 
         // Save record using service layer
-        boolean isSuccess = evalService.submitEvaluation(targetEmp.getUserId(), currentAdminId, periodText, score, remarks);
+        boolean isSuccess = evalService.submitEvaluation(targetEmp.getUserId(), currentAdminId, selectedPeriod.toString(), score, remarks);
 
         if (isSuccess) {
             javax.swing.JOptionPane.showMessageDialog(this, "Evaluation saved successfully!");
             // Clear text controls and refresh history instantly using the new service layout!
             remarksTxt.setText("");
-            dateTxt.setText("MM/dd/yy");
+            periodCmb.setSelectedIndex(0);
             sliderEvaluation.setValue(80); 
             loadEvaluationHistoryTable(); 
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Error saving evaluation record.");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         remarksTxt.setText("");
-        dateTxt.setText("MM/dd/yy");
+        periodCmb.setSelectedIndex(0);
         sliderEvaluation.setValue(80);
         lblScore.setText("80");
         updateRating(80);   
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_clearBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField dateTxt;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JComboBox<String> employeeJcom;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -548,7 +550,9 @@ public class EvaluationPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblRating;
     private javax.swing.JLabel lblScore;
+    private javax.swing.JComboBox<String> periodCmb;
     private javax.swing.JTextArea remarksTxt;
+    private javax.swing.JButton saveBtn;
     private javax.swing.JSlider sliderEvaluation;
     // End of variables declaration//GEN-END:variables
 }

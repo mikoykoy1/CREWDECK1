@@ -104,6 +104,11 @@ public class MainFrame extends javax.swing.JFrame {
                 PasswordActionPerformed(evt);
             }
         });
+        Password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PasswordKeyPressed(evt);
+            }
+        });
         loginPanel.add(Password);
         Password.setBounds(50, 270, 290, 40);
 
@@ -254,6 +259,12 @@ public class MainFrame extends javax.swing.JFrame {
         Password.setEchoChar('•'); // Mask text (standard bullet character)
     }
     }//GEN-LAST:event_showPasswordBtnActionPerformed
+
+    private void PasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            loginButton.doClick();
+        }
+    }//GEN-LAST:event_PasswordKeyPressed
     
     
     /**

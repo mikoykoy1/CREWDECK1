@@ -65,7 +65,7 @@ public class EvaluationService {
         try{
         List<Evaluation> evals = evalDAO.getEvaluationsFiltered(selectedUserId, currentUserId);
         
-        String[] columns = {"ID", "Employee ID", "Evaluator ID", "Period", "Score", "Remarks", "Evaluation Date"};
+        String[] columns = {"Eval No.", "Evaluee", "Evaluator", "Period", "Score", "Remarks", "Evaluation Date"};
         Object[][] data = new Object[evals.size()][7];
         
         for (int i = 0; i < evals.size(); i++) {
@@ -109,7 +109,7 @@ public class EvaluationService {
             List<Evaluation> historyList = evalDAO.fetchHistoryByEmployee(employeeId);
 
             // Dynamically match your custom CellRenderer array index count
-            String[] columns = {"ID", "Evaluator ID", "Period", "Score / Rating", "Remarks", "Evaluation Date"};
+            String[] columns = {"Eval No.", "Evaluee", "Evaluator", "Score / Rating", "Remarks", "Evaluation Date"};
             Object[][] data = new Object[historyList.size()][6];
 
             for (int i = 0; i < historyList.size(); i++) {

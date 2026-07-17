@@ -64,10 +64,10 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
         if (employeeToUpdate.getStatus() != null) {
             try {
                 // Converts "ACTIVE" or "ON_LEAVE" string from DB to Enum constant
-                Model.EmployeeStatus currentStatus = Model.EmployeeStatus.valueOf(employeeToUpdate.getStatus().toUpperCase());
+                EmployeeStatus currentStatus = Model.EmployeeStatus.valueOf(employeeToUpdate.getStatus().toUpperCase());
                 statusCmb.setSelectedItem(currentStatus);
             } catch (IllegalArgumentException e) {
-                statusCmb.setSelectedItem(Model.EmployeeStatus.ACTIVE); // Default fallback
+                statusCmb.setSelectedItem(EmployeeStatus.ACTIVE); // Default fallback
             }
         }
         
@@ -285,7 +285,7 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(roleCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(statusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
         updatePanelLayout.setVerticalGroup(
@@ -314,10 +314,10 @@ public class UpdateRecordDialog extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(departmentTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(statusCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel5))
